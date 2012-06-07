@@ -1,0 +1,14 @@
+# Files
+Capfile
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+config/deploy.rb
+config/database.yml
+db/data.yml
+
+# Folders
+.bundle
+vendor/bundle
+log/*.log
+tmp/**/*
