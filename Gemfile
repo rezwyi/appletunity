@@ -5,6 +5,7 @@ gem 'unicorn'
 gem 'mysql2', '0.2.6'
 gem 'rails', '3.2.5'
 gem 'jquery-rails'
+gem 'slim-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
