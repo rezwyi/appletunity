@@ -1,0 +1,9 @@
+doctype html
+
+html
+	== render :partial => 'shared/head'
+
+body{ data-spy='scroll' data-target='.subnav' data-offset='200' }
+  .container
+    == render :partial => 'shared/header'
+    = yield
