@@ -11,3 +11,24 @@
  *= require_self
  *= require_tree .
  */
+
+.logo a, .logo a:hover {
+	text-decoration: none;
+	color: #333;
+}
+
+.vacancy {
+	padding-bottom: 60px;
+}
+
+.vacancy .company-logo {
+  margin-top: 3em
+}
+
+.pagination {
+	text-align: center;
+}
+
+.stay-connected a {
+  margin-right: 9px;
+}

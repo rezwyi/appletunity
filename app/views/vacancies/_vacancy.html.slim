@@ -1,0 +1,15 @@
+.row.vacancy
+  .span8
+		.span5
+		  h2: a{ href='#' } Heading
+		  p
+		    span.icon-map-marker
+		    | &nbsp; Location
+		  p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+		  p
+		    - 2.times do
+		      |  &nbsp;
+		      span.label = t('jobtype.full-time')
+		  p: a.btn{ href='#' } = t('view_details')
+		.span2
+		  a{ href='#' }: img.company-logo{ src='http://placehold.it/160x120&text=Company+Logo' }

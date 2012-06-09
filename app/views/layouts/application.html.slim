@@ -3,7 +3,13 @@ doctype html
 html
 	== render :partial => 'shared/head'
 
-body{ data-spy='scroll' data-target='.subnav' data-offset='200' }
+body{ data-spy='scroll' data-target='.subnav' }
   .container
     == render :partial => 'shared/header'
-    = yield
+    .row
+      .span8
+        = yield
+      .span4
+        == render :partial => 'shared/sidebar'
+    hr
+    == render :partial => 'shared/footer'
