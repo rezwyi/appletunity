@@ -1,0 +1,45 @@
+.row
+  .span8
+    form.form-horizontal
+      fieldset
+        .span7
+          h2 = t('.about_your_company')
+          hr
+        .control-group
+          label.control-label{ for='input01' } = t('.name')
+          .controls
+            input.input-xlarge#input01{ type='text' }
+        .control-group
+          label.control-label{ for='input02' } = t('.location')
+          .controls
+            input.input-xlarge#input02{ type='text' }
+        .control-group
+          label.control-label{ for='fileInput' } = t('.logo')
+          .controls
+            input.input-file#fileInput{ type='file' }
+
+        .clearfix
+
+        .span7
+          h2 = t('.what_you_want')
+          hr
+        .control-group
+          label.control-label{ for='input01' } = t('.title')
+          .controls
+            input.input-xlarge#input01{ type='text' }
+        .control-group
+          label.control-label{ for='optionsCheckbox' } = t('.type')
+          .controls
+            label.checkbox.inline
+              input#optionsCheckbox{ type='checkbox' value='option1' }
+                = t('jobtype.full-time')
+            label.checkbox.inline
+              input#optionsCheckbox{ type='checkbox' value='option1' }
+                = t('jobtype.freelance')
+        .control-group
+          label.control-label{ for='textarea' } = t('.description')
+          .controls
+            textarea.input-xlarge#textarea{ rows='5' }
+        .form-actions
+          button.btn{ type='submit' } = t('add')
+          = link_to t('cancel'), root_url, :class => 'btn'

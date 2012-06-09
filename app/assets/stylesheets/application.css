@@ -32,3 +32,7 @@
 .stay-connected a {
   margin-right: 9px;
 }
+
+.clearfix {
+	height: 30px;
+}
