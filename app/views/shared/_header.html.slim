@@ -1,5 +1,5 @@
 header.jumbotron.subhead#overview
-  h1.logo = link_to_if current_page?(root_url), t('appletunity'), root_url
+  h1.logo = link_to_unless current_page?(root_url), t('appletunity'), root_url
   p.lead = t('best_place')
 section#navbar
   .navbar
