@@ -7,6 +7,8 @@ gem 'rails', '3.2.5'
 gem 'jquery-rails'
 gem 'slim-rails'
 
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
