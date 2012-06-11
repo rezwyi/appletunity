@@ -40,6 +40,17 @@
           label.control-label{ for='textarea' } = t('.description')
           .controls
             textarea.input-xlarge#textarea{ rows='5' }
+
+        .clearfix
+
+        .span7
+          h2 = t('.contacts')
+          hr
+        .control-group
+          label.control-label{ for='input01' } = t('.email')
+          .controls
+            input.input-xlarge#input01{ type='text' }
+
         .form-actions
           button.btn{ type='submit' } = t('add')
           = link_to t('cancel'), root_url, :class => 'btn'
