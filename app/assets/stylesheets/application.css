@@ -17,10 +17,6 @@
 	color: #333;
 }
 
-.vacancy {
-	padding-bottom: 60px;
-}
-
 .vacancy .company-logo {
   margin-top: 3em
 }
@@ -35,4 +31,8 @@
 
 .clearfix {
 	height: 30px;
+}
+
+.social-buttons {
+	margin-top: 5px;
 }
