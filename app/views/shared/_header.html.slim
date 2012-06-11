@@ -10,6 +10,6 @@ section#navbar
         .nav-collapse
           ul.nav
             li.active: a{ href='/' } = t('menu.home')
-            li: a{ href='#' } = t('menu.about')
+            li = link_to t('menu.about'), static_path('about')
           form.navbar-search.pull-right
             input.search-query.span2{ type='text' placeholder='Search' }

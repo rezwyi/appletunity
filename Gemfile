@@ -6,6 +6,7 @@ gem 'mysql2', '0.2.6'
 gem 'rails', '3.2.5'
 gem 'jquery-rails'
 gem 'slim-rails'
+gem 'high_voltage'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
