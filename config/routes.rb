@@ -1,4 +1,4 @@
 Appletunity::Application.routes.draw do
-	resource :vacancies
+	resources :vacancies
   root :to => 'vacancies#index'
 end
