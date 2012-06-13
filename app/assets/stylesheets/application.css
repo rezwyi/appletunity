@@ -36,3 +36,8 @@
 .social-buttons {
 	margin-top: 5px;
 }
+
+#login-form {
+	width: 250px;
+	margin-left: -125px;
+}
