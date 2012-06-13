@@ -6,6 +6,7 @@ html
 body{ data-spy='scroll' data-target='.subnav' }
   .container
     == render :partial => 'shared/header'
+    == render :partial => 'shared/flash_message'
     .row
       .span8
         = yield
