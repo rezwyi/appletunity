@@ -10,4 +10,4 @@
       p = label_tag :password, t('.password')
       p = password_field_tag :password
   .modal-footer
-    a.btn.pull-left{ href='#' } = t('login')
+    = link_to t('login'), admin_path, :class => 'btn pull-left'
