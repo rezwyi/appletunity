@@ -51,7 +51,18 @@
           .controls
             input.input-xlarge#input01{ type='text' }
 
+        .clearfix
+
+        .span7
+          h2 = t('.term_of_service')
+          hr
+        .control-group
+          .controls
+            label.checkbox.inline
+              input#optionsCheckbox{ type='checkbox' value='option1' }
+                = t('i_agree_to_the_appletunity_term_of_service')
+
         .span7
           .form-actions
-            button.btn{ type='submit' } = t('next')
+            a.btn{ href='/' } = t('checkout')
             = link_to t('cancel'), root_url, :class => 'btn'
