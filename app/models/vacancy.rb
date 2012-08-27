@@ -5,4 +5,7 @@ class Vacancy < ActiveRecord::Base
   has_one :company, :through => :vacancies_company
   has_one :vacancies_city
   has_one :city, :through => :vacancies_city
+
+  validates :title, :description, :contact_email, :agreed_to_offer, :expired_at,
+            :edit_token, :presence => true
 end
