@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake', '0.9.2.2'
 gem 'unicorn'
-gem 'mysql2', '0.2.6'
+gem 'mysql2', '0.3.11'
 gem 'rails', '3.2.7'
 gem 'jquery-rails'
 gem 'slim-rails'
