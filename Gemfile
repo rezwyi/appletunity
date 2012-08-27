@@ -18,4 +18,5 @@ end
 
 group :developement do
 	gem 'rspec-rails'
+	gem 'shoulda-matchers'
 end
