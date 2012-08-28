@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120827060351) do
-
-  create_table "cities", :force => true do |t|
-    t.string  "name",       :null => false
-    t.integer "regions_id"
-  end
+ActiveRecord::Schema.define(:version => 20120828182612) do
 
   create_table "companies", :force => true do |t|
     t.string "name",     :null => false
@@ -24,10 +19,6 @@ ActiveRecord::Schema.define(:version => 20120827060351) do
   end
 
   create_table "occupations", :force => true do |t|
-    t.string "name", :null => false
-  end
-
-  create_table "regions", :force => true do |t|
     t.string "name", :null => false
   end
 
@@ -39,16 +30,7 @@ ActiveRecord::Schema.define(:version => 20120827060351) do
     t.boolean "agreed_to_offer", :null => false
     t.date    "expired_at",      :null => false
     t.string  "edit_token",      :null => false
-  end
-
-  create_table "vacancies_cities", :force => true do |t|
-    t.integer "vacancies_id"
-    t.integer "cities_id"
-  end
-
-  create_table "vacancies_companies", :force => true do |t|
-    t.integer "companies_id"
-    t.integer "vacancies_id"
+    t.integer "company_id"
   end
 
   create_table "vacancies_occupations", :force => true do |t|
