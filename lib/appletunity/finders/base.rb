@@ -7,7 +7,10 @@ module Appletunity::Finders
 
     #
     def retrieve
-      Vacancy.where('expired_at >= ?', Time.now).page(page).per(per_page)
+      vacancies = Vacancy.where('expired_at >= ?', Time.now)\
+                         .page(page).per(per_page)
+
+      vacancies.order('id DESC')
     end
 
     protected
