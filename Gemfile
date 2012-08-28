@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'slim-rails'
 gem 'high_voltage'
 gem 'kaminari'
+gem 'dynamic_form'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
