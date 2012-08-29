@@ -1,16 +1,14 @@
-.row
-	.span4
-	  h3 = t('add_vacancy_header')
-	  p = t('add_vacancy_description')
-	  = link_to content_tag(:h5, t('add_vacancy')), new_vacancy_path,
-	            :class => 'btn'
+h3 = t('add_vacancy_header')
+p = t('add_vacancy_description')
+= link_to content_tag(:h5, t('add_vacancy')), new_vacancy_path,
+          :class => 'btn'
+
 hr
-.row
-	.span4
-	  h3 = t('stay_connected_header')
-	  p = t('stay_connected_description')
-	  div.stay-connected
-	    a{ href='http://twitter.com/appletunity'}
-	      img{ src='http://placehold.it/64x64&text=Twi' }
-	    a{ href='#'}
-	      img{ src='http://placehold.it/64x64&text=Rss' }
+
+h3 = t('stay_connected_header')
+p = t('stay_connected_description')
+div.stay-connected
+  a{ href='http://twitter.com/appletunity'}
+    img{ src='http://placehold.it/64x64&text=Twi' }
+  a{ href='#'}
+    img{ src='http://placehold.it/64x64&text=Rss' }
