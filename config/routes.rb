@@ -4,8 +4,6 @@ Appletunity::Application.routes.draw do
 	get 'admin', :to => 'admin/vacancies#index'
 	get 'admin/configuration', :to => 'admin/users#index'
 	
-	match '/:id' => 'high_voltage/pages#show', :as => :static, :via => :get
-	
 	resources :vacancies
 	resources :sessions
 
@@ -14,6 +12,7 @@ Appletunity::Application.routes.draw do
 	  resources :users
 	  resources :occupations
 	end
-  
+
+	match '/:id' => 'high_voltage/pages#show', :as => :static, :via => :get
   root :to => 'vacancies#index'
 end
