@@ -1,2 +1,5 @@
 == render :partial => 'vacancies', :locals => {:vacancies => @vacancies}
-= paginate @vacancies
+- if @vacancies.num_pages > 1
+  ul.pager
+    li.next
+      = link_to_next_page @vacancies, "#{t('.older')} &rarr;".html_safe

@@ -1,3 +1,16 @@
 - vacancies.each do |v|
-  == render :partial => 'vacancy', :locals => {:vacancy => v}
-  hr
+  .vacancy
+    .company-logo.pull-left
+      = link_to v.company_website, :target => '_blank' do
+        = image_tag 'http://placehold.it/80x80&text=Logo'
+    h2 = link_to v.title, vacancy_path(v)
+    - if v.location
+      div: span.icon-map-marker
+        | &nbsp;
+        = v.location
+    - if v.occupations.any?
+      div
+        - v.occupations.each do |o|
+          span.label = o.name
+          | &nbsp;
+    .clearfix

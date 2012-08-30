@@ -58,5 +58,20 @@ module Appletunity
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Custom error messages html
+    ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+      errors = Array(instance.error_message).join(',')
+      
+      # If errors present on checkboxes then ignore it
+      case
+      when html_tag =~ /type="checkbox"/ then
+        html = html_tag
+      else
+        html = %(#{html_tag}<label class="help-inline">#{errors}</label>)
+      end
+
+      html.html_safe
+    end
   end
 end

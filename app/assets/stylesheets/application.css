@@ -12,28 +12,73 @@
  *= require_tree .
  */
 
-.logo a, .logo a:hover {
+header .logo a,
+header .logo a:hover {
   text-decoration: none;
   color: #333;
 }
 
-.pagination {
-  text-align: center;
+footer {
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+
+.container .row {
+  background: url('/assets/bg.jpeg') 0 0 repeat;
+  box-shadow: 0 0 10px #999;
+  border-radius: 5px;
+}
+
+.sidebar {
+  margin: 30px 10px 30px 15px;
 }
 
 .stay-connected a {
   margin-right: 9px;
 }
 
-.clearfix {
-  height: 30px;
-}
-
 .social-buttons {
   margin-top: 5px;
 }
 
+.pagination {
+  text-align: center;
+}
+
+.contentable {
+  padding: 30px;
+}
+
+.clearfix {
+  height: 30px;
+}
+
+/* Login form >> */
 #login-form {
   width: 250px;
   margin-left: -125px;
 }
+/* << Login form */
+
+/* Vacancies >> */
+.vacancy,
+.vacancy-in {
+  min-height: 80px;
+  margin-bottom: 30px;
+}
+
+.vacancy h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vacancy .company-logo {
+  margin-right: 15px;
+  padding: 5px 0 0 0;
+}
+
+.vacancy-in .vacancy-in-header {
+  min-height: 100px;
+}
+/* << Vacancies */

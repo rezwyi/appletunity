@@ -1,26 +1,13 @@
 = form_for vacancy, :html => {:class => 'form-horizontal'} do |f|
   fieldset
-    h2 = t('.about_your_company')
-    hr
-    .control-group
-      = f.label :company_name, t('.name'), :class => 'control-label'
-      .controls
-        = f.text_field :company_name, :class => 'input-xlarge'
-    .control-group
-      = f.label :company_website, t('.website'), :class => 'control-label'
-      .controls
-        = f.text_field :company_website, :class => 'input-xlarge'
-
-    .clearfix
-
     h2 = t('.what_you_want')
     hr
-    .control-group
-      = f.label :title, t('.title'), :class => 'control-label'
+    .control-group{ class="#{'error' if vacancy.errors[:title].present?}"}
+      = label_tag '', t('.title'), :class => 'control-label'
       .controls
         = f.text_field :title, :class => 'input-xlarge'
-    .control-group
-      = f.label :description, t('.description'), :class => 'control-label'
+    .control-group{ class="#{'error' if vacancy.errors[:description].present?}"}
+      = label_tag '', t('.description'), :class => 'control-label'
       .controls
         = f.text_area :description, :class => 'input-xlarge', :rows => 5
     .control-group
@@ -32,20 +19,33 @@
             = check_box_tag 'occupations[]', o.id, checked
             = o.name
     .control-group
-      = f.label :location, t('.location'), :class => 'control-label'
+      = label_tag '', t('.location'), :class => 'control-label'
       .controls
         = f.text_field :location, :class => 'input-xlarge'
 
     .clearfix
 
-    h2 = t('.contacts')
+    h2 = t('.about_your_company')
     hr
     .control-group
-      = f.label :contact_email, t('.contact_email'), :class => 'control-label'
+      = label_tag '', t('.name'), :class => 'control-label'
+      .controls
+        = f.text_field :company_name, :class => 'input-xlarge'
+    .control-group
+      = label_tag '', t('.website'), :class => 'control-label'
+      .controls
+        = f.text_field :company_website, :class => 'input-xlarge'
+
+    .clearfix
+
+    h2 = t('.contacts')
+    hr
+    .control-group{ class="#{'error' if vacancy.errors[:contact_email].present?}"}
+      = label_tag '', t('.contact_email'), :class => 'control-label'
       .controls
         = f.text_field :contact_email, :class => 'input-xlarge'
     .control-group
-      = f.label :contact_phone, t('.contact_phone'), :class => 'control-label'
+      = label_tag '', t('.contact_phone'), :class => 'control-label'
       .controls
         = f.text_field :contact_phone, :class => 'input-xlarge'
 
@@ -58,7 +58,10 @@
         label.checkbox.inline
           = f.check_box :agreed_to_offer, :value => 0
           = t('i_agree_to_the_appletunity_term_of_service')
+          - if vacancy.errors[:agreed_to_offer].present?
+            label.error = t('.need_to_agree!')
 
     .form-actions
-      = f.submit t('checkout'), :class => 'btn'
+      = f.submit 'Add', :class => 'btn'
+      | &nbsp;
       = link_to t('cancel'), root_url, :class => 'btn'

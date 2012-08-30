@@ -1,21 +1,21 @@
-- within_vacancy = current_page?(vacancy_path(vacancy))
-
-.vacancy.row
-  .span6
-    h3 = link_to_unless within_vacancy, vacancy.title, vacancy_path(vacancy)
+.vacancy-in
+  .vacancy-in-header
+    .company-logo.pull-right
+      = link_to vacancy.company_website, :target => '_blank' do
+        = image_tag 'http://placehold.it/100x100&text=Logo'
+    h2 = vacancy.title
     - if vacancy.location
-      p: span.icon-map-marker
+      div: span.icon-map-marker
         | &nbsp;
         = vacancy.location
     - if vacancy.occupations.any?
-      p
+      div
         - vacancy.occupations.each do |o|
           span.label = o.name
           | &nbsp;
-    p = within_vacancy ? vacancy.description : vacancy.short_description
-    - if within_vacancy
-      p = link_to t('reply'), mailto_for(vacancy), :class => 'btn'
-  .span2
-    = link_to vacancy.company_website, :target => '_blank' do
-      = image_tag 'http://placehold.it/80x80&text=Logo', :class => 'company-logo'
-    == render :partial => 'shared/social-buttons' if within_vacancy
+  hr
+  div = vacancy.description
+  hr
+  div
+    == render :partial => 'shared/social_buttons'
+    = link_to t('reply'), mailto_for(vacancy), :class => 'btn'
