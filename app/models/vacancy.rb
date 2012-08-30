@@ -4,4 +4,8 @@ class Vacancy < ActiveRecord::Base
 
   validates :title, :description, :contact_email, :agreed_to_offer,
             :presence => true
+
+  attr_accessible :company_name, :company_website, :title, :description,
+                  :location, :occupations, :contact_email, :contact_phone,
+                  :agreed_to_offer
 end
