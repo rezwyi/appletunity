@@ -1,68 +1,64 @@
-.row
-  .span8
-    form.form-horizontal
-      fieldset
-        .span7
-          h2 = t('.about_your_company')
-          hr
-        .control-group
-          label.control-label{ for='input01' } = t('.name')
-          .controls
-            input.input-xlarge#input01{ type='text' }
-        .control-group
-          label.control-label{ for='input02' } = t('.location')
-          .controls
-            input.input-xlarge#input02{ type='text' }
-        .control-group
-          label.control-label{ for='fileInput' } = t('.logo')
-          .controls
-            input.input-file#fileInput{ type='file' }
+= form_for vacancy, :html => {:class => 'form-horizontal'} do |f|
+  fieldset
+    h2 = t('.about_your_company')
+    hr
+    .control-group
+      = f.label :company_name, t('.name'), :class => 'control-label'
+      .controls
+        = f.text_field :company_name, :class => 'input-xlarge'
+    .control-group
+      = f.label :company_website, t('.website'), :class => 'control-label'
+      .controls
+        = f.text_field :company_website, :class => 'input-xlarge'
 
-        .clearfix
+    .clearfix
 
-        .span7
-          h2 = t('.what_you_want')
-          hr
-        .control-group
-          label.control-label{ for='input01' } = t('.title')
-          .controls
-            input.input-xlarge#input01{ type='text' }
-        .control-group
-          label.control-label{ for='optionsCheckbox' } = t('.type')
-          .controls
-            label.checkbox.inline
-              input#optionsCheckbox{ type='checkbox' value='option1' }
-                = t('jobtype.full-time')
-            label.checkbox.inline
-              input#optionsCheckbox{ type='checkbox' value='option1' }
-                = t('jobtype.freelance')
-        .control-group
-          label.control-label{ for='textarea' } = t('.description')
-          .controls
-            textarea.input-xlarge#textarea{ rows='5' }
+    h2 = t('.what_you_want')
+    hr
+    .control-group
+      = f.label :title, t('.title'), :class => 'control-label'
+      .controls
+        = f.text_field :title, :class => 'input-xlarge'
+    .control-group
+      = f.label :description, t('.description'), :class => 'control-label'
+      .controls
+        = f.text_area :description, :class => 'input-xlarge', :rows => 5
+    .control-group
+      label.control-label{ for='optionsCheckbox' } = t('.occupation')
+      .controls
+        - Occupation.all.each do |o|
+          label.checkbox.inline
+            - checked = vacancy.occupations.map(&:id).include?(o.id)
+            = check_box_tag 'occupations[]', o.id, checked
+            = o.name
+    .control-group
+      = f.label :location, t('.location'), :class => 'control-label'
+      .controls
+        = f.text_field :location, :class => 'input-xlarge'
 
-        .clearfix
+    .clearfix
 
-        .span7
-          h2 = t('.contacts')
-          hr
-        .control-group
-          label.control-label{ for='input01' } = t('.email')
-          .controls
-            input.input-xlarge#input01{ type='text' }
+    h2 = t('.contacts')
+    hr
+    .control-group
+      = f.label :contact_email, t('.contact_email'), :class => 'control-label'
+      .controls
+        = f.text_field :contact_email, :class => 'input-xlarge'
+    .control-group
+      = f.label :contact_phone, t('.contact_phone'), :class => 'control-label'
+      .controls
+        = f.text_field :contact_phone, :class => 'input-xlarge'
 
-        .clearfix
+    .clearfix
 
-        .span7
-          h2 = t('.term_of_service')
-          hr
-        .control-group
-          .controls
-            label.checkbox.inline
-              input#optionsCheckbox{ type='checkbox' value='option1' }
-                = t('i_agree_to_the_appletunity_term_of_service')
+    h2 = t('.term_of_service')
+    hr
+    .control-group
+      .controls
+        label.checkbox.inline
+          = f.check_box :agreed_to_offer, :value => 0
+          = t('i_agree_to_the_appletunity_term_of_service')
 
-        .span7
-          .form-actions
-            a.btn{ href='/' } = t('checkout')
-            = link_to t('cancel'), root_url, :class => 'btn'
+    .form-actions
+      = f.submit t('checkout'), :class => 'btn'
+      = link_to t('cancel'), root_url, :class => 'btn'

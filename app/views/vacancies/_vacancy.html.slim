@@ -1,20 +1,21 @@
-.row.vacancy
-  .span8
-		.span5
-		  h2 = link_to_unless current_page?('/vacancies/1'), 'Heading', '/vacancies/1'
-		  p
-		    span.icon-map-marker
-		    | &nbsp; Location
-		  p
-		    - 2.times do
-		      |  &nbsp;
-		      span.label = t('jobtype.full-time')
-		  p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-		  - if current_page?('/vacancies/1')
-		    p: a.btn{ href='mailto:example@example.com?subject=Heading' } = t('reply')
-		  - else
-		    p: a.btn{ href='/vacancies/1' } = t('view_details')
-		.span2
-		  a{ href='#' }: img.company-logo{ src='http://placehold.it/160x120&text=Company+Logo' }
-		  - if current_page?('/vacancies/1')
-		    == render :partial => 'shared/social-buttons'
+- within_vacancy = current_page?(vacancy_path(vacancy))
+
+.vacancy.row
+  .span6
+    h3 = link_to_unless within_vacancy, vacancy.title, vacancy_path(vacancy)
+    - if vacancy.location
+      p: span.icon-map-marker
+        | &nbsp;
+        = vacancy.location
+    - if vacancy.occupations.any?
+      p
+        - vacancy.occupations.each do |o|
+          span.label = o.name
+          | &nbsp;
+    p = within_vacancy ? vacancy.description : vacancy.short_description
+    - if within_vacancy
+      p = link_to t('reply'), mailto_for(vacancy), :class => 'btn'
+  .span2
+    = link_to vacancy.company_website, :target => '_blank' do
+      = image_tag 'http://placehold.it/80x80&text=Logo', :class => 'company-logo'
+    == render :partial => 'shared/social-buttons' if within_vacancy

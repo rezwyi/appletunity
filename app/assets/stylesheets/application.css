@@ -13,16 +13,12 @@
  */
 
 .logo a, .logo a:hover {
-	text-decoration: none;
-	color: #333;
-}
-
-.vacancy .company-logo {
-  margin-top: 3em
+  text-decoration: none;
+  color: #333;
 }
 
 .pagination {
-	text-align: center;
+  text-align: center;
 }
 
 .stay-connected a {
@@ -30,14 +26,14 @@
 }
 
 .clearfix {
-	height: 30px;
+  height: 30px;
 }
 
 .social-buttons {
-	margin-top: 5px;
+  margin-top: 5px;
 }
 
 #login-form {
-	width: 250px;
-	margin-left: -125px;
+  width: 250px;
+  margin-left: -125px;
 }
