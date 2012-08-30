@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828185644) do
+ActiveRecord::Schema.define(:version => 20120830040729) do
 
   create_table "companies", :force => true do |t|
     t.string "name",     :null => false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20120828185644) do
     t.date    "expired_at",      :null => false
     t.string  "edit_token",      :null => false
     t.integer "company_id"
-    t.integer "city_id"
+    t.string  "location"
   end
 
   create_table "vacancies_occupations", :force => true do |t|
