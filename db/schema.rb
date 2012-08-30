@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830040729) do
-
-  create_table "companies", :force => true do |t|
-    t.string "name",     :null => false
-    t.string "site_url"
-  end
+ActiveRecord::Schema.define(:version => 20120830043115) do
 
   create_table "occupations", :force => true do |t|
     t.string "name", :null => false
@@ -32,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20120830040729) do
     t.string  "edit_token",      :null => false
     t.integer "company_id"
     t.string  "location"
+    t.string  "company_name"
+    t.string  "company_website"
   end
 
   create_table "vacancies_occupations", :force => true do |t|
