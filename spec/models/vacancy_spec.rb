@@ -13,4 +13,22 @@ describe Vacancy do
       Vacancy.friendly_token.should eq '-A_BC'
     end
   end
+
+  context 'instance' do
+    before :each do
+      @vacancy = Vacancy.new
+    end
+    
+    context '#short_description' do
+      it 'should return description' do
+        @vacancy.stub(:description).and_return('d')
+        @vacancy.short_description.should eq 'd'
+      end
+
+      it 'should return cropped description' do
+        @vacancy.stub(:description).and_return('d' * 141)
+        @vacancy.short_description.should eq ('d' * 137 + '...')
+      end
+    end
+  end
 end
