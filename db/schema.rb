@@ -11,24 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120830043115) do
+ActiveRecord::Schema.define(:version => 20120901102757) do
 
   create_table "occupations", :force => true do |t|
     t.string "name", :null => false
   end
 
   create_table "vacancies", :force => true do |t|
-    t.string  "title",           :null => false
-    t.text    "description",     :null => false
-    t.string  "contact_email",   :null => false
-    t.string  "contact_phone"
-    t.boolean "agreed_to_offer", :null => false
-    t.date    "expired_at",      :null => false
-    t.string  "edit_token",      :null => false
-    t.integer "company_id"
-    t.string  "location"
-    t.string  "company_name"
-    t.string  "company_website"
+    t.string   "title",             :null => false
+    t.text     "description",       :null => false
+    t.string   "contact_email",     :null => false
+    t.string   "contact_phone"
+    t.boolean  "agreed_to_offer",   :null => false
+    t.date     "expired_at",        :null => false
+    t.string   "edit_token",        :null => false
+    t.integer  "company_id"
+    t.string   "location"
+    t.string   "company_name"
+    t.string   "company_website"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
   end
 
   create_table "vacancies_occupations", :force => true do |t|
