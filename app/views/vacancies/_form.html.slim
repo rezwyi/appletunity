@@ -35,6 +35,12 @@
       = label_tag '', t('.website'), :class => 'control-label'
       .controls
         = f.text_field :company_website, :class => 'input-xlarge'
+    .control-group
+      = label_tag '', t('.logo'), :class => 'control-label'
+      .controls
+        = logo_for vacancy, :medium, :class => 'well'
+      .controls
+        = f.file_field :logo, :class => 'input-xlarge'
 
     .clearfix
 

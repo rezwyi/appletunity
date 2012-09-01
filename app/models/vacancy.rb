@@ -7,10 +7,13 @@ class Vacancy < ActiveRecord::Base
 
   attr_accessible :company_name, :company_website, :title, :description,
                   :location, :occupations, :contact_email, :contact_phone,
-                  :agreed_to_offer
+                  :agreed_to_offer, :logo
 
   before_save :generate_expired_at
   before_save :generate_edit_token
+
+  has_attached_file :logo,
+                    :styles => {:small => '80x80', :medium => '100x100'}
 
   # Simple random token generator
   def self.friendly_token

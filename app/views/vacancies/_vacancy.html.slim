@@ -1,9 +1,10 @@
 .vacancy-in
   .vacancy-in-header
-    .company-logo.pull-right
-      = link_to vacancy.company_website, :target => '_blank' do
-        = image_tag 'http://placehold.it/100x100&text=Logo'
     h2 = vacancy.title
+    - if vacancy.logo?
+      .company-logo.pull-right
+        = link_to vacancy.company_website, :target => '_blank' do
+          = logo_for vacancy, :medium
     - if vacancy.location
       div: span.icon-map-marker
         | &nbsp;
