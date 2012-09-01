@@ -17,15 +17,6 @@ class Vacancy < ActiveRecord::Base
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
   end
 
-  # Crops vacancy description to 140 symbols
-  def short_description
-    if self.description.length > 140
-      "#{self.description[0,137]}..."
-    else
-      self.description
-    end
-  end
-
   protected
 
   def generate_expired_at
