@@ -6,11 +6,11 @@
           = logo_for vacancy, :medium
     h2 = title_for vacancy
     - if vacancy.location
-      div: span.icon-map-marker
+      .location: span.icon-map-marker
         | &nbsp;
         = vacancy.location
     - if vacancy.occupations.any?
-      div
+      .occupations
         - vacancy.occupations.each do |o|
           span.label = o.name
           | &nbsp;

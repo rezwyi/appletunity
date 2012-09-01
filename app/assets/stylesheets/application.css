@@ -67,13 +67,16 @@ footer {
   margin-bottom: 30px;
 }
 
-.vacancy h2 {
+.vacancy h2,
+.vacancy .location,
+.vacancy-in .location {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .vacancy .company-logo {
+  height: 80px;
   margin-right: 15px;
   padding: 5px 0 0 0;
 }
