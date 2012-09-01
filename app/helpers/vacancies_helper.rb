@@ -1,4 +1,6 @@
 module VacanciesHelper
+  include ActionView::Helpers::TagHelper
+
   # Public: Build 'mailto' link for given vacancy
   #
   # vacancy - Instance of Vacancy (required)
@@ -12,5 +14,44 @@ module VacanciesHelper
   def mailto_for(vacancy)
     return unless vacancy && vacancy.title && vacancy.contact_email
     "mailto:#{vacancy.contact_email}?subject=#{vacancy.title}"
+  end
+
+  # Public: Build title for given vacancy
+  #
+  # vacancy - Instance of Vacancy (required)
+  #
+  # Examples
+  #
+  #   title_for(vacancy)
+  #   # => '[some_vacancy_company_name] some_vacancy title'
+  #
+  # Returns html safe String
+  def title_for(vacancy)
+    return unless vacancy
+    ["[#{vacancy.company_name}]", vacancy.title].join(' ').html_safe
+  end
+
+  # Public: Build vacancy logo image tag
+  #
+  # vacancy - Instance of Vacancy (required)
+  # size - The size of image attachment (default: :small)
+  # options - The Hash of html options (optional)
+  #
+  # Examples
+  #
+  #   logo_for(vacancy)
+  #   # => 'img tag'
+  #
+  # Returns html safe String
+  def logo_for(vacancy, size = :small, options = {})
+    return unless vacancy
+    
+    if vacancy.logo?
+      html = image_tag(vacancy.logo.url(size), options)
+    else
+      html = image_tag('no_logo.png', options)
+    end
+    
+    html
   end
 end
