@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901102757) do
+ActiveRecord::Schema.define(:version => 20120901122202) do
 
   create_table "occupations", :force => true do |t|
     t.string "name", :null => false
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20120901102757) do
     t.string   "edit_token",        :null => false
     t.integer  "company_id"
     t.string   "location"
-    t.string   "company_name"
+    t.string   "company_name",      :null => false
     t.string   "company_website"
     t.string   "logo_file_name"
     t.string   "logo_content_type"

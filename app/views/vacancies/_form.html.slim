@@ -27,7 +27,7 @@
 
     h2 = t('.about_your_company')
     hr
-    .control-group
+    .control-group{ class="#{'error' if vacancy.errors[:company_name].present?}"}
       = label_tag '', t('.name'), :class => 'control-label'
       .controls
         = f.text_field :company_name, :class => 'input-xlarge'
