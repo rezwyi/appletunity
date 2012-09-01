@@ -1,10 +1,10 @@
 .vacancy-in
   .vacancy-in-header
-    h2 = vacancy.title
     - if vacancy.logo?
       .company-logo.pull-right
         = link_to vacancy.company_website, :target => '_blank' do
           = logo_for vacancy, :medium
+    h2 = title_for vacancy
     - if vacancy.location
       div: span.icon-map-marker
         | &nbsp;

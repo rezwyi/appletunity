@@ -3,6 +3,7 @@
     .company-logo.pull-left
       = link_to v.company_website, :target => '_blank' do
         = logo_for v
+    h2 = link_to title_for(v), vacancy_path(v)
     - if v.location
       div: span.icon-map-marker
         | &nbsp;
