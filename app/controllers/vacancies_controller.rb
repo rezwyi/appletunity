@@ -23,4 +23,9 @@ class VacanciesController < ApplicationController
   def show
     @vacancy = Vacancy.find(params[:id])
   end
+
+  def edit
+    @vacancy = Vacancy.find(params[:id])
+    render_404 and return unless @vacancy.edit_token == params[:token]
+  end
 end
