@@ -1,5 +1,6 @@
-@defaultVacancyHeight: 80px;
+@defaultHeight: 70px;
 @defaultShadowColor: #999;
+@defaultBorderColor: #ddd;
 
 // Main
 header .logo a,
@@ -36,7 +37,11 @@ footer {
 }
 
 .contentable {
-  padding: 30px;
+  padding: 45px 30px 45px 45px;
+}
+
+.clear {
+  clear: both;
 }
 
 .clearfix {
@@ -50,13 +55,24 @@ footer {
 }
 
 // Vacancies
-.vacancy,
-.vacancy-in {
-  min-height: @defaultVacancyHeight;
-  margin-bottom: 30px;
+.vacancies .vacancy {
+  border-bottom: 1px solid @defaultBorderColor;
 }
 
-.vacancy h2,
+.vacancies :last-child {
+  border: none;
+}
+
+.vacancy {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.vacancy-in {
+  min-height: @defaultHeight;
+}
+
+.vacancy .title,
 .vacancy .location,
 .vacancy-in .location {
   white-space: nowrap;
@@ -64,12 +80,22 @@ footer {
   text-overflow: ellipsis;
 }
 
+.vacancy .title,
+.vacancy-in .title {
+  font-size: 1.1em;
+  line-height: 36px;
+}
+
 .vacancy .company-logo {
-  height: @defaultVacancyHeight;
+  height: @defaultHeight;
   margin-right: 15px;
   padding: 5px 0 0 0;
 }
 
 .vacancy-in .vacancy-in-header {
-  min-height: 100px;
+  min-height: @defaultHeight;
+}
+
+.vacancy-in .vacancy-in-header .company-logo {
+  margin-bottom: 10px;
 }

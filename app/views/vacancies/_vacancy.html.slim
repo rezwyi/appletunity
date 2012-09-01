@@ -7,7 +7,7 @@
             = logo_for vacancy, :medium
         - else
           = logo_for vacancy, :medium
-    h2 = title_for vacancy
+    h3 = title_for vacancy
     - if vacancy.location
       .location: span.icon-map-marker
         | &nbsp;
@@ -17,8 +17,8 @@
         - vacancy.occupations.each do |o|
           span.label = o.name
           | &nbsp;
-  hr
-  div = vacancy.description
+  hr.clear
+  p = vacancy.description
   hr
   div
     == render :partial => 'shared/social_buttons'
