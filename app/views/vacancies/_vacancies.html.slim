@@ -1,7 +1,9 @@
 - vacancies.each do |v|
   .vacancy
     .company-logo.pull-left
-      = link_to v.company_website, :target => '_blank' do
+      - unless v.company_website.empty?
+        = link_to(v.company_website, :target => '_blank') { logo_for v }
+      - else
         = logo_for v
     h2 = link_to title_for(v), vacancy_path(v)
     - if v.location

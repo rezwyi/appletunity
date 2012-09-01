@@ -2,7 +2,10 @@
   .vacancy-in-header
     - if vacancy.logo?
       .company-logo.pull-right
-        = link_to vacancy.company_website, :target => '_blank' do
+        - unless vacancy.company_website.empty?
+          = link_to(vacancy.company_website, :target => '_blank') do
+            = logo_for vacancy, :medium
+        - else
           = logo_for vacancy, :medium
     h2 = title_for vacancy
     - if vacancy.location
