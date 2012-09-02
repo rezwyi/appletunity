@@ -1,0 +1,48 @@
+doctype html
+
+html
+  head
+    title = t('.administration')
+    = stylesheet_link_tag 'administration/application', :media => 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+    = yield :javascripts
+
+body
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      .container-fluid
+        .navbar-text.pull-right
+          em = current_admin.email
+          | &nbsp;
+          = link_to t('.home'), root_url, :class => 'navbar-link'
+          | &nbsp;
+          = link_to t('.logout'), destroy_admin_session_path,
+                    :method => :delete, :class => 'navbar-link'
+        .brand = t('.administration')
+        .nav-collapse.collapse
+          ul.nav
+            - %w(admins vacancies occupations).each do |i|
+              - href = "/administration/#{i}"
+              - active = 'active' if request.path.starts_with?(href)
+              li{ class="#{active}" } = link_to t(".#{i}"), href
+  header#overview.jumbotron.subhead
+    .container-fluid
+      h1
+        = t(".management_of_#{controller_name}")
+        | &nbsp;&#47;&nbsp;
+        = t(".#{action_name}")
+      br
+      p.lead
+        = link_to t(".new_#{controller_name.singularize}"),
+                  url_for(:action => :new, :controller => controller_name),
+                  :class => 'btn btn-success'
+  .container-fluid
+    .row-fluid
+      .span8
+        .contentable
+          == render :partial => 'shared/flash_message'
+          = yield
+      .span4
+        .sidebar
+          = yield :sidebar
