@@ -7,11 +7,13 @@ Appletunity::Application.routes.draw do
 
   resources :vacancies
 
-  namespace :admin do
+  namespace :administration do
+    resources :admins
     resources :vacancies
     resources :occupations
   end
 
   match '/:id' => 'high_voltage/pages#show', :as => :static, :via => :get
+  
   root :to => 'vacancies#index'
 end
