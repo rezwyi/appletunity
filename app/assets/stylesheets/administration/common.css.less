@@ -1,0 +1,38 @@
+@defaultBoxShadow: #bbb;
+@defaultBorderColor: #bbb;
+
+header {
+  background-color: #ddd;
+  padding: 40px 20px 20px 60px;
+  border-bottom: 1px solid @defaultBorderColor;
+  box-shadow: 0 0 5px @defaultBoxShadow;
+}
+
+header h1 {
+  font-size: 36px;
+}
+
+.contentable {
+  padding: 30px 30px 30px 60px;
+}
+
+.contentable form fieldset {
+  padding: 17px 20px 18px;
+}
+
+.contentable .breadcrumb {
+  margin-bottom: 30px;
+}
+
+.sidebar {
+  padding: 30px;
+}
+
+.sidebar form {
+  margin: 0;
+}
+
+// Usualy a row actions
+.table tbody td:last-child {
+  text-align: right;
+}
