@@ -3,4 +3,6 @@ class Occupation < ActiveRecord::Base
   has_many :vacancies, :through => :vacancies_occupations
 
   validates :name, :presence => true
+
+  attr_accessible :name
 end

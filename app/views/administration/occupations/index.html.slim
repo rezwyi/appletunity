@@ -1,0 +1,21 @@
+- content_for(:sidebar) { render 'shared/search_form' }
+
+table.table
+  thead
+    tr
+      th #
+      th = t('.name')
+      th
+  tbody
+    - @resources.each do |r|
+      tr
+        td = r.id
+        td = r.name
+        td
+          = link_to t('edit'), edit_administration_occupation_path(r),
+                    :class => 'btn'
+          | &nbsp;
+          = link_to t('delete'), administration_occupation_path(r),
+                    :method => :delete, :class => 'btn btn-danger'
+
+= paginate @resources, :theme => 'administration'
