@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901191453) do
+ActiveRecord::Schema.define(:version => 20120903043909) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -35,15 +35,16 @@ ActiveRecord::Schema.define(:version => 20120901191453) do
     t.string "name", :null => false
   end
 
+  add_index "occupations", ["name"], :name => "index_occupations_on_name", :unique => true
+
   create_table "vacancies", :force => true do |t|
     t.string   "title",             :null => false
     t.text     "description",       :null => false
     t.string   "contact_email",     :null => false
     t.string   "contact_phone"
     t.boolean  "agreed_to_offer",   :null => false
-    t.date     "expired_at",        :null => false
+    t.datetime "expired_at",        :null => false
     t.string   "edit_token",        :null => false
-    t.integer  "company_id"
     t.string   "location"
     t.string   "company_name",      :null => false
     t.string   "company_website"
@@ -51,7 +52,11 @@ ActiveRecord::Schema.define(:version => 20120901191453) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
+
+  add_index "vacancies", ["edit_token"], :name => "index_vacancies_on_edit_token", :unique => true
 
   create_table "vacancies_occupations", :force => true do |t|
     t.integer "vacancy_id"
