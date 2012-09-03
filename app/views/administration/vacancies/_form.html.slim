@@ -13,10 +13,11 @@
     .control-group
       label.control-label{ for='optionsCheckbox' } = t('.occupation')
       .controls
+        = hidden_field_tag 'vacancy[occupation_ids][]'
         - Occupation.all.each do |o|
           label.checkbox.inline
-            - checked = @resource.occupations.map(&:id).include?(o.id)
-            = check_box_tag 'occupations[]', o.id, checked
+            - checked = @resource.occupation_ids.include?(o.id)
+            = check_box_tag 'vacancy[occupation_ids][]', o.id, checked
             = o.name
     .control-group
       = label_tag '', t('.location'), :class => 'control-label'

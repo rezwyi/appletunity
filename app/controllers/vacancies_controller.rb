@@ -9,8 +9,7 @@ class VacanciesController < ApplicationController
   end
 
   def create
-    @vacancy = Vacancy.new(params[:vacancy])
-    @vacancy.occupation_ids = params[:occupations]
+    @vacancy = Vacancy.create(params[:vacancy])
     
     if @vacancy.save
       flash[:message] = t('.vacancy_created_successfull')

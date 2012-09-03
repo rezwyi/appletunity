@@ -8,7 +8,7 @@ class Vacancy < ActiveRecord::Base
   validates :edit_token, :uniqueness => true
 
   attr_accessible :company_name, :company_website, :title, :description,
-                  :location, :occupations, :contact_email, :contact_phone,
+                  :location, :occupation_ids, :contact_email, :contact_phone,
                   :agreed_to_offer, :logo
 
   before_save :generate_expired_at
