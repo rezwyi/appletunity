@@ -14,10 +14,8 @@ table.table
         td = link_to r.title, vacancy_path(r), :target => '_blank'
         td = r.expired_at
         td
-          = link_to t('edit'), edit_administration_vacancy_path(r),
-                    :class => 'btn'
+          = link_to_edit_resource r, :class => 'btn'
           | &nbsp;
-          = link_to t('delete'), administration_vacancy_path(r),
-                    :method => :delete, :class => 'btn btn-danger'
+          = link_to_delete_resource r, :class => 'btn btn-danger'
 
 = paginate @resources, :theme => 'administration'

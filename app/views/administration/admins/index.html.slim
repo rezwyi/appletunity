@@ -15,12 +15,10 @@ table.table
         td = r.email
         td = r.last_sign_in_at
         td = r.last_sign_in_ip
-        td.row-actions
-          = link_to t('edit'), edit_administration_admin_path(r),
-                    :class => 'btn'
+        td
+          = link_to_edit_resource r, :class => 'btn'
           | &nbsp;
           - unless current_admin.id == r.id
-            = link_to t('delete'), administration_admin_path(r),
-                      :method => :delete, :class => 'btn btn-danger'
+            = link_to_delete_resource r, :class => 'btn btn-danger'
 
 = paginate @resources, :theme => 'administration'
