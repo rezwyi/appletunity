@@ -1,0 +1,19 @@
+doctype html
+
+html
+
+body
+  p Здравствуйте!
+  
+  p Уведомляем вас, что ваше объявление о вакансии успешно создано.
+  
+  p Если вы допустили ошибку, то можете отредактировать вакансию по этой ссылке:
+  p
+    = link_to edit_vacancy_url(@vacancy),
+              edit_vacancy_url(@vacancy, :token => @vacancy.edit_token),
+              :target => '_blank'
+  
+  p Спасибо, что воспользовались нашим сервисом!
+  p 
+    | С любовью,&nbsp;
+    = link_to 'appletunity.ru', root_url, :target => '_blank'

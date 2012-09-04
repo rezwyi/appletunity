@@ -1,4 +1,6 @@
 class VacanciesController < ApplicationController
+  after_filter :send_created_email, :only => :create
+
   def index
     @finder = Appletunity::Finders::Base.new(params)
     @vacancies = @finder.retrieve
@@ -37,5 +39,12 @@ class VacanciesController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  private
+
+  def send_created_email
+    return unless @vacancy
+    VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
   end
 end
