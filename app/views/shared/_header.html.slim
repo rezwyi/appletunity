@@ -1,5 +1,7 @@
 header.jumbotron.subhead#overview
   - if current_admin
-    .pull-right = link_to t('.logout'), destroy_admin_session_path, :method => :delete
+    .pull-right
+      = link_to t('.logout'), destroy_admin_session_path,
+                :class => 'zurb-btn', :method => :delete
   h1.logo = link_to t('appletunity'), root_url
   p.lead = t('best_place')

@@ -6,7 +6,7 @@
           = text_field_tag 'filter[keywords]', @finder.keywords,
                            :class => 'input-xlarge'
           | &nbsp;
-          = button_tag t('.search'), :name => '', :class => 'btn'
+          = button_tag t('.search'), :name => '', :class => 'zurb-btn'
       .control-group.options
         .controls
           - Occupation.all.each do |o|
