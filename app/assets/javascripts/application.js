@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jquery.role
+//= require external/jquery.cookie
 //= require_tree .
