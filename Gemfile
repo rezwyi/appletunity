@@ -13,6 +13,7 @@ gem 'paperclip'
 gem 'devise'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'role-rails'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
