@@ -37,7 +37,8 @@ footer {
 }
 
 .contentable {
-  padding: 45px 30px 45px 45px;
+  overflow: hidden;
+  padding: 45px;
 }
 
 .clear {
@@ -98,4 +99,44 @@ footer {
 
 .vacancy-in .vacancy-in-header .company-logo {
   margin-bottom: 10px;
+}
+
+// Filter form
+#filter-form {
+  margin: -45px 0 30px 0;
+  background-color: #eee;
+  border-left: 1px solid @defaultBorderColor;
+  border-right: 1px solid @defaultBorderColor;
+  border-bottom: 1px solid @defaultBorderColor;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 0 6px @defaultShadowColor;
+  overflow: hidden;
+}
+
+#filter-form form {
+  margin: 0;
+  padding: 30px 45px 0px 45px;
+}
+
+#filter-form #filter_keywords {
+  width: 82%;
+}
+
+#filter-form .options {
+  text-align: center;
+}
+
+#filter-form .switcher {
+  height: 1em;
+  background: url('/assets/filter-hide.png') 50% 0 no-repeat;
+  text-align: center;
+}
+
+#filter-form .switcher.hidden {
+  background: url('/assets/filter-show.png') 50% 0 no-repeat;
+  text-align: center;
+}
+
+#filter-form .switcher:hover {
+  background-color: #ddd;
 }

@@ -1,0 +1,17 @@
+#filter-form
+  = form_tag '', :method => :get, :class => 'form-search', :role => 'filter-form' do
+    fieldset
+      .control-group
+        .controls
+          = text_field_tag 'filter[keywords]', @finder.keywords,
+                           :class => 'input-xlarge'
+          | &nbsp;
+          = button_tag t('.search'), :name => '', :class => 'btn'
+      .control-group.options
+        .controls
+          - Occupation.all.each do |o|
+            label.inline.checkbox
+              = check_box_tag 'filter[occupations][]', o.id,
+                              @finder.have_occupation?(o)
+              = o.name
+  .switcher{ role="filter-form-switcher" }

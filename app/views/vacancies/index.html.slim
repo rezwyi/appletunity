@@ -1,5 +1,8 @@
+== render :partial => 'shared/filter'
 == render :partial => 'vacancies', :locals => {:vacancies => @vacancies}
-- if @vacancies.num_pages > 1
+
+- if @vacancies.num_pages > 1 && !@vacancies.last_page?
   ul.pager
     li.next
-      = link_to_next_page @vacancies, "#{t('.older')} &rarr;".html_safe
+      = link_to "#{t('.older')} &rarr;".html_safe,
+                url_for(params.merge(:page => @vacancies.current_page + 1))
