@@ -1,4 +1,11 @@
 .pull-right
-  img{ src='/assets/twitter.png' }
+  = t('.share')
+  | &#58;&nbsp;
+  = link_to build_share_link_for(:twitter, @vacancy), :target => '_blank' do
+    = image_tag 'twitter.png'
   | &nbsp;
-  img{ src='/assets/facebook.png' }
+  = link_to build_share_link_for(:facebook, @vacancy), :target => '_blank' do
+    = image_tag 'facebook.png'
+  | &nbsp;
+  = link_to build_share_link_for(:gplus, @vacancy), :target => '_blank' do
+    = image_tag 'google_plus.png'

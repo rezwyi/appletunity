@@ -54,4 +54,48 @@ module VacanciesHelper
     
     html
   end
+
+  # Public: Build share link for the given network name and vacancy instance.
+  #         When unknown network name given returns nil.
+  #
+  # network - The network name Symbol (required):
+  #           :twitter
+  #           :facebook
+  #           :gplus (google plus)
+  # vacancy - Instance of Vacancy (required)
+  #
+  # Examples
+  #
+  #   build_share_link_for(:twitter, vacancy)
+  #   # => 'https://twitter.com/share?...'
+  #
+  #   build_share_link_for(:unknown, vacancy)
+  #   # => nil
+  #
+  # Returns html safe String
+  def build_share_link_for(network, vacancy)
+    return unless network && vacancy
+
+    url = vacancy_url(vacancy)
+    
+    case network
+    when :twitter then
+      via = 'appletunity'
+      hash_tags = "##{via}"
+      text = "#{title_for(vacancy)} #{url} #{hash_tags}"
+
+      uri = URI.parse 'https://twitter.com/share'
+      uri.query = URI.encode_www_form :via => via, :text => text
+
+      uri.to_s.html_safe
+    when :facebook then
+      uri = URI.parse 'https://facebook.com/sharer/sharer.php'
+      uri.query = URI.encode_www_form :u => url
+    when :gplus then
+      uri = URI.parse 'https://plus.google.com/share'
+      uri.query = URI.encode_www_form :url => url
+    end
+
+    uri.to_s.html_safe if uri
+  end
 end
