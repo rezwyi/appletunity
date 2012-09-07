@@ -22,7 +22,18 @@ class Vacancy < ActiveRecord::Base
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
   end
 
+  def to_param
+    "#{self.id.to_s}-#{self.ascii_title}"
+  end
+
   protected
+
+  def ascii_title
+    title = self.title.split(' ').map do |w|
+      Russian::translit(w).downcase.gsub(/\W/,'-').strip
+    end
+    title.join('-').gsub(/[-]+/, '-').gsub(/^-/, '').gsub(/-$/, '')
+  end
 
   def generate_expired_at
     self.expired_at = Time.now + 7.days
