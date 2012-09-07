@@ -5,7 +5,9 @@ Appletunity::Application.routes.draw do
     post 'sessions/admin' => 'devise/sessions#create'
   end 
 
-  resources :vacancies
+  resources :vacancies, :except => :delete do
+    get 'feed', :on => :collection, :format => :rss
+  end
 
   namespace :administration do
     resources :admins

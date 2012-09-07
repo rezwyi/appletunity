@@ -41,6 +41,11 @@ class VacanciesController < ApplicationController
     end
   end
 
+  def feed
+    @finder = Appletunity::Finders::Base.new
+    @vacancies = @finder.retrieve
+  end
+
   private
 
   def send_created_email
