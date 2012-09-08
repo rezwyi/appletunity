@@ -1,13 +1,13 @@
 #filter-form
   = form_tag '', :method => :get, :class => 'form-search', :role => 'filter-form' do
     fieldset
-      .control-group
+      .control-group.keywords
         .controls
           = text_field_tag 'filter[keywords]', @finder.keywords,
                            :class => 'input-xlarge'
           | &nbsp;
           = button_tag t('.search'), :name => '', :class => 'zurb-btn'
-      .control-group.options
+      .control-group.occupations
         .controls
           - Occupation.all.each do |o|
             label.inline.checkbox
