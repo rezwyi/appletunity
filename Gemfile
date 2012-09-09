@@ -15,6 +15,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'role-rails'
 gem 'russian'
+gem 'redcarpet'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
@@ -24,7 +25,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :developement do
-	gem 'rspec-rails'
-	gem 'shoulda-matchers'
+group :developement, :test do
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'factory_girl_rails'
 end
