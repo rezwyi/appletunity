@@ -1,7 +1,9 @@
-.pagination
-  ul
-    li.disabled: a href='#' «
-    li.active: a href='#' 1
-    li: a href='#' 2
-    li: a href='#' 3
-    li: a href='#' »
+.clear
+  .pull-left
+    - if resources.try(:num_pages) > 1 && !resources.first_page?
+      = link_to "&larr; #{t('.newer')}".html_safe,
+                url_for(params.merge(:page => resources.current_page - 1))
+  .pull-right
+    - if resources.try(:num_pages) > 1 && !resources.last_page?
+      = link_to "#{t('.older')} &rarr;".html_safe,
+                url_for(params.merge(:page => resources.current_page + 1))
