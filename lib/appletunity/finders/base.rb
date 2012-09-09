@@ -5,11 +5,12 @@ module Appletunity::Finders
     end
 
     def retrieve
-      vacancies = Vacancy.where('expired_at >= ?', Time.now)
+      vacancies = Vacancy.where('expired_at >= ?', Time.now)\
+                         .group('vacancies.id')
 
       if filter
         if keywords
-          query = 'title LIKE ? OR description LIKE ? OR location LIKE ?'
+          query = 'title LIKE ? OR body LIKE ? OR location LIKE ?'
           params = "%#{keywords}%"
           vacancies = vacancies.where(query, params, params, params)
         end
