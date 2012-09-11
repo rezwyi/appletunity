@@ -11,8 +11,8 @@ class Vacancy < ActiveRecord::Base
                   :occupation_ids, :contact_email, :contact_phone,
                   :agreed_to_offer, :logo
 
-  before_save :generate_expired_at, :if => :new_record?
-  before_save :generate_edit_token, :if => :new_record?
+  before_create :generate_expired_at
+  before_create :generate_edit_token
   before_save :render_body
 
   has_attached_file :logo,
