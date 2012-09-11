@@ -73,5 +73,13 @@ module Appletunity
 
       html.html_safe
     end
+
+    # Twitter configuration
+    Twitter.configure do |config|
+      config.consumer_key = 'B8XQvgbHCmtnX2oyYIjQ8A'
+      config.consumer_secret = 'vXFDjaQTyfYOkUV0t0iAxYkxv5AHOjwriOtsjrw'
+      config.oauth_token = '437674309-iK1mrKR7hVCnmaHfK9qXiFcoAIUaKSafK9QvIQ5J'
+      config.oauth_token_secret = 'euo6X3fOyMlAwpkV5626PFrTPH7370lKqauPmd9VI'
+    end
   end
 end
