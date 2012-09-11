@@ -1,8 +1,7 @@
 .sidebar
-  h3 = t('add_vacancy_header')
-  p = t('add_vacancy_description')
-  = link_to t('add_vacancy'), new_vacancy_path,
-            :class => 'zurb-btn'
+  = link_to new_vacancy_path, :class => 'zurb-btn centered-text' do
+    h3 = t('add_vacancy')
+    span = t('add_vacancy_description')
 
   .clearfix
 
