@@ -3,6 +3,8 @@ class Administration::ResourcesController < ActionController::Base
   layout 'administration/layouts/application'
 
   before_filter :authenticate_admin!
+  before_filter :load_resource, :only => [:edit, :update, :destroy]
+  before_filter :create_resource, :only => :create
 
   def index
     params[:per_page] ||= Rails.application.config.default_per_page
@@ -15,9 +17,6 @@ class Administration::ResourcesController < ActionController::Base
   end
 
   def create
-    @resource = resource_name.constantize\
-                             .create(params[resource_name.downcase])
-    
     if @resource.save
       flash[:message] = t(".#{resource_name.downcase}_created_successfull")
       redirect_to :action => :index
@@ -27,12 +26,9 @@ class Administration::ResourcesController < ActionController::Base
   end
 
   def edit
-    @resource = resource_name.constantize.find(params[:id])
   end
 
   def update
-    @resource = resource_name.constantize.find(params[:id])
-    
     if @resource.update_attributes(params[resource_name.downcase])
       flash[:message] = t(".#{resource_name.downcase}_updated_successfull")
       redirect_to :action => :index
@@ -42,8 +38,6 @@ class Administration::ResourcesController < ActionController::Base
   end
 
   def destroy
-    @resource = resource_name.constantize.find(params[:id])
-    
     if @resource.destroy
       flash[:message] = t(".#{resource_name.downcase}_deleted_successfull")
     end
@@ -56,5 +50,13 @@ class Administration::ResourcesController < ActionController::Base
   # Classify current controller name
   def resource_name
     controller_name.classify
+  end
+
+  def load_resource
+    @resource = resource_name.constantize.find(params[:id])
+  end
+
+  def create_resource
+    @resource = resource_name.constantize.create(params[resource_name.downcase])
   end
 end
