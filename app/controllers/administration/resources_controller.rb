@@ -5,6 +5,7 @@ class Administration::ResourcesController < ActionController::Base
   before_filter :authenticate_admin!
 
   def index
+    params[:per_page] ||= Rails.application.config.default_per_page
     @resources = resource_name.constantize.order('id DESC')\
                               .page(params[:page]).per(params[:per_page])
   end
