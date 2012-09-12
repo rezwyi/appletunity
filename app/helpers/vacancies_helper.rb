@@ -13,7 +13,7 @@ module VacanciesHelper
   # Returns String
   def mailto_for(vacancy)
     return unless vacancy && vacancy.title && vacancy.contact_email
-    "mailto:#{vacancy.contact_email}?subject=#{vacancy.title}"
+    "mailto:#{vacancy.contact_email}?subject=#{vacancy.title}".html_safe
   end
 
   # Public: Build title for given vacancy
@@ -28,7 +28,7 @@ module VacanciesHelper
   # Returns html safe String
   def title_for(vacancy)
     return unless vacancy
-    [vacancy.company_name, vacancy.title].join(' &raquo; ').html_safe
+    ["[#{vacancy.company_name}]", vacancy.title].join(' ').html_safe
   end
 
   # Public: Build vacancy logo image tag
@@ -52,7 +52,7 @@ module VacanciesHelper
       html = image_tag('no_logo.png', options)
     end
     
-    html
+    html.html_safe
   end
 
   # Public: Build share link for the given network name and vacancy instance.
