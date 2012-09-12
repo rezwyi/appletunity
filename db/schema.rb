@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120909134855) do
+ActiveRecord::Schema.define(:version => 20120912074624) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20120909134855) do
     t.string   "contact_email",     :null => false
     t.string   "contact_phone"
     t.boolean  "agreed_to_offer",   :null => false
-    t.datetime "expired_at",        :null => false
+    t.datetime "expired_at"
     t.string   "edit_token",        :null => false
     t.string   "location"
     t.string   "company_name",      :null => false
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120909134855) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.text     "rendered_body",     :null => false
+    t.boolean  "approved"
   end
 
   add_index "vacancies", ["edit_token"], :name => "index_vacancies_on_edit_token", :unique => true
