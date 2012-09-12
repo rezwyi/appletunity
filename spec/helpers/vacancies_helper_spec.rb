@@ -28,7 +28,7 @@ describe VacanciesHelper do
         vacancy.stub(:title).and_return('some_title')
         vacancy.stub(:company_name).and_return('some_company_name')
         helper.title_for(vacancy)\
-              .should eq 'some_company_name &raquo; some_title'.html_safe
+              .should eq '[some_company_name] some_title'.html_safe
       end
     end
   end
