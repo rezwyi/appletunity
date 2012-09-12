@@ -98,4 +98,17 @@ module VacanciesHelper
 
     uri.to_s.html_safe if uri
   end
+
+  # Public: Convert default_vacancy_lifetime config option to string
+  #
+  # Examples
+  #
+  #   default_vacancy_lifetime
+  #   # => '14'
+  #
+  # Returns html safe String
+  def default_vacancy_lifetime
+    lifetime = Rails.application.config.default_vacancy_lifetime / 86400
+    lifetime.to_s.html_safe
+  end
 end
