@@ -69,4 +69,8 @@ Appletunity::Application.configure do
   config.after_initialize do
     Rails.application.routes.default_url_options = {:host => 'appletunity.ru'}
   end
+
+  # ActionMailer
+  ActionMailer::Base.default :from => 'no-reply@appletunity.ru'
+  config.action_mailer.default_url_options = {:host => 'appletunity.ru'}
 end
