@@ -22,7 +22,7 @@ body
         .brand = t('.administration')
         .nav-collapse.collapse
           ul.nav
-            - %w(admins vacancies occupations).each do |i|
+            - %w(vacancies occupations admins).each do |i|
               - href = "/administration/#{i}"
               - active = 'active' if request.path.starts_with?(href)
               li{ class="#{active}" } = link_to t(".#{i}"), href

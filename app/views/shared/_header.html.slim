@@ -1,6 +1,9 @@
 header.jumbotron.subhead#overview
   - if current_admin
-    .pull-right
+    .manage-buttons.pull-right
+      = link_to t('.manage'), administration_vacancies_path,
+                :class => 'zurb-btn'
+      | &nbsp;
       = link_to t('.logout'), destroy_admin_session_path,
                 :class => 'zurb-btn', :method => :delete
   h1.logo = link_to t('appletunity'), root_url
