@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Appletunity::Finders::Base do
   subject do
     params = {:first => 'first', :second => 'second',
-              :filter => {'keywords' => 'Some title'}}
+              :filter => {'keywords' => 'Some body'}}
     Appletunity::Finders::Base.new(params)
   end
 
@@ -12,13 +12,17 @@ describe Appletunity::Finders::Base do
     subject.second.should eq 'second'
   end
 
-  it 'should return no vacancies' do
+  it 'should find no vacancies' do
     subject.retrieve.should be_empty
   end
 
-  it 'should return some vacancies' do
-    vacancy = FactoryGirl.build(:vacancy)
-    vacancy.save!
+  it 'should find some vacancies' do
+    vacancy = FactoryGirl.create(:vacancy)
+    subject.retrieve.map(&:id).include?(vacancy.id).should be_true
+  end
+
+  it 'should find some vacancies' do
+    vacancy = FactoryGirl.create(:vacancy, :body => 'Some *body*')
     subject.retrieve.map(&:id).include?(vacancy.id).should be_true
   end
 end

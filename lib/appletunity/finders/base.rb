@@ -10,9 +10,10 @@ module Appletunity::Finders
 
       if filter
         if keywords
-          query = 'title LIKE ? OR body LIKE ? OR location LIKE ?'
-          params = "%#{keywords}%"
-          vacancies = vacancies.where(query, params, params, params)
+          query = ['title LIKE ?', 'body LIKE ?', 'location LIKE ?',
+                   'company_name LIKE ?'].join(' OR ')
+          params = "%#{keywords.split(' ').join('%')}%"
+          vacancies = vacancies.where(query, params, params, params, params)
         end
 
         if occupations
