@@ -43,7 +43,7 @@ class Vacancy < ActiveRecord::Base
   end
 
   def expired?
-    self.expired_at <= Time.now
+    self.expired_at && self.expired_at <= Time.now
   end
 
   protected
