@@ -3,6 +3,8 @@
 @defaultBorderColor: #ddd;
 @defaultButtonNormalColor: #08c;
 @defaultButtonHoverColor: darken(@defaultButtonNormalColor, 15%);
+@defaultNoscriptBackgroundColor: #b94a48;
+@defaultNoscriptBorderColor: darken(@defaultNoscriptBackgroundColor, 15%);
 
 // Main
 a:hover {
@@ -220,4 +222,18 @@ label.terms a:hover {
 // Captcha
 #captcha {
   display: none;
+}
+
+// Noscript
+noscript {
+  font-size: 14px;
+  color: #fff;
+  text-shadow: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 20px;
+  background-color: @defaultNoscriptBackgroundColor;
+  border-bottom: @defaultNoscriptBorderColor;
 }

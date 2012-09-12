@@ -65,3 +65,8 @@ ru:
         remember_me: 'Запомнить меня'
         sign_in: 'Войти'
         cancel: 'Отмена'
+
+  layouts:
+    application:
+      no_javascript: 'В вашем браузере отключен Javascript. Напоминаем, что
+                      Appletunity работает лучше, если его включить.'
