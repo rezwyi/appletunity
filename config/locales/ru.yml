@@ -56,3 +56,12 @@ ru:
       header: 'О проекте'
     terms:
       header: 'Пользовательское соглашение'
+
+  devise:
+    sessions:
+      new:
+        email: 'Email'
+        password: 'Пароль'
+        remember_me: 'Запомнить меня'
+        sign_in: 'Войти'
+        cancel: 'Отмена'
