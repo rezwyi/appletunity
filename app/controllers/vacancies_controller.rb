@@ -15,7 +15,8 @@ class VacanciesController < ApplicationController
     @vacancy = Vacancy.create(params[:vacancy])
     
     if @vacancy.save
-      flash[:message] = t('.vacancy_created_successfull')
+      flash[:message] = t('.vacancy_created_successfull',
+                          :email => @vacancy.contact_email)
       redirect_to root_url
     else
       render 'new'

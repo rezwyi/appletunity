@@ -1,12 +1,13 @@
 .sidebar
   = link_to new_vacancy_path, :class => 'zurb-btn centered-text' do
     h3 = t('add_vacancy')
-    span = t('add_vacancy_description')
+    p = t('add_vacancy_description',
+          :d => default_vacancy_lifetime)
 
   .clearfix
 
-  h3 = t('stay_connected_header')
-  p = t('stay_connected_description')
-  div.stay-connected
+  .stay-connected.centered-text
+    h3 = t('stay_connected')
+    p = t('stay_connected_description')
     = link_to image_tag('twitter_big.png'), 'http://twitter.com/appletunity'
     = link_to image_tag('rss_big.png'), feed_vacancies_path

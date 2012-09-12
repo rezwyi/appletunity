@@ -1,0 +1,52 @@
+ru:
+  appletunity: 'Appletunity'
+  best_vacancies: 'Лучшие вакансии для iOS/Mac разработчиков'
+  wtf?: 'О проекте'
+  add_vacancy: 'Разместить'
+  add_vacancy_description: 'Это не требует регистрации и бесплатно на %{d} дней!'
+  stay_connected: 'Будь в курсе!'
+  stay_connected_description: 'Следи за нами в Twitter или подпишить на Rss!'
+  reply: 'Откликнуться на вакансию'
+
+  vacancy_created_successfull: 'Поздравляем! Ваша вакансия успешно создана и будет 
+                               опубликована в ближайшее время. На ваш адрес
+                               %{email} отправлено письмо с деталями.'
+  vacancy_updated_successfull: 'Вакансия успешно изменена!'
+
+  shared:
+    header:
+      manage: 'Управление'
+      logout: 'Выход'
+
+    filter:
+      search: 'Поиск...'
+
+    pagination:
+      older: 'Старее'
+      newer: 'Новее'
+
+    social_buttons:
+      share: 'Поделиться ссылкой'
+
+  vacancies:
+    form:
+      what_you_want: 'Опишите вакансию'
+      title: 'Заголовок'
+      body: 'Описание'
+      occupation: 'Виды занятости'
+      location: 'Город'
+      about_your_company: 'Опишите вашу компанию'
+      name: 'Название'
+      website: 'Сайт'
+      logo: 'Логотип'
+      contacts: 'Контактная информация'
+      email: 'Email'
+      phone: 'Телефон'
+      term_of_service: 'Пользовательское соглашение'
+      i_agree: 'Я принимаю условия'
+      terms: 'пользовательского соглашения'
+      new: 'Разместить'
+      create: 'Разместить'
+      edit: 'Сохранить'
+      cancel: 'Отмена'
+      need_to_agree!: 'необходимо принять условия соглашения'

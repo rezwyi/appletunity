@@ -5,11 +5,15 @@
     h2 = t('.what_you_want')
     hr
     .control-group{ class="#{'error' if vacancy.errors[:title].present?}"}
-      = label_tag '', t('.title'), :class => 'control-label'
+      = label_tag '', :class => 'control-label' do
+        = t('.title')
+        span.required &nbsp;&#42;
       .controls
         = f.text_field :title, :class => 'input-xlarge'
     .control-group{ class="#{'error' if vacancy.errors[:body].present?}"}
-      = label_tag '', t('.body'), :class => 'control-label'
+      = label_tag '', :class => 'control-label' do
+        = t('.body')
+        span.required &nbsp;&#42;
       .controls
         = f.text_area :body, :class => 'input-xlarge', :rows => 15
     .control-group
@@ -31,7 +35,9 @@
     h2 = t('.about_your_company')
     hr
     .control-group{ class="#{'error' if vacancy.errors[:company_name].present?}"}
-      = label_tag '', t('.name'), :class => 'control-label'
+      = label_tag '', :class => 'control-label' do
+        = t('.name')
+        span.required &nbsp;&#42;
       .controls
         = f.text_field :company_name, :class => 'input-xlarge'
     .control-group
@@ -50,27 +56,29 @@
     h2 = t('.contacts')
     hr
     .control-group{ class="#{'error' if vacancy.errors[:contact_email].present?}"}
-      = label_tag '', t('.contact_email'), :class => 'control-label'
+      = label_tag '', :class => 'control-label' do
+        = t('.email')
+        span.required &nbsp;&#42;
       .controls
         = f.text_field :contact_email, :class => 'input-xlarge'
     .control-group
-      = label_tag '', t('.contact_phone'), :class => 'control-label'
+      = label_tag '', t('.phone'), :class => 'control-label'
       .controls
         = f.text_field :contact_phone, :class => 'input-xlarge'
 
     .clearfix
 
-    h2 = t('.term_of_service')
-    hr
-    .control-group
-      .controls
-        label.checkbox.inline
+    .form-actions
+      .control-group
+        label.checkbox.inline.terms
           = f.check_box :agreed_to_offer, :value => 0
-          = t('i_agree_to_the_appletunity_term_of_service')
+          = t('.i_agree')
+          | &nbsp;
+          = link_to t('.terms'), static_path('terms')
+          span.required &nbsp;&#42;
           - if vacancy.errors[:agreed_to_offer].present?
             label.error = t('.need_to_agree!')
-
-    .form-actions
-      = f.submit t(".#{action_name}"), :class => 'zurb-btn'
-      | &nbsp;
-      = link_to t('cancel'), root_url
+      div
+        = f.submit t(".#{action_name}"), :class => 'zurb-btn'
+        | &nbsp;
+        = link_to t('.cancel'), root_url
