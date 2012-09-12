@@ -34,4 +34,9 @@ Appletunity::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Default host
+  config.after_initialize do
+    Rails.application.routes.default_url_options = {:host => 'localhost:8888'}
+  end
 end
