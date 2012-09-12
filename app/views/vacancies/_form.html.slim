@@ -74,7 +74,7 @@
           = f.check_box :agreed_to_offer, :value => 0
           = t('.i_agree')
           | &nbsp;
-          = link_to t('.terms'), static_path('terms')
+          = link_to t('.terms'), static_path('terms'), :target => '_blank'
           span.required &nbsp;&#42;
           - if vacancy.errors[:agreed_to_offer].present?
             label.error = t('.need_to_agree!')
