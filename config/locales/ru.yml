@@ -54,3 +54,5 @@ ru:
   pages:
     about:
       header: 'О проекте'
+    terms:
+      header: 'Пользовательское соглашение'
