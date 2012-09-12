@@ -10,6 +10,7 @@ describe Vacancy do
   it { should validate_presence_of :company_name }
   it { should validate_presence_of :contact_email }
   it { should validate_presence_of :agreed_to_offer }
+  it { should validate_attachment_size(:logo).in(0..100.kilobytes) }
 
   it 'can have several occupations' do
     occupations = [FactoryGirl.build(:occupation, :name => 'Fulltime'),
@@ -28,6 +29,27 @@ describe Vacancy do
   end
 
   context 'before save' do
+    it 'should be valid' do
+      subject.should be_valid
+    end
+
+    it 'should validates length of title' do
+      subject.title = '.' * 71
+      subject.should have(1).error_on(:title)
+    end
+
+    it 'should validates length of company_name' do
+      subject.company_name = '.' * 31
+      subject.should have(1).error_on(:company_name)
+    end
+
+    it 'should validates format of contact_email' do
+      subject.contact_email = '123'
+      subject.should have(1).error_on(:contact_email)
+    end
+  end
+
+  context 'when save' do
     it 'should generate edit_token' do
       subject.save!
       subject.edit_token.should_not be_nil
@@ -44,12 +66,6 @@ describe Vacancy do
                                 .render(subject.body)
       subject.save!
       subject.rendered_body.should eq html
-    end
-  end
-
-  context 'when save' do
-    it 'should be valid' do
-      subject.should be_valid
     end
   end
 end

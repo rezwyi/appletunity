@@ -7,6 +7,13 @@ class Vacancy < ActiveRecord::Base
 
   validates :edit_token, :uniqueness => true
 
+  validates :title, :length => {:maximum => 70}
+  validates :company_name, :length => {:maximum => 30}
+
+  validates :contact_email, :format => {:with => Devise.email_regexp}
+
+  validates_attachment :logo, :size => {:in => 0..100.kilobytes}
+
   attr_accessible :company_name, :company_website, :title, :body, :location,
                   :occupation_ids, :contact_email, :contact_phone,
                   :agreed_to_offer, :logo
