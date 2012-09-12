@@ -34,6 +34,17 @@ class Vacancy < ActiveRecord::Base
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
   end
 
+  # Used from whenever task. Tweet about new vacancies created
+  # within 1 hour
+  def self.tweet_about_new_vacancies
+    now = Time.now
+    Vacancy.live.where(:created_at => (now - 1.hour)..now).each do |v|
+      url = Rails.application.routes.url_helpers.vacancy_url(v)
+      status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
+      Twitter.delay(:queue => 'tweeting').update(status)
+    end
+  end
+
   def to_param
     "#{self.id.to_s}-#{self.ascii_title}"
   end
