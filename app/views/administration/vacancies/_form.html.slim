@@ -6,10 +6,10 @@
       = label_tag '', t('.title'), :class => 'control-label'
       .controls
         = f.text_field :title, :class => 'input-xlarge'
-    .control-group{ class="#{'error' if @resource.errors[:description].present?}"}
-      = label_tag '', t('.description'), :class => 'control-label'
+    .control-group{ class="#{'error' if @resource.errors[:body].present?}"}
+      = label_tag '', t('.body'), :class => 'control-label'
       .controls
-        = f.text_area :description, :class => 'input-xlarge', :rows => 5
+        = f.text_area :body, :class => 'input-xlarge', :rows => 5
     .control-group
       label.control-label{ for='optionsCheckbox' } = t('.occupation')
       .controls
