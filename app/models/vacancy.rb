@@ -42,6 +42,10 @@ class Vacancy < ActiveRecord::Base
     !!self.approved
   end
 
+  def expired?
+    self.expired_at <= Time.now
+  end
+
   protected
 
   def ascii_title
