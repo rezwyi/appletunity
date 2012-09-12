@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :check_captcha, :only => :create
+
   protected
 
   def render_404
@@ -11,5 +13,9 @@ class ApplicationController < ActionController::Base
       end
       type.all { render :status => :not_found, :nothing => true }
     end
+  end
+
+  def check_captcha
+    redirect_to(root_url) and return if params[:captcha].present?
   end
 end

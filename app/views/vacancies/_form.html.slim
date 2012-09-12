@@ -1,4 +1,6 @@
 = form_for vacancy, :html => {:class => 'form-horizontal'} do |f|
+  == render :partial => 'shared/honeypot_captcha'
+  
   fieldset
     h2 = t('.what_you_want')
     hr
@@ -9,7 +11,7 @@
     .control-group{ class="#{'error' if vacancy.errors[:body].present?}"}
       = label_tag '', t('.body'), :class => 'control-label'
       .controls
-        = f.text_area :body, :class => 'input-xlarge', :rows => 5
+        = f.text_area :body, :class => 'input-xlarge', :rows => 15
     .control-group
       label.control-label{ for='optionsCheckbox' } = t('.occupation')
       .controls
