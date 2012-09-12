@@ -53,7 +53,7 @@ class Administration::ResourcesController < ActionController::Base
 
   protected
 
-  # Classify currnet controller name.
+  # Classify current controller name
   def resource_name
     controller_name.classify
   end
