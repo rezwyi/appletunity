@@ -23,12 +23,12 @@ module VacanciesHelper
   # Examples
   #
   #   title_for(vacancy)
-  #   # => '[some_vacancy_company_name] some_vacancy title'
+  #   # => 'some_vacancy_company_name » some_vacancy title'ß
   #
   # Returns html safe String
   def title_for(vacancy)
     return unless vacancy
-    ["[#{vacancy.company_name}]", vacancy.title].join(' ').html_safe
+    [vacancy.company_name, vacancy.title].join(' &raquo; ').html_safe
   end
 
   # Public: Build vacancy logo image tag
