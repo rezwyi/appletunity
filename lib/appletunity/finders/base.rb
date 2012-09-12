@@ -5,8 +5,7 @@ module Appletunity::Finders
     end
 
     def retrieve
-      vacancies = Vacancy.where('expired_at >= ?', Time.now)\
-                         .group('vacancies.id')
+      vacancies = Vacancy.live.group('vacancies.id')
 
       if filter
         if keywords

@@ -16,6 +16,11 @@ describe Appletunity::Finders::Base do
     subject.retrieve.should be_empty
   end
 
+  it 'should find no vacancies' do
+    vacancy = FactoryGirl.create(:vacancy, :approved => false)
+    subject.retrieve.should be_empty
+  end
+
   it 'should find some vacancies' do
     vacancy = FactoryGirl.create(:vacancy)
     subject.retrieve.map(&:id).include?(vacancy.id).should be_true

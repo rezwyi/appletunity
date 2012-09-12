@@ -18,12 +18,16 @@ class Vacancy < ActiveRecord::Base
                   :occupation_ids, :contact_email, :contact_phone,
                   :agreed_to_offer, :logo
 
-  before_create :generate_expired_at
   before_create :generate_edit_token
   before_save :render_body
+  before_save :generate_expired_at
 
   has_attached_file :logo,
                     :styles => {:small => '80x80', :medium => '100x100'}
+
+  scope :live, lambda {
+    where('approved = ? AND expired_at >= ?', true, Time.now)
+  }
 
   # Simple random token generator
   def self.friendly_token
@@ -32,6 +36,10 @@ class Vacancy < ActiveRecord::Base
 
   def to_param
     "#{self.id.to_s}-#{self.ascii_title}"
+  end
+
+  def approved?
+    !!self.approved
   end
 
   protected
@@ -44,8 +52,12 @@ class Vacancy < ActiveRecord::Base
   end
 
   def generate_expired_at
-    lifetime = Rails.application.config.default_vacancy_lifetime
-    self.expired_at = Time.now + lifetime
+    return if self.expired_at
+    
+    if self.approved?
+      lifetime = Rails.application.config.default_vacancy_lifetime
+      self.expired_at = Time.now + lifetime
+    end
   end
 
   def generate_edit_token

@@ -4,6 +4,7 @@ table.table
   thead
     tr
       th #
+      th &#10004;
       th = t('.title')
       th = t('.expired_at')
       th
@@ -11,6 +12,7 @@ table.table
     - @resources.each do |r|
       tr
         td = r.id
+        td = '&#10004;'.html_safe if r.approved?
         td = link_to r.title, vacancy_path(r), :target => '_blank'
         td = r.expired_at
         td

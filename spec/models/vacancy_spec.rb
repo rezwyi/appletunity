@@ -64,6 +64,12 @@ describe Vacancy do
       subject.expired_at.should == Time.now + lifetime
     end
 
+    it 'should leave expired_at empty if not approved' do
+      subject.approved = false
+      subject.save!
+      subject.expired_at.should be_nil
+    end
+
     it 'should render body to html' do
       html = Redcarpet::Markdown.new(Redcarpet::Render::Appletunity)\
                                 .render(subject.body)

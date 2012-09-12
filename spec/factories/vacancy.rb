@@ -7,5 +7,6 @@ FactoryGirl.define do
     company_website 'http://some-company-website.com'
     contact_email 'some@email.com'
     agreed_to_offer true
+    approved true
   end
 end
