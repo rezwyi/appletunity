@@ -59,6 +59,10 @@ module Appletunity
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Custom Appletunity configuration
+    config.default_per_page = 12
+    config.default_vacancy_lifetime = 5.days
+
     # Custom error messages html
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
       errors = Array(instance.error_message).join(',')

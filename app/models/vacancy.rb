@@ -44,7 +44,8 @@ class Vacancy < ActiveRecord::Base
   end
 
   def generate_expired_at
-    self.expired_at = Time.now + 7.days
+    lifetime = Rails.application.config.default_vacancy_lifetime
+    self.expired_at = Time.now + lifetime
   end
 
   def generate_edit_token

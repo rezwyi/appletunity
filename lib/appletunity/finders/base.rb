@@ -1,7 +1,7 @@
 module Appletunity::Finders
   class Base
-    def initialize(params={})
-      @params = params
+    def initialize(params={})      
+      @params = normalize_params(params)
     end
 
     def retrieve
@@ -41,6 +41,11 @@ module Appletunity::Finders
 
     def method_missing(method, *args, &block)
       @params[method]
+    end
+
+    def normalize_params(params)
+      params[:per_page] ||= Rails.application.config.default_per_page
+      params
     end
   end
 end

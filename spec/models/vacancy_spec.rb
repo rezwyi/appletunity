@@ -56,9 +56,12 @@ describe Vacancy do
     end
 
     it 'should generate expired_at' do
+      lifetime = Rails.application.config.default_vacancy_lifetime
+      
       Time.stub(:now).and_return(Time.new)
+      
       subject.save!
-      subject.expired_at.should == Time.now + 7.days
+      subject.expired_at.should == Time.now + lifetime
     end
 
     it 'should render body to html' do
