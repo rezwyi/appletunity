@@ -19,6 +19,7 @@ gem 'redcarpet'
 gem 'twitter'
 gem 'whenever', :require => false
 gem 'capistrano'
+gem 'rvm-capistrano'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
