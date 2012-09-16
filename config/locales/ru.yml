@@ -52,6 +52,10 @@ ru:
       cancel: 'Отмена'
       need_to_agree!: 'необходимо принять условия соглашения'
 
+      title_placeholder: "Например, 'Дизайнер интерфейсов iOS'"
+      body_placeholder: 'Для форматирования вы можете воспользоваться Markdown'
+      location_placeholder: "Например, 'Россия, Москва'"
+
   pages:
     about:
       header: 'О проекте'
