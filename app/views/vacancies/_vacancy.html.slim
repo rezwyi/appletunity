@@ -18,7 +18,8 @@
           span.label = o.name
           | &nbsp;
   hr.clear
-  p = raw vacancy.rendered_body
+  .vacancy-in-body
+    = raw vacancy.rendered_body
   hr
   div
     == render :partial => 'shared/social_buttons'
