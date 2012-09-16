@@ -12,10 +12,10 @@ $(document).ready ->
     form = $(this).siblings('form')
 
     if form.css('margin-top') != '0px'
-      form.animate marginTop: '0px'
+      form.css marginTop: '0px'
       $.removeCookie '_appletunity_hide_filter', {path: '/'}
     else
-      form.animate marginTop: '-100px'
+      form.css marginTop: '-100px'
       $.cookie '_appletunity_hide_filter', true, {path: '/'}
 
     that.toggleClass 'hidden'
