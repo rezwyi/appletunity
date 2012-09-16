@@ -29,6 +29,10 @@ class Vacancy < ActiveRecord::Base
     where('approved = ? AND expired_at >= ?', true, Time.now)
   }
 
+  scope :not_approved, lambda {
+    where('approved = ? AND expired_at IS NULL', false)
+  }
+
   # Simple random token generator
   def self.friendly_token
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
@@ -41,6 +45,13 @@ class Vacancy < ActiveRecord::Base
       url = Rails.application.routes.url_helpers.vacancy_url(v)
       status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
       Twitter.delay(:queue => 'tweeting').update(status)
+    end
+  end
+
+  # Used from whenever task
+  def self.notify_about_not_approved_vacancies
+    if (vs = Vacancy.not_approved)
+      VacancyMailer.delay(:queue => 'mailing').not_approved(vs.to_a)
     end
   end
 

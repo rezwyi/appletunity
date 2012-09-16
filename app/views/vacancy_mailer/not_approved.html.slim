@@ -1,0 +1,24 @@
+doctype html
+
+html
+
+body
+  p
+    strong Здравствуйте!
+  
+  p
+    | Вы получили это уведомление, потому что находитесь в списках администраторов сайта 
+    = link_to 'appletunity.ru', root_url, :target => '_blank'
+    | .
+  
+  p
+    | Напоминаем, что на сайте находятся неподтвержденные вакансии, требующие вашей реакции:
+    - unless @vacancies.empty?
+      ul
+        - @vacancies.each do |v|
+          li = link_to v.title, edit_administration_vacancy_url(v), :target => '_blank'
+
+  p
+    | С уважением,&nbsp;
+    = link_to 'appletunity.ru', root_url, :target => '_blank'
+    | .
