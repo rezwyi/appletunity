@@ -41,10 +41,14 @@ class Vacancy < ActiveRecord::Base
   # Used from whenever task
   def self.tweet_about_new_vacancies
     now = Time.now
-    Vacancy.live.where(:created_at => (now - 1.hour)..now).each do |v|
-      url = Rails.application.routes.url_helpers.vacancy_url(v)
-      status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
-      Twitter.delay(:queue => 'tweeting').update(status)
+    Vacancy.live.each do |v|
+      # Approved date
+      ap = v.expired_at - Rails.application.config.default_vacancy_lifetime
+      if (now - 1.hour) <= ap && now >= ap
+        url = Rails.application.routes.url_helpers.vacancy_url(v)
+        status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
+        Twitter.delay(:queue => 'tweeting').update(status)
+      end
     end
   end
 
