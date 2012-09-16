@@ -34,8 +34,7 @@ class Vacancy < ActiveRecord::Base
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
   end
 
-  # Used from whenever task. Tweet about new vacancies created
-  # within 1 hour
+  # Used from whenever task
   def self.tweet_about_new_vacancies
     now = Time.now
     Vacancy.live.where(:created_at => (now - 1.hour)..now).each do |v|
