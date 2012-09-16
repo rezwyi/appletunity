@@ -12,6 +12,7 @@ ru:
                                опубликована в ближайшее время. На ваш адрес
                                %{email} отправлено письмо с деталями.'
   vacancy_updated_successfull: 'Вакансия успешно изменена!'
+  created_email: 'Уведомление о создании вакансии на сайте appletunity.ru'
 
   shared:
     header:
