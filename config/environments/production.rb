@@ -73,4 +73,10 @@ Appletunity::Application.configure do
   # ActionMailer
   ActionMailer::Base.default :from => 'no-reply@appletunity.ru'
   config.action_mailer.default_url_options = {:host => 'appletunity.ru'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {:address => 'mail.locum.ru',
+                                        :port => 25,
+                                        :user_name => 'no-reply@appletunity.ru',
+                                        :password => '1xEaD419sl4dw38y',
+                                        :authentication => 'plain'}
 end
