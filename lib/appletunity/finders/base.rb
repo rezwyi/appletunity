@@ -21,7 +21,7 @@ module Appletunity::Finders
         end
       end
 
-      vacancies.order('id DESC').page(page).per(per_page)
+      vacancies.order('expired_at DESC').page(page).per(per_page)
     end
 
     def keywords
