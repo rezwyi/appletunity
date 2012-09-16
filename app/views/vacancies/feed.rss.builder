@@ -9,7 +9,7 @@ xml.rss :version => '2.0'  do
     @vacancies.each do |vacancy|
       xml.item do
         xml.title vacancy.title
-        xml.description vacancy.description
+        xml.description vacancy.rendered_body
         xml.pubDate vacancy.created_at
         xml.link vacancy_url(vacancy)
         xml.guid vacancy_url(vacancy)
