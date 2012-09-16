@@ -4,6 +4,6 @@ class Administration::VacanciesController < Administration::ResourcesController
   private
 
   def set_approved
-    @resource.approved = params[:approved]
+    @resource.approved = params[:approved].present?
   end
 end
