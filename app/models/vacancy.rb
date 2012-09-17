@@ -54,8 +54,9 @@ class Vacancy < ActiveRecord::Base
 
   # Used from whenever task
   def self.notify_about_not_approved_vacancies
-    if (vs = Vacancy.not_approved)
-      VacancyMailer.delay(:queue => 'mailing').not_approved(vs.to_a)
+    vs = Vacancy.not_approved.to_a
+    unless vs.empty?
+      VacancyMailer.delay(:queue => 'mailing').not_approved(vs)
     end
   end
 
