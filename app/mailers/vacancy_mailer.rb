@@ -5,7 +5,7 @@ class VacancyMailer < ActionMailer::Base
   end
 
   def not_approved(vacancies)
-  	@vacancies = vacancies
+    @vacancies = vacancies
     mail :to => Admin.all.map(&:email), :subject => t('.notify_email')
   end
 end
