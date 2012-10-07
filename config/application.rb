@@ -61,7 +61,7 @@ module Appletunity
 
     # Custom Appletunity configuration
     config.default_per_page = 12
-    config.default_vacancy_lifetime = 14.days
+    config.default_vacancy_lifetime = 30.days
 
     # Custom error messages html
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
