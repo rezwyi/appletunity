@@ -45,6 +45,8 @@ module VacanciesHelper
   # Returns html safe String
   def logo_for(vacancy, size = :small, options = {})
     return unless vacancy
+
+    options = {:alt => vacancy.company_name}.merge(options)
     
     if vacancy.logo?
       html = image_tag(vacancy.logo.url(size), options)
