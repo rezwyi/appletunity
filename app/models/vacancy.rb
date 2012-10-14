@@ -101,7 +101,7 @@ class Vacancy < ActiveRecord::Base
   end
 
   def render_body
-    allowed_tags = %w(h2 p div ul li)
+    allowed_tags = %w(h2 p div ul li b i em)
     self.rendered_body = sanitize(self.body, :tags => allowed_tags)
   end
 end

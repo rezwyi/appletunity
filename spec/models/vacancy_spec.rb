@@ -70,6 +70,20 @@ describe Vacancy do
       subject.expired_at.should be_nil
     end
 
+    it 'should allow b tag in body' do
+      body = '<b>Some body</b>'
+      subject.body = body
+      subject.save!
+      subject.rendered_body.should eq body
+    end
+
+    it 'should allow i and em tag in body' do
+      body = '<i>Some</i> <em>body</em>'
+      subject.body = body
+      subject.save!
+      subject.rendered_body.should eq body
+    end
+
     it 'should sanitize link tag in body' do
       subject.body = '<a href="#">Some body</a>'
       subject.save!
