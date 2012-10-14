@@ -1,4 +1,6 @@
 class Vacancy < ActiveRecord::Base
+  include ActionView::Helpers::SanitizeHelper
+
   has_many :vacancies_occupations, :dependent => :destroy
   has_many :occupations, :through => :vacancies_occupations
 
@@ -99,7 +101,7 @@ class Vacancy < ActiveRecord::Base
   end
 
   def render_body
-    self.rendered_body = Redcarpet::Markdown.new(Redcarpet::Render::Appletunity)\
-                                            .render(self.body)
+    allowed_tags = %w(h2 p div ul li)
+    self.rendered_body = sanitize(self.body, :tags => allowed_tags)
   end
 end
