@@ -11,6 +11,11 @@ end
 
 module Appletunity
   class Application < Rails::Application
+    # Setting up the exception notification middleware
+    config.middleware.use ExceptionNotifier,
+                          :sender_address => 'no-reply@appletunity.ru',
+                          :exception_recipients => 'support@appletunity.ru'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
