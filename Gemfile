@@ -21,6 +21,7 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'exception_notification'
 gem 'bootstrap-sass'
+gem 'therubyracer'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
