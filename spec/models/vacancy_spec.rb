@@ -70,11 +70,28 @@ describe Vacancy do
       subject.expired_at.should be_nil
     end
 
-    it 'should render body to html' do
-      html = Redcarpet::Markdown.new(Redcarpet::Render::Appletunity)\
-                                .render(subject.body)
+    it 'should sanitize link tag in body' do
+      subject.body = '<a href="#">Some body</a>'
       subject.save!
-      subject.rendered_body.should eq html
+      subject.rendered_body.should eq 'Some body'
+    end
+
+    it 'should sanitize script tag in body' do
+      subject.body = '<script type="text/javascript">alert("Alert!")</script>'
+      subject.save!
+      subject.rendered_body.should eq ''
+    end
+
+    it 'should sanitize h1 tag in body' do
+      subject.body = '<h1>Some body</h1>'
+      subject.save!
+      subject.rendered_body.should eq 'Some body'
+    end
+
+    it 'should sanitize ol tag in body' do
+      subject.body = '<ol><li>Some list item</li></ol>'
+      subject.save!
+      subject.rendered_body.should eq '<li>Some list item</li>'
     end
   end
 end

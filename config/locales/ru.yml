@@ -55,7 +55,7 @@ ru:
       need_to_agree!: 'необходимо принять условия соглашения'
 
       title_placeholder: "Например, 'Дизайнер интерфейсов iOS'"
-      body_placeholder: 'Для форматирования вы можете воспользоваться Markdown'
+      body_placeholder: 'Опишите что вам нужно, какие у вас преимущества и т.д.'
       location_placeholder: "Например, 'Россия, Москва'"
 
   pages:

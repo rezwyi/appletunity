@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :vacancy do
     title 'Some title'
-    body 'Some body'
+    body '<p>Some body</p>'
     location 'Some location'
     company_name 'Some company name'
     company_website 'http://some-company-website.com'
