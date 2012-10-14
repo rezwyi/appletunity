@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require jquery.role
 //= require external/jquery.cookie
+//= require external/redactor
+//= require external/redactor.locale
 //= require_tree .
