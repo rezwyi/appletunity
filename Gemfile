@@ -15,7 +15,6 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'role-rails'
 gem 'russian'
-gem 'redcarpet'
 gem 'twitter'
 gem 'whenever', :require => false
 gem 'capistrano'
