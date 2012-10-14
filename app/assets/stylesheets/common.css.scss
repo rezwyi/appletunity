@@ -1,14 +1,18 @@
-@defaultHeight: 70px;
-@defaultShadowColor: #999;
-@defaultBorderColor: #ddd;
-@defaultButtonNormalColor: #08c;
-@defaultButtonHoverColor: darken(@defaultButtonNormalColor, 15%);
-@defaultNoscriptBackgroundColor: #b94a48;
-@defaultNoscriptBorderColor: darken(@defaultNoscriptBackgroundColor, 15%);
+$defaultHeight: 70px;
+$defaultShadowColor: #999;
+$defaultBorderColor: #ddd;
+$defaultButtonNormalColor: #08c;
+$defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
+$defaultNoscriptBackgroundColor: #b94a48;
+$defaultNoscriptBorderColor: darken($defaultNoscriptBackgroundColor, 15%);
 
-// Main
 a:hover {
   text-decoration: none;
+}
+
+header h1.logo {
+  font-family: 'Courgette', cursive;
+  font-size: 2.5em;
 }
 
 header .logo a,
@@ -17,6 +21,10 @@ footer a,
 footer a:hover {
   text-decoration: none;
   color: #333;
+}
+
+header .lead {
+  font-size: 16px;
 }
 
 header .manage-buttons {
@@ -46,7 +54,7 @@ label.terms a:hover {
 
 .container .row {
   background: url('/assets/container.png') 0 0 repeat;
-  box-shadow: 0 0 10px @defaultShadowColor;
+  box-shadow: 0 0 10px $defaultShadowColor;
   border-radius: 5px;
 }
 
@@ -86,7 +94,7 @@ label.terms a:hover {
 
 .contentable {
   overflow: hidden;
-  padding: 45px;
+  padding: 30px 45px 45px 45px;
   text-shadow: none;
 }
 
@@ -108,7 +116,7 @@ label.terms a:hover {
 
 // Vacancies
 .vacancies .vacancy {
-  border-bottom: 1px solid @defaultBorderColor;
+  border-bottom: 1px solid $defaultBorderColor;
 }
 
 .vacancies :last-child {
@@ -121,7 +129,7 @@ label.terms a:hover {
 }
 
 .vacancy-in {
-  min-height: @defaultHeight;
+  min-height: $defaultHeight;
 }
 
 .vacancy .title,
@@ -140,13 +148,13 @@ label.terms a:hover {
 
 .vacancy .company-logo {
   width: 80px;
-  min-height: @defaultHeight;
+  min-height: $defaultHeight;
   margin-right: 15px;
   padding: 5px 0 0 0;
 }
 
 .vacancy-in .vacancy-in-header {
-  min-height: @defaultHeight;
+  min-height: $defaultHeight;
 }
 
 .vacancy-in .vacancy-in-header .company-logo {
@@ -180,23 +188,19 @@ label.terms a:hover {
 
 // Filter form
 #filter-form {
-  margin: -45px 0 30px 0;
+  margin: -37px 0 30px 0;
   background-color: #eee;
-  border-left: 1px solid @defaultBorderColor;
-  border-right: 1px solid @defaultBorderColor;
-  border-bottom: 1px solid @defaultBorderColor;
+  border-left: 1px solid $defaultBorderColor;
+  border-right: 1px solid $defaultBorderColor;
+  border-bottom: 1px solid $defaultBorderColor;
   border-radius: 0 0 5px 5px;
-  box-shadow: 0 0 6px @defaultShadowColor;
+  box-shadow: 0 0 6px $defaultShadowColor;
   overflow: hidden;
 }
 
 #filter-form form {
   margin: 0;
   padding: 30px 45px 0px 45px;
-}
-
-#filter-form #filter_keywords {
-  width: 80%;
 }
 
 #filter-form .keywords,
@@ -222,7 +226,7 @@ label.terms a:hover {
 // Zurb buttons
 .zurb-btn {
   position: relative;
-  background-color: @defaultButtonNormalColor;
+  background-color: $defaultButtonNormalColor;
   display: inline-block;
   color: #fff;
   border-bottom: 1px solid rgba(0,0,0,0.25);
@@ -238,7 +242,7 @@ label.terms a:hover {
 }
 
 .zurb-btn:hover {
-  background-color: @defaultButtonHoverColor;
+  background-color: $defaultButtonHoverColor;
   text-decoration: none;
   color:  #fff;
 }
@@ -262,8 +266,8 @@ noscript {
   right: 0;
   left: 0;
   height: 20px;
-  background-color: @defaultNoscriptBackgroundColor;
-  border-bottom: @defaultNoscriptBorderColor;
+  background-color: $defaultNoscriptBackgroundColor;
+  border-bottom: $defaultNoscriptBorderColor;
 }
 
 // Redactor

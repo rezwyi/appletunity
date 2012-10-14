@@ -1,11 +1,11 @@
-@defaultBoxShadow: #bbb;
-@defaultBorderColor: #bbb;
+$defaultBoxShadow: #bbb;
+$defaultBorderColor: #bbb;
 
 header {
   background-color: #ddd;
   padding: 40px 20px 20px 60px;
-  border-bottom: 1px solid @defaultBorderColor;
-  box-shadow: 0 0 5px @defaultBoxShadow;
+  border-bottom: 1px solid $defaultBorderColor;
+  box-shadow: 0 0 5px $defaultBoxShadow;
 }
 
 header h1 {
