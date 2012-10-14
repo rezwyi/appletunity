@@ -20,6 +20,7 @@ gem 'twitter'
 gem 'whenever', :require => false
 gem 'capistrano'
 gem 'rvm-capistrano'
+gem 'exception_notification'
 
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
@@ -29,11 +30,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :developement, :test do
+group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-end
-
-group :test do
   gem 'factory_girl_rails'
 end
