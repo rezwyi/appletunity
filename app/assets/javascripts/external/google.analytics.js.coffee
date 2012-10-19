@@ -1,4 +1,6 @@
-_gaq = [['_setAccount', 'UA-24462942-2'], ['_trackPageview']]
+# See http://stackoverflow.com/questions/4214731/coffeescript-global-variables
+root = exports ? this
+root._gaq = [['_setAccount', 'UA-24462942-2'], ['_trackPageview']]
 
 insertGAScript = ->
   ga = document.createElement 'script'

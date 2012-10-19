@@ -16,5 +16,6 @@
 //= require external/jquery.cookie
 //= require external/redactor
 //= require external/redactor.locale
-//= require external/google.analytics
 //= require_tree .
+
+<% require_asset 'external/google.analytics' if Rails.env == 'production' %>
