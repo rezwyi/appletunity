@@ -1,14 +1,15 @@
-_gaq = _gaq || []
-_gaq.push ['_setAccount', 'UA-24462942-2']
-_gaq.push ['_trackPageview']
+_gaq = [['_setAccount', 'UA-24462942-2'], ['_trackPageview']]
 
-->
+insertGAScript = ->
   ga = document.createElement 'script'
   ga.type = 'text/javascript'
   ga.async = true
 
-  proto = (document.location.protocol == 'https:' ? 'https://ssl' : 'http://www')
+  proto = document.location.protocol
+  proto = if (proto is 'https:') then 'https://ssl' else 'http://www'
   ga.src = "#{proto}.google-analytics.com/ga.js"
   
   s = document.getElementsByTagName 'script'
   s[0].parentNode.insertBefore ga, s
+
+insertGAScript()
