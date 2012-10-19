@@ -16,4 +16,5 @@
 //= require external/jquery.cookie
 //= require external/redactor
 //= require external/redactor.locale
+//= require external/google.analytics
 //= require_tree .
