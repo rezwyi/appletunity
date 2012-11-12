@@ -6,5 +6,6 @@ header.jumbotron.subhead#overview
       | &nbsp;
       = link_to t('.logout'), destroy_admin_session_path,
                 :class => 'zurb-btn', :method => :delete
-  h1.logo = link_to t('appletunity'), root_url
+  = image_tag 'appletunity.png'
+  h1.logo = link_to "#{content_tag(:strong, 'apple')}tunity".html_safe, root_url
   p.lead = t('best_vacancies')

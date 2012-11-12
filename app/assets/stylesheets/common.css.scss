@@ -11,8 +11,16 @@ a:hover {
 }
 
 header h1.logo {
-  font-family: 'Courgette', cursive;
-  font-size: 2.5em;
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.9em;
+  font-weight: 400;
+  margin-left: 12px;
+  text-transform: uppercase;
+}
+
+header h1.logo strong {
+  font-weight: 600;
 }
 
 header .logo a,
@@ -25,6 +33,7 @@ footer a:hover {
 
 header .lead {
   font-size: 16px;
+  margin: -35px 0 35px 92px;
 }
 
 header .manage-buttons {
