@@ -37,7 +37,7 @@ ru:
       title: 'Заголовок'
       body: 'Описание'
       occupation: 'Виды занятости'
-      location: 'Город'
+      location: 'Местоположение'
       about_your_company: 'Опишите вашу компанию'
       name: 'Название'
       website: 'Сайт'
