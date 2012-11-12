@@ -1,15 +1,14 @@
 - content_for :javascripts do
   javascript:
     $(document).ready(function(){
-      var redactor_buttons = ['formatting',
-                              '|', 'bold', 'italic',
-                              '|', 'unorderedlist'];
+      var redactor_buttons = ['formatting', '|',
+                              'bold', 'italic', 'deleted', '|', 
+                              'unorderedlist', 'orderedlist'];
 
       // Transform body textarea to modern
       // WYSIWYG editor
       $('#vacancy_body').redactor({
         lang: '#{I18n.locale}',
-        formattingTags: ['h2'],
         buttons: redactor_buttons,
         minHeight: 400
       });
