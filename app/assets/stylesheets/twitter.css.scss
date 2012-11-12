@@ -33,6 +33,14 @@ body {
   width: 101px;
 }
 
+.form-actions .control-group {
+  margin-left: 0;
+}
+
+.control-group {
+  margin-left: 20px;
+}
+
 .control-group label.error {
   color: $errorText;
 }
