@@ -10,7 +10,7 @@
       $('#vacancy_body').redactor({
         lang: '#{I18n.locale}',
         buttons: redactor_buttons,
-        minHeight: 400
+        autoresize: false
       });
     });
 
@@ -27,13 +27,18 @@
       .controls
         = f.text_field :title, :class => 'input-xlarge',
                        :placeholder => t('.title_placeholder')
+    .control-group
+      = label_tag '', t('.location'), :class => 'control-label'
+      .controls
+        = f.text_field :location, :class => 'input-xlarge',
+                       :placeholder => t('.location_placeholder')
+
     .control-group{ class="#{'error' if vacancy.errors[:body].present?}"}
       = label_tag '', :class => 'control-label' do
         = t('.body')
         span.required &nbsp;&#42;
-      .controls
-        = f.text_area :body, :class => 'input-xlarge', :rows => 15,
-                      :placeholder => t('.body_placeholder')
+      = f.text_area :body, :class => 'input-xlarge', :rows => 15,
+                    :placeholder => t('.body_placeholder')
     .control-group
       label.control-label{ for='optionsCheckbox' } = t('.occupation')
       .controls
@@ -43,12 +48,6 @@
             - checked = vacancy.occupation_ids.include?(o.id)
             = check_box_tag 'vacancy[occupation_ids][]', o.id, checked
             = o.name
-    .control-group
-      = label_tag '', t('.location'), :class => 'control-label'
-      .controls
-        = f.text_field :location, :class => 'input-xlarge',
-                       :placeholder => t('.location_placeholder')
-
     .clearfix
 
     h2 = t('.about_your_company')
