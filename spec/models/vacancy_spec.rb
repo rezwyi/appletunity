@@ -84,6 +84,20 @@ describe Vacancy do
       subject.rendered_body.should eq body
     end
 
+    it 'should allow h1 tag in body' do
+      body = '<h1>Some body</h1>'
+      subject.body = body
+      subject.save!
+      subject.rendered_body.should eq body
+    end
+
+    it 'should allow ol tag in body' do
+      body = '<ol><li>Some list item</li></ol>'
+      subject.body = body
+      subject.save!
+      subject.rendered_body.should eq body
+    end
+
     it 'should sanitize link tag in body' do
       subject.body = '<a href="#">Some body</a>'
       subject.save!
@@ -96,16 +110,10 @@ describe Vacancy do
       subject.rendered_body.should eq ''
     end
 
-    it 'should sanitize h1 tag in body' do
-      subject.body = '<h1>Some body</h1>'
+    it 'should sanitize img tag in body' do
+      subject.body = '<img src="#">'
       subject.save!
-      subject.rendered_body.should eq 'Some body'
-    end
-
-    it 'should sanitize ol tag in body' do
-      subject.body = '<ol><li>Some list item</li></ol>'
-      subject.save!
-      subject.rendered_body.should eq '<li>Some list item</li>'
+      subject.rendered_body.should eq ''
     end
   end
 end
