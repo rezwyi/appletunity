@@ -64,7 +64,7 @@
     .control-group
       .controls
         label.checkbox.inline
-          = check_box_tag t('.approved'), 'yes', @resource.approved?
+          = check_box_tag 'approved', 'yes', @resource.approved?
           = t('.approved')
   .form-actions
     = f.submit t(action_name), :class => 'btn'
