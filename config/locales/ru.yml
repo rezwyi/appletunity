@@ -134,7 +134,6 @@ ru:
       index:
         email: 'Эл. адрес'
         last_sign_in_at: 'Последний вход'
-        last_sign_in_ip: 'Последний ip'
 
       form:
         email: 'Эл. адрес'

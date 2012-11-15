@@ -6,7 +6,6 @@ table.table
       th #
       th = t('.email')
       th = t('.last_sign_in_at')
-      th = t('.last_sign_in_ip')
       th
   tbody
     - @resources.each do |r|
@@ -14,7 +13,6 @@ table.table
         td = r.id
         td = r.email
         td = r.last_sign_in_at
-        td = r.last_sign_in_ip
         td
           = link_to_edit_resource r, :class => 'btn'
           | &nbsp;
