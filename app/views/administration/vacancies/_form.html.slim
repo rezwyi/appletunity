@@ -1,3 +1,19 @@
+- content_for :javascripts do
+  javascript:
+    $(document).ready(function(){
+      var redactor_buttons = ['formatting', '|',
+                              'bold', 'italic', 'deleted', '|', 
+                              'unorderedlist', 'orderedlist'];
+
+      // Transform body textarea to modern
+      // WYSIWYG editor
+      $('#vacancy_body').redactor({
+        lang: '#{I18n.locale}',
+        buttons: redactor_buttons,
+        autoresize: false
+      });
+    });
+
 = form_for [:administration, @resource], :html => {:class => 'well'} do |f|
   = f.hidden_field :agreed_to_offer, :value => 1
   
@@ -6,10 +22,14 @@
       = label_tag '', t('.title'), :class => 'control-label'
       .controls
         = f.text_field :title, :class => 'input-xlarge'
+    .control-group
+      = label_tag '', t('.location'), :class => 'control-label'
+      .controls
+        = f.text_field :location, :class => 'input-xlarge'
     .control-group{ class="#{'error' if @resource.errors[:body].present?}"}
       = label_tag '', t('.body'), :class => 'control-label'
       .controls
-        = f.text_area :body, :class => 'input-xlarge', :rows => 5
+        = f.text_area :body, :class => 'input-xxlarge', :rows => 15
     .control-group
       label.control-label{ for='optionsCheckbox' } = t('.occupation')
       .controls
@@ -19,10 +39,6 @@
             - checked = @resource.occupation_ids.include?(o.id)
             = check_box_tag 'vacancy[occupation_ids][]', o.id, checked
             = o.name
-    .control-group
-      = label_tag '', t('.location'), :class => 'control-label'
-      .controls
-        = f.text_field :location, :class => 'input-xlarge'
     .control-group{ class="#{'error' if @resource.errors[:company_name].present?}"}
       = label_tag '', t('.name'), :class => 'control-label'
       .controls
@@ -38,17 +54,17 @@
       .controls
         = f.file_field :logo, :class => 'input-xlarge'
     .control-group{ class="#{'error' if @resource.errors[:contact_email].present?}"}
-      = label_tag '', t('.contact_email'), :class => 'control-label'
+      = label_tag '', t('.email'), :class => 'control-label'
       .controls
         = f.text_field :contact_email, :class => 'input-xlarge'
     .control-group
-      = label_tag '', t('.contact_phone'), :class => 'control-label'
+      = label_tag '', t('.phone'), :class => 'control-label'
       .controls
         = f.text_field :contact_phone, :class => 'input-xlarge'
     .control-group
       .controls
         label.checkbox.inline
-          = check_box_tag 'approved', 'yes', @resource.approved?
+          = check_box_tag t('.approved'), 'yes', @resource.approved?
           = t('.approved')
   .form-actions
     = f.submit t(action_name), :class => 'btn'
