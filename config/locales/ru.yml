@@ -16,6 +16,12 @@ ru:
   created_email: 'Уведомление о создании вакансии на сайте appletunity.ru'
   notify_email: 'Уведомление о неподтвержденных вакансиях на сайте appletunity.ru'
 
+  new: 'Создать'
+  edit: 'Редактировать'
+  cancel: 'Отменить'
+  delete: 'Удалить'
+  sure?: 'Уверен?'
+
   shared:
     header:
       manage: 'Управление'
@@ -30,6 +36,9 @@ ru:
 
     social_buttons:
       share: 'Поделиться ссылкой'
+
+    search_form:
+      search: 'Поиск...'
 
   vacancies:
     form:
@@ -77,3 +86,57 @@ ru:
     application:
       no_javascript: 'В вашем браузере отключен Javascript. Напоминаем, что
                       Appletunity работает лучше, если его включить.'
+
+  administration:
+    layouts:
+      application:
+        administration: 'Панель администрирования'
+        vacancies: 'Вакансии'
+        occupations: 'Виды занятости'
+        admins: 'Администраторы'
+        home: 'На главную'
+        logout: 'Выйти'
+        management_of_vacancies: 'Управление вакансиями'
+        management_of_occupations: 'Управление видами занятости'
+        management_of_admins: 'Управление администраторами'
+        index: 'Список'
+        new: 'Создание'
+        edit: 'Редактирование'
+        new_vacancy: 'Добавить вакансию'
+        new_occupation: 'Добавить вид занятости'
+        new_admin: 'Добавить администратора'
+
+    vacancies:
+      index:
+        title: 'Заголовок'
+        expired_at: 'Истекает'
+
+      form:
+        title: 'Заголовок'
+        body: 'Описание'
+        occupation: 'Виды занятости'
+        location: 'Местоположение'
+        name: 'Название'
+        website: 'Сайт'
+        logo: 'Логотип'
+        email: 'Email'
+        phone: 'Телефон'
+        approved: 'Не спам!'
+
+    occupations:
+      index:
+        name: 'Имя'
+
+      form:
+        name: 'Имя'
+
+    admins:
+      index:
+        email: 'Эл. адрес'
+        last_sign_in_at: 'Последний вход'
+        last_sign_in_ip: 'Последний ip'
+
+      form:
+        email: 'Эл. адрес'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'

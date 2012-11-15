@@ -32,7 +32,7 @@ module ResourcesHelper
   def link_to_delete_resource(resource, options = {})
     return unless resource
     
-    defaults = {:method => :delete, :data => {:confirm => 'Are you sure?'}}
+    defaults = {:method => :delete, :data => {:confirm => I18n.t(:sure?)}}
     options = options.merge(defaults)
     
     link_to t('delete'), polymorphic_path([:administration, resource]), options
