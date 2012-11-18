@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe VacanciesHelper do
-  before :each do
-    
-  end
-
   describe '#link_to_edit_resource' do
     it 'should return nil' do
       helper.link_to_edit_resource(nil).should be_nil
