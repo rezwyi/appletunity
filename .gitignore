@@ -12,5 +12,5 @@ db/data.yml
 .bundle
 vendor/bundle
 log/*.log
-tmp/**/*
+tmp/
 public/system
