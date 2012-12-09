@@ -34,4 +34,5 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'guard-rspec'
+  gem 'capybara'
 end
