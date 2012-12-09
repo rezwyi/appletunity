@@ -4,18 +4,48 @@ describe VacanciesController do
   describe 'GET' do
     before :each do
       approved = true
-      10.times do
-        FactoryGirl.create(:vacancy, :approved => approved)
+      10.times do |i|
+        FactoryGirl.create(:vacancy,
+                           :expired_at => (5 - i).days.ago,
+                           :approved => approved)
         approved = !approved
       end
     end
 
+    describe '#index' do
+      it 'should return all approved vacancies' do
+        get :index
+        assigns[:vacancies].length.should == 5
+        response.should render_template(:index)
+      end
+    end
+
     context '#feed' do
-      it 'should return approved and not expired vacancies' do
+      it 'should return all approved vacancies' do
         get :feed, :format => :rss
         assigns[:vacancies].length.should == 5
         response.should render_template('feed')
         response.content_type.should eq('application/rss+xml')
+      end
+    end
+
+    describe '#show' do
+      let(:expired_vacancy) do
+        Vacancy.live.where('expired_at < ?', 1.day.ago).last
+      end
+
+      let(:not_approved_vacancy) do
+        Vacancy.where(:approved => false).last
+      end
+
+      it 'should render expired vacancy' do
+        get :show, :id => expired_vacancy.id
+        response.should render_template(:show)
+      end
+
+      it 'should render 404' do
+        get :show, :id => not_approved_vacancy.id
+        response.status.should == 404
       end
     end
   end

@@ -27,10 +27,7 @@ class Vacancy < ActiveRecord::Base
   has_attached_file :logo,
                     :styles => {:small => '80x80', :medium => '100x100'}
 
-  scope :live, lambda {
-    where('approved = ? AND expired_at >= ?', true, Time.now)
-  }
-
+  scope :live, lambda { where(:approved => true) }
   scope :not_approved, lambda {
     where('approved = ? AND expired_at IS NULL', false)
   }

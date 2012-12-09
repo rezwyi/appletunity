@@ -137,6 +137,14 @@ label.terms a:hover {
   padding-bottom: 15px;
 }
 
+.vacancy.expired {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+}
+
 .vacancy-in {
   min-height: $defaultHeight;
 }

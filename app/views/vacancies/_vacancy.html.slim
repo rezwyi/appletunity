@@ -21,6 +21,10 @@
   .vacancy-in-body
     = raw vacancy.rendered_body
   hr
-  div
-    == render :partial => 'shared/social_buttons'
-    = link_to t('reply'), mailto_for(vacancy), :class => 'zurb-btn'
+  .vacancy-in-footer
+    - if vacancy.expired?
+      .alert.alert-error
+        = t(:expired_note)
+    - else
+      == render :partial => 'shared/social_buttons'
+      = link_to t('reply'), mailto_for(vacancy), :class => 'zurb-btn'

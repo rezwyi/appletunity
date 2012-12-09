@@ -24,7 +24,7 @@ class VacanciesController < ApplicationController
   end
 
   def show
-    render_404 and return if @vacancy.expired? || !@vacancy.approved?
+    render_404 and return unless @vacancy.approved?
   end
 
   def edit

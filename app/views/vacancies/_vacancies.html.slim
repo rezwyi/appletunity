@@ -1,6 +1,6 @@
 .vacancies
   - vacancies.each do |v|
-    .vacancy
+    .vacancy{ id="vacancy_#{v.id}" class="#{'expired' if v.expired?}" }
       .company-logo.pull-left
         - unless v.company_website.empty?
           = link_to(v.company_website, :target => '_blank') { logo_for v }
