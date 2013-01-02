@@ -62,7 +62,7 @@ label.terms a:hover {
 }
 
 .container .row {
-  background: url('/assets/container.png') 0 0 repeat;
+  background: image-url('container.png') 0 0 repeat;
   box-shadow: 0 0 10px $defaultShadowColor;
   border-radius: 5px;
 }
@@ -227,12 +227,12 @@ label.terms a:hover {
 
 #filter-form .switcher {
   height: 1em;
-  background: url('/assets/filter-hide.png') 50% 0 no-repeat;
+  background: image-url('filter-hide.png') 50% 0 no-repeat;
   text-align: center;
 }
 
 #filter-form .switcher.hidden {
-  background: url('/assets/filter-show.png') 50% 0 no-repeat;
+  background: image-url('filter-show.png') 50% 0 no-repeat;
   text-align: center;
 }
 
