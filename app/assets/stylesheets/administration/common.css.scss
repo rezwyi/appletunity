@@ -1,3 +1,5 @@
+@import "mixins";
+
 $defaultBoxShadow: #bbb;
 $defaultBorderColor: #bbb;
 
@@ -5,7 +7,7 @@ header {
   background-color: #ddd;
   padding: 40px 20px 20px 60px;
   border-bottom: 1px solid $defaultBorderColor;
-  box-shadow: 0 0 5px $defaultBoxShadow;
+  @include box_shadow(0, 0, 5px);
 }
 
 header h1 {
@@ -225,9 +227,7 @@ header h1 {
   background-color: #fff;
   border: 1px solid #ccc;
   font-size: 13px;
-  -webkit-box-shadow: 0 2px 4px #ccc;
-  -moz-box-shadow: 0 2px 4px #ccc;  
-  box-shadow: 0 2px 4px #ccc; 
+  @include box_shadow(0, 2px, 4px);
   line-height: 21px;  
   padding: 10px;  
 }

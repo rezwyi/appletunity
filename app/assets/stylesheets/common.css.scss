@@ -1,3 +1,5 @@
+@import "mixins";
+
 $defaultHeight: 70px;
 $defaultShadowColor: #999;
 $defaultBorderColor: #ddd;
@@ -67,7 +69,7 @@ label.terms a:hover {
 
 .container .row {
   background: image-url('container.png') right 0 repeat-y #fff;
-  box-shadow: 0 0 10px $defaultShadowColor;
+  @include box_shadow(0, 0, 10px);
   border-radius: 5px;
 }
 
@@ -251,7 +253,7 @@ label.terms a:hover {
   border-right: 1px solid $defaultBorderColor;
   border-bottom: 1px solid $defaultBorderColor;
   border-radius: 0 0 5px 5px;
-  box-shadow: 0 0 6px $defaultShadowColor;
+  @include box_shadow(0, 0, 6px);
   overflow: hidden;
 }
 
@@ -295,8 +297,7 @@ label.terms a:hover {
   border-bottom: 1px solid rgba(0,0,0,0.25);
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  @include box_shadow(0, 1px, 3px);
   font-size: 14px;
   text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
   text-decoration: none;
@@ -520,9 +521,7 @@ noscript {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	font-size: 13px;
-	-webkit-box-shadow: 0 2px 4px #ccc;
-	-moz-box-shadow: 0 2px 4px #ccc;	
-	box-shadow: 0 2px 4px #ccc;	
+	@include box_shadow(0, 2px, 4px);
 	line-height: 21px;	
 	padding: 10px;	
 }
