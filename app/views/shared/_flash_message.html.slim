@@ -1,4 +1,3 @@
-- if flash[:message]
-  .alert.alert-success
-    a.close{ data-dismiss='alert' href='#' } ×
-    = flash[:message]
+- flash.each do |k,v|
+  .alert{class="#{bootstrapize_flash_key(k)}" role="flash"}
+    = v

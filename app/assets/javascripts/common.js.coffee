@@ -19,3 +19,12 @@ $(document).ready ->
       $.cookie '_appletunity_hide_filter', true, {path: '/'}
 
     that.toggleClass 'hidden'
+
+  # jGrowl notification
+  if $('@flash').length
+    $.jGrowl $('@flash').html(),
+      closer: false
+      speed: 'slow'
+      theme: $('@flash').attr('class')
+      close: ->
+        $('@flash').remove()

@@ -251,3 +251,17 @@ header h1 {
   text-decoration: none;
   background-color: #dde4ef;
 }
+
+// Flashes
+.alert {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 60px;
+  width: 300px;
+  @include box_shadow(4px, 4px, 4px);
+}
+
+.alert .jGrowl-close {
+  display: none;
+}

@@ -41,8 +41,9 @@ body
     .row-fluid
       .span8
         .contentable
-          == render :partial => 'shared/flash_message'
           = yield
       .span4
         .sidebar
           = yield :sidebar
+
+  == render partial: 'shared/flash_message'
