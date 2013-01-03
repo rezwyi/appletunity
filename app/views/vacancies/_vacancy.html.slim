@@ -7,10 +7,14 @@
             = logo_for vacancy, :medium
         - else
           = logo_for vacancy, :medium
-    h3 = title_for vacancy
-    - if vacancy.location
-      .location: span.icon-map-marker
-        | &nbsp;
+    h1.title
+      = title_for vacancy
+    
+    span.created
+      = Russian::strftime(vacancy.created_at, '%d %B')
+    - if vacancy.location.present?
+      span.location
+        | &nbsp;&#47;&nbsp;
         = vacancy.location
     - if vacancy.occupations.any?
       .occupations

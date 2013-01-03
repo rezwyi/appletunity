@@ -153,6 +153,11 @@ label.terms a:hover {
 .vacancy {
   margin-bottom: 15px;
   padding-bottom: 15px;
+  min-height: 90px;
+}
+
+.vacancy .title {
+  margin: 0;
 }
 
 .expired > * {
@@ -175,10 +180,27 @@ label.terms a:hover {
   text-overflow: ellipsis;
 }
 
+.vacancy .location,
+.vacancy-in .location {
+  display: inline-block;
+  font-size: 0.9em;
+  line-height: 24px;
+}
+
 .vacancy .title,
 .vacancy-in .title {
   font-size: 1.1em;
-  line-height: 36px;
+  line-height: 32px;
+}
+
+.vacancy-in .title {
+  font-size: 1.5em;
+}
+
+.vacancy .created,
+.vacancy-in .created {
+  font-size: 0.9em;
+  line-height: 24px;
 }
 
 .vacancy .company-logo {
