@@ -4,4 +4,7 @@ footer
       = copyright_years
       | &nbsp;&copy;&nbsp;
       | rezvanov.info
-  h5.pull-left = link_to t('wtf?'), static_path('about')
+  h5.pull-left
+    = link_to t('wtf?'), static_path('about')
+  h5.pull-left
+    = link_to t('sign_in'), new_admin_session_path

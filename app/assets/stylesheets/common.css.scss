@@ -45,6 +45,10 @@ footer {
   margin-bottom: 2em;
 }
 
+footer h5 {
+  margin-right: 15px;
+}
+
 button,
 input[type="submit"] {
   border: none;
@@ -62,14 +66,21 @@ label.terms a:hover {
 }
 
 .container .row {
-  background: image-url('container.png') 0 0 repeat;
+  background: image-url('container.png') right 0 repeat-y #fff;
   box-shadow: 0 0 10px $defaultShadowColor;
   border-radius: 5px;
 }
 
 .sidebar {
-  margin: 30px 12px 30px 12px;
+  margin: 30px 30px 30px 35px;
   text-shadow: none;
+}
+
+.sidebar p {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  margin-top: 5px;
 }
 
 .sidebar a.zurb-btn p {
@@ -78,15 +89,14 @@ label.terms a:hover {
   line-height: 12px;
 }
 
-.stay-connected h3 {
-  line-height: 1em;
+.sidebar .clearfix {
+  border-bottom: 1px solid #ddd;
+  height: 30px;
+  margin-bottom: 30px;
 }
 
-.stay-connected p {
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 12px;
-  margin-top: 5px;
+.stay-connected h3 {
+  line-height: 1em;
 }
 
 .stay-connected a {
@@ -107,8 +117,16 @@ label.terms a:hover {
   text-shadow: none;
 }
 
-.centered-text {
+.center-aligned-text {
   text-align: center;
+}
+
+.right-aligned-text {
+  text-align: right;
+}
+
+.left-aligned-text {
+  text-align: left;
 }
 
 .clear {
@@ -116,7 +134,7 @@ label.terms a:hover {
 }
 
 .clearfix {
-  height: 30px;
+  height: 15px;
 }
 
 .required {
@@ -137,7 +155,7 @@ label.terms a:hover {
   padding-bottom: 15px;
 }
 
-.vacancy.expired {
+.expired > * {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
   -moz-opacity: 0.5;

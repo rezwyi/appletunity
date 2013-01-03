@@ -1,5 +1,5 @@
 // Override column width and grid gutter
-$gridColumnWidth: 70px;
+$gridColumnWidth: 75px;
 $gridGutterWidth: 0px;
 
 // Default link color
@@ -9,7 +9,7 @@ $linkColor: #08c;
 
 // Customize
 body { 
-  background: url('/assets/bg.png') 0 0 repeat;
+  background: image-url('bg.png') 0 0 repeat;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   padding: 30px 0 30px 0;
   text-shadow: 0px 1px 0px #fff;
