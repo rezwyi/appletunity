@@ -25,4 +25,29 @@ module ApplicationHelper
 
     html.html_safe
   end
+
+  # Public: Convert flash key to bootstrap class
+  #
+  # Examples
+  #
+  #   bootstrapize_flash_key(:message)
+  #   # => 'alert-success'
+  #
+  # Returns html safe String
+  def bootstrapize_flash_key(key)
+    return unless key
+
+    css_class = case key
+    when :message
+      'alert-success'
+    when :notice
+      'alert-success'
+    when :error
+      'alert-error'
+    when :alert
+      'alert-error'
+    end
+
+    css_class.try(:html_safe)
+  end
 end
