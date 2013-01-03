@@ -9,16 +9,26 @@ ru:
   stay_connected_description: 'Следи за нами в Twitter или подпишись на Rss!'
   reply: 'Откликнуться на вакансию'
 
-  vacancy_created_successfull: 'Поздравляем! Ваша вакансия успешно создана и будет 
-                               опубликована в ближайшее время. На ваш адрес
-                               %{email} отправлено письмо с деталями.'
+  vacancy_created_successfull: 'Вакансия создана и будет опубликована в ближайшее время.
+                                На адрес %{email} отправлена инструкция.'
   vacancy_updated_successfull: 'Вакансия успешно изменена!'
+  vacancy_deleted_successfull: 'Вакансия успешно удалена!'
+
+  occupation_created_successfull: 'Вид занятости создан успешно!'
+  occupation_updated_successfull: 'Вид занятости успешно изменен!'
+  occupation_deleted_successfull: 'Вид занятости успешно удален!'
+
+  admin_created_successfull: 'Администратор создан успешно!'
+  admin_updated_successfull: 'Администратор успешно изменен!'
+  admin_deleted_successfull: 'Администратор успешно удален!'
   
   created_email: 'Уведомление о создании вакансии на сайте appletunity.ru'
   notify_email: 'Уведомление о неподтвержденных вакансиях на сайте appletunity.ru'
 
   new: 'Создать'
+  create: 'Создать'
   edit: 'Редактировать'
+  update: 'Редактировать'
   cancel: 'Отменить'
   delete: 'Удалить'
   sure?: 'Уверен?'
