@@ -7,6 +7,9 @@
                            :class => 'input-xlarge'
           | &nbsp;
           = button_tag t('.search'), :name => '', :class => 'zurb-btn'
+          | &nbsp;
+          = link_to t('.clear'), params.except(:filter, :per_page, :page),
+                    class: 'clear-filter'
       .control-group.occupations
         .controls
           - Occupation.all.each do |o|

@@ -257,7 +257,7 @@ label.terms a:hover {
 
 #filter-form form {
   margin: 0;
-  padding: 30px 45px 0px 45px;
+  padding: 30px 0 0 0;
 }
 
 #filter-form .keywords,
@@ -279,6 +279,11 @@ label.terms a:hover {
 
 #filter-form .switcher:hover {
   background-color: #ddd;
+}
+
+#filter-form .clear-filter {
+  text-decoration: underline;
+  font-size: 0.8em;
 }
 
 // Zurb buttons

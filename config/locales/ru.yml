@@ -39,6 +39,7 @@ ru:
 
     filter:
       search: 'Поиск...'
+      clear: 'Сбросить'
 
     pagination:
       older: 'Старее'
