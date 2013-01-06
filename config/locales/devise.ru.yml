@@ -10,3 +10,4 @@ ru:
     sessions:
       admin:
         signed_in: 'Вы успешно вошли в систему.'
+        signed_out: 'Вы вышли из системы.'
