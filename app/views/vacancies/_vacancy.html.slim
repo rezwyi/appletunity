@@ -27,7 +27,7 @@
   hr
   .vacancy-in-footer
     - if vacancy.expired?
-      .alert.alert-error
+      .expired-note
         = t(:expired_note)
     - else
       == render :partial => 'shared/social_buttons'

@@ -1,6 +1,7 @@
 doctype html
 
-html == render :partial => 'shared/head'
+html
+  == render :partial => 'shared/head'
 
 body{ data-spy='scroll' data-target='.subnav' }
   noscript
@@ -13,5 +14,3 @@ body{ data-spy='scroll' data-target='.subnav' }
         .contentable = yield
       .span4 == render :partial => 'shared/sidebar'
     == render :partial => 'shared/footer'
-
-  == render partial: 'shared/flash_message'

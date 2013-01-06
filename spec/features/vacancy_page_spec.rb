@@ -9,7 +9,7 @@ describe 'Vacancy page' do
     it 'should display expired note' do
       visit vacancy_path(vacancy)
       page.should have_no_selector('.vacancy-in-footer .zurb-button')
-      find('.vacancy-in-footer .alert-error')\
+      find('.vacancy-in-footer .expired-note')\
         .should have_content(I18n.t(:expired_note))
     end
   end

@@ -20,11 +20,6 @@ $(document).ready ->
 
     that.toggleClass 'hidden'
 
-  # jGrowl notification
-  if $('@flash').length
-    $.jGrowl $('@flash').html(),
-      closer: false
-      speed: 'slow'
-      theme: $('@flash').attr('class')
-      close: ->
-        $('@flash').remove()
+  # Flashes
+  if (flash = $('head script[type="text/flash"]')).length
+    $.jGrowl flash.text(), {theme: flash.attr('theme')}

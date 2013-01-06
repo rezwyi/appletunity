@@ -8,6 +8,8 @@ html
     = csrf_meta_tags
     = yield :javascripts
 
+    == render partial: 'shared/flash_message'
+
 body
   .navbar.navbar-inverse.navbar-fixed-top
     .navbar-inner
@@ -45,5 +47,3 @@ body
       .span4
         .sidebar
           = yield :sidebar
-
-  == render partial: 'shared/flash_message'

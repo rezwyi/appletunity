@@ -224,6 +224,19 @@ label.terms a:hover {
   font-size: 14px;
 }
 
+.vacancy-in .expired-note {
+  color: #B94A48;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #F2DEDE;
+  border-color: #EED3D7;
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  border: 1px solid #EED3D7;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
 .vacancy-in .vacancy-in-body h1,
 .vacancy-in .vacancy-in-body h2,
 .vacancy-in .vacancy-in-body h3,
@@ -548,7 +561,6 @@ noscript {
 
 // Flashes
 .alert {
-  display: none;
   position: fixed;
   bottom: 30px;
   right: 60px;

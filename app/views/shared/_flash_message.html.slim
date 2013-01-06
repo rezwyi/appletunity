@@ -1,3 +1,3 @@
 - flash.each do |k,v|
-  .alert{class="#{bootstrapize_flash_key(k)}" role="flash"}
+  script{type="text/flash" theme="alert #{bootstrapize_flash_key(k)}"}
     = v
