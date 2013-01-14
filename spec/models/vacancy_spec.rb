@@ -70,8 +70,8 @@ describe Vacancy do
       subject.expired_at.should be_nil
     end
 
-    it 'should allow b tag in body' do
-      body = '<b>Some body</b>'
+    it 'should allow b and strong tag in body' do
+      body = '<b>Some</b> <strong>body</strong>'
       subject.body = body
       subject.save!
       subject.rendered_body.should eq body
