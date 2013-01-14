@@ -74,6 +74,7 @@ label.terms a:hover {
 }
 
 .sidebar {
+  min-height: 600px;
   margin: 30px 30px 30px 35px;
   text-shadow: none;
 }
@@ -141,6 +142,10 @@ label.terms a:hover {
 
 .required {
   color: #b94a48;
+}
+
+.fullwidth {
+  width: 100%;
 }
 
 // Vacancies
@@ -572,3 +577,4 @@ noscript {
 .alert .jGrowl-close {
   display: none;
 }
+

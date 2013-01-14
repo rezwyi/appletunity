@@ -63,7 +63,7 @@
         = f.text_field :contact_phone, :class => 'input-xlarge'
     .control-group
       .controls
-        label.checkbox.inline
+        label.checkbox.inline.fullwidth
           = check_box_tag 'approved', 'yes', @resource.approved?
           = t('.approved')
   .form-actions
