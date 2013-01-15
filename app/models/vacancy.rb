@@ -44,7 +44,11 @@ class Vacancy < ActiveRecord::Base
       # Approved date
       ap = v.expired_at - Rails.application.config.default_vacancy_lifetime
       if (now - 1.hour) <= ap && now >= ap
-        url = Rails.application.routes.url_helpers.vacancy_url(v)
+        url = Rails.application.routes.url_helpers.vacancy_url(v, {
+          utm_source: 'twitter',
+          utm_medium: 'referral',
+          utm_campaign: Date.today.strftime('%b').downcase
+        })
         status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
         Twitter.delay(:queue => 'tweeting').update(status)
       end

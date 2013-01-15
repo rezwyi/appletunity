@@ -71,41 +71,58 @@ describe VacanciesHelper do
     end
 
     context 'when arguments given' do
+      let(:vacancy) { FactoryGirl.build(:vacancy) }
+
       before :each do
-        @vacancy = mock_model(Vacancy)
-        
-        @vacancy.stub(:id).and_return(1)
-        @vacancy.stub(:title).and_return('some_title')
-        @vacancy.stub(:company_name).and_return('some_company_name')
-        
-        @url = vacancy_url(@vacancy)
+        Date.stub_chain(:today, :strftime).and_return('jan')
       end
 
       it 'should return nil' do
-        helper.build_share_link_for(:unknown_network, @vacancy).should be_nil
+        helper.build_share_link_for(:unknown_network, vacancy).should be_nil
       end
 
       it 'should return twitter share link' do
-        text = "#{helper.title_for(@vacancy)} #{@url} #appletunity"
+        url = vacancy_url(vacancy, {
+          utm_source: 'twitter',
+          utm_medium: 'referral',
+          utm_campaign: 'jan'
+        })
         
         result = URI.parse 'https://twitter.com/share'
-        result.query = URI.encode_www_form :via => 'appletunity', :text => text
+        result.query = URI.encode_www_form(
+          text: title_for(vacancy),
+          url: url,
+          hashtags: 'appletunity',
+          via: 'appletunity'
+        )
         
-        helper.build_share_link_for(:twitter, @vacancy).should eq result.to_s
+        helper.build_share_link_for(:twitter, vacancy).should eq result.to_s
       end
 
       it 'should return facebook share link' do
+        url = vacancy_url(vacancy, {
+          utm_source: 'facebook',
+          utm_medium: 'referral',
+          utm_campaign: 'jan'
+        })
+
         result = URI.parse 'https://facebook.com/sharer/sharer.php'
-        result.query = URI.encode_www_form :u => @url
+        result.query = URI.encode_www_form u: url
         
-        helper.build_share_link_for(:facebook, @vacancy).should eq result.to_s
+        helper.build_share_link_for(:facebook, vacancy).should eq result.to_s
       end
 
       it 'should return google+ share link' do
+        url = vacancy_url(vacancy, {
+          utm_source: 'gplus',
+          utm_medium: 'referral',
+          utm_campaign: 'jan'
+        })
+
         result = URI.parse 'https://plus.google.com/share'
-        result.query = URI.encode_www_form :url => @url
+        result.query = URI.encode_www_form url: url
         
-        helper.build_share_link_for(:gplus, @vacancy).should eq result.to_s
+        helper.build_share_link_for(:gplus, vacancy).should eq result.to_s
       end
     end
   end

@@ -78,16 +78,21 @@ module VacanciesHelper
   def build_share_link_for(network, vacancy)
     return unless network && vacancy
 
-    url = vacancy_url(vacancy)
+    url = vacancy_url(vacancy, {
+      utm_source: network.to_s,
+      utm_medium: 'referral',
+      utm_campaign: Date.today.strftime('%b').downcase
+    })
     
     case network
     when :twitter then
-      via = 'appletunity'
-      hash_tags = "##{via}"
-      text = "#{title_for(vacancy)} #{url} #{hash_tags}"
-
       uri = URI.parse 'https://twitter.com/share'
-      uri.query = URI.encode_www_form :via => via, :text => text
+      uri.query = URI.encode_www_form(
+        text: title_for(vacancy),
+        url: url,
+        hashtags: 'appletunity',
+        via: 'appletunity'
+      )
 
       uri.to_s.html_safe
     when :facebook then
