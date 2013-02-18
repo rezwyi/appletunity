@@ -20,7 +20,7 @@ gem 'whenever', :require => false
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'exception_notification'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'therubyracer'
 gem 'libv8', '~> 3.11.8'
 
