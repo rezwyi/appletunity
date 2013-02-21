@@ -1,12 +1,14 @@
 head
   title = [t('appletunity'), t('best_vacancies')].join(' - ')
-  link{ href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css' }
-  meta{ name='description' content='#{t('intro')}' }
 
   = stylesheet_link_tag 'all', :media => 'all'
   = javascript_include_tag 'application'
   = csrf_meta_tags
 
-  = yield :javascripts
+  = yield :head
+
+  link{ href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css' }
+  meta{ name='description' content='#{t('intro')}' }
+  meta{ property='og:image' content='#{image_path('appletunity.png')}' }
 
   == render partial: 'shared/flash_message'
