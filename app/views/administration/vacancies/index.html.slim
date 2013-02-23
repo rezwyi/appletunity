@@ -14,7 +14,7 @@ table.table
         td = r.id
         td = '&#10004;'.html_safe if r.approved?
         td = link_to r.title, vacancy_path(r), :target => '_blank'
-        td = r.expired_at
+        td = Russian::strftime(r.expired_at, '%d %B')
         td
           = link_to_edit_resource r, :class => 'btn'
           | &nbsp;

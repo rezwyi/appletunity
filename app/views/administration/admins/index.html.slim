@@ -12,7 +12,7 @@ table.table
       tr
         td = r.id
         td = r.email
-        td = r.last_sign_in_at
+        td = Russian::strftime(r.last_sign_in_at, '%d %B %Y')
         td
           = link_to_edit_resource r, :class => 'btn'
           | &nbsp;
