@@ -1,5 +1,1 @@
-- if @vacancy.logo?
-  - content_for :head do
-    meta{ property='og:image' content='#{image_path(@vacancy.logo.url(:medium))}' }
-
 == render :partial => 'vacancy', :locals => {:vacancy => @vacancy}

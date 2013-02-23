@@ -36,4 +36,49 @@ describe ApplicationHelper do
       helper.bootstrapize_flash_key(:alert).should == 'alert-error'
     end
   end
+
+  describe '#title_and_metas' do
+    before { controller.stub(:controller_name).and_return('vacancies') }
+
+    it 'should be html safe' do
+      helper.title_and_metas.should be_html_safe
+    end
+
+    it 'should set default title and meta tags' do
+      helper.title_and_metas.split("\n").should == [
+        content_tag(
+          :title,
+          [I18n.t(:appletunity), I18n.t(:best_vacancies)].join(' - ')
+        ),
+        tag(:meta, :property => 'og:image', :content => '/assets/appletunity.png'),
+        tag(:meta, :name => 'description', :content => I18n.t(:intro))
+      ]
+    end
+
+    it 'should set default title and meta tags related to the object' do
+      @vacancy = FactoryGirl.build(:vacancy)
+
+      helper.title_and_metas.split("\n").should == [
+        content_tag(
+          :title,
+          [I18n.t(:appletunity), @vacancy.company_name, @vacancy.title].join(' - ')
+        ),
+        tag(:meta, :property => 'og:image', :content => image_path(@vacancy.logo)),
+        tag(:meta, :name => 'description', :content => 'Some body')
+      ]
+    end
+
+    it 'should set default title and meta tags related to the object' do
+      @vacancy = FactoryGirl.build(:vacancy, :logo => nil)
+
+      helper.title_and_metas.split("\n").should == [
+        content_tag(
+          :title,
+          [I18n.t(:appletunity), @vacancy.company_name, @vacancy.title].join(' - ')
+        ),
+        tag(:meta, :property => 'og:image', :content => '/assets/appletunity.png'),
+        tag(:meta, :name => 'description', :content => 'Some body')
+      ]
+    end
+  end
 end
