@@ -126,11 +126,14 @@ ru:
         new_vacancy: 'Добавить вакансию'
         new_occupation: 'Добавить вид занятости'
         new_admin: 'Добавить администратора'
+        awaiting_approve: 'Ожидают подтверждения'
 
     vacancies:
       index:
         title: 'Заголовок'
         expired_at: 'Истекает'
+        all: 'Все'
+        awaiting_approve: 'Ожидают подтверждения'
 
       form:
         title: 'Заголовок'

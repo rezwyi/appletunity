@@ -27,10 +27,9 @@ class Vacancy < ActiveRecord::Base
   has_attached_file :logo,
                     :styles => {:small => '80x80', :medium => '100x100'}
 
-  scope :live, lambda { where(:approved => true) }
-  scope :not_approved, lambda {
-    where('approved = ? AND expired_at IS NULL', false)
-  }
+  default_scope { order('expired_at desc') }
+  scope :live, -> { where(:approved => true) }
+  scope :awaiting_approve, -> { where(:approved => false) }
 
   # Simple random token generator
   def self.friendly_token
@@ -57,9 +56,9 @@ class Vacancy < ActiveRecord::Base
 
   # Used from whenever task
   def self.notify_about_not_approved_vacancies
-    vs = Vacancy.not_approved.to_a
+    vs = Vacancy.awaiting_approve.where(:expired_at => nil).to_a
     unless vs.empty?
-      VacancyMailer.delay(:queue => 'mailing').not_approved(vs)
+      VacancyMailer.delay(:queue => 'mailing').awaiting_approve(vs)
     end
   end
 

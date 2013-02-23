@@ -1,7 +1,7 @@
 header.jumbotron.subhead#overview
   - if current_admin
     .manage-buttons.pull-right
-      = link_to t('.manage'), administration_vacancies_path,
+      = link_to t('.manage'), awaiting_approve_administration_vacancies_path,
                 :class => 'zurb-btn'
       | &nbsp;
       = link_to t('.logout'), destroy_admin_session_path,

@@ -1,4 +1,8 @@
-- content_for(:sidebar) { render 'shared/search_form' }
+ul.nav.nav-tabs
+  li{ class="#{'active' if current_page?(awaiting_approve_administration_vacancies_path)}"}
+    = link_to t('.awaiting_approve'), awaiting_approve_administration_vacancies_path
+  li{ class="#{'active' if current_page?(administration_vacancies_path)}"}
+    = link_to t('.all'), administration_vacancies_path
 
 table.table
   thead

@@ -1,5 +1,6 @@
 class Administration::ResourcesController < ActionController::Base
   protect_from_forgery
+
   layout 'administration/layouts/application'
 
   before_filter :authenticate_admin!
@@ -21,7 +22,7 @@ class Administration::ResourcesController < ActionController::Base
       flash[:message] = t(".#{resource_name.downcase}_created_successfull")
       redirect_to :action => :index
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -33,7 +34,7 @@ class Administration::ResourcesController < ActionController::Base
       flash[:message] = t(".#{resource_name.downcase}_updated_successfull")
       redirect_to :action => :index
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -41,7 +42,6 @@ class Administration::ResourcesController < ActionController::Base
     if @resource.destroy
       flash[:message] = t(".#{resource_name.downcase}_deleted_successfull")
     end
-
     redirect_to :action => :index
   end
 

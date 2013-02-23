@@ -10,8 +10,10 @@ Appletunity::Application.routes.draw do
   end
 
   namespace :administration do
+    resources :vacancies do
+      get :awaiting_approve, :on => :collection
+    end
     resources :admins
-    resources :vacancies
     resources :occupations
   end
 

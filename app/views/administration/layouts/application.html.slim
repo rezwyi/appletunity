@@ -29,6 +29,7 @@ body
               - href = "/administration/#{i}"
               - active = 'active' if request.path.starts_with?(href)
               li{ class="#{active}" } = link_to t(".#{i}"), href
+
   header#overview.jumbotron.subhead
     .container-fluid
       h1
@@ -40,6 +41,7 @@ body
         = link_to t(".new_#{controller_name.singularize}"),
                   url_for(:action => :new, :controller => controller_name),
                   :class => 'btn btn-success'
+
   .container-fluid
     .row-fluid
       .span8
