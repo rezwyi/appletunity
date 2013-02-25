@@ -5,9 +5,11 @@ describe VacanciesController do
     before :each do
       approved = true
       10.times do |i|
-        FactoryGirl.create(:vacancy,
-                           :expired_at => (5 - i).days.ago,
-                           :approved => approved)
+        FactoryGirl.create(
+          :vacancy,
+          :expired_at => (5 - i).days.ago,
+          :approved => approved
+        )
         approved = !approved
       end
     end

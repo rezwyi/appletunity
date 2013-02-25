@@ -2,8 +2,11 @@ require 'spec_helper'
 
 describe Appletunity::Finders::Base do
   subject do
-    params = {:first => 'first', :second => 'second',
-              :filter => {'keywords' => 'Some body'}}
+    params = {
+      :first => 'first',
+      :second => 'second',
+      :filter => {'keywords' => 'Some body'}
+    }
     Appletunity::Finders::Base.new(params)
   end
 

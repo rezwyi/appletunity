@@ -24,10 +24,11 @@ class Vacancy < ActiveRecord::Base
   before_save :render_body
   before_save :generate_expired_at
 
-  has_attached_file :logo,
-                    :styles => {:small => '80x80', :medium => '100x100'}
+  has_attached_file :logo, :styles => {
+    :small => '80x80',
+    :medium => '100x100'
+  }
 
-  default_scope { order('expired_at asc') }
   scope :live, -> { where(:approved => true) }
   scope :awaiting_approve, -> { where(:approved => false) }
 
