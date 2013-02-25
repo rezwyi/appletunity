@@ -7,6 +7,12 @@ class Administration::ResourcesController < ActionController::Base
   before_filter :load_resource, :only => [:edit, :update, :destroy]
   before_filter :create_resource, :only => :create
 
+  class << self
+    def set_redirect_action(action)
+      @@redirect_action = action
+    end
+  end
+
   def index
     params[:per_page] ||= Rails.application.config.default_per_page
     @resources = resource_name.constantize.order('id DESC')\
@@ -19,8 +25,11 @@ class Administration::ResourcesController < ActionController::Base
 
   def create
     if @resource.save
-      flash[:message] = t(".#{resource_name.downcase}_created_successfull")
-      redirect_to :action => :index
+      flash[:message] = t(
+        ".#{resource_name.downcase}_created_successfull",
+        :email => nil
+      )
+      redirect_to :action => @@redirect_action
     else
       render :new
     end
@@ -32,7 +41,7 @@ class Administration::ResourcesController < ActionController::Base
   def update
     if @resource.update_attributes(params[resource_name.downcase])
       flash[:message] = t(".#{resource_name.downcase}_updated_successfull")
-      redirect_to :action => :index
+      redirect_to :action => @@redirect_action
     else
       render :edit
     end
@@ -42,7 +51,7 @@ class Administration::ResourcesController < ActionController::Base
     if @resource.destroy
       flash[:message] = t(".#{resource_name.downcase}_deleted_successfull")
     end
-    redirect_to :action => :index
+    redirect_to :action => @@redirect_action
   end
 
   protected
