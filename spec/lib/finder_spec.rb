@@ -1,13 +1,12 @@
 require 'spec_helper'
 
-describe Appletunity::Finders::Base do
+describe Finder do
   subject do
-    params = {
+    Finder.new({
       :first => 'first',
       :second => 'second',
       :filter => {'keywords' => 'Some body'}
-    }
-    Appletunity::Finders::Base.new(params)
+    })
   end
 
   it 'should convert params to methods' do

@@ -3,7 +3,7 @@ class VacanciesController < ApplicationController
   after_filter :send_created_email, :only => :create
 
   def index
-    @finder = Appletunity::Finders::Base.new(params)
+    @finder = Finder.new(params)
     @vacancies = @finder.retrieve
   end
 
@@ -41,7 +41,7 @@ class VacanciesController < ApplicationController
   end
 
   def feed
-    @finder = Appletunity::Finders::Base.new
+    @finder = Finder.new
     @vacancies = @finder.retrieve
   end
 
