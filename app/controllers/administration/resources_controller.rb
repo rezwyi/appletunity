@@ -8,6 +8,8 @@ class Administration::ResourcesController < ActionController::Base
   before_filter :create_resource, :only => :create
 
   class << self
+    @@redirect_action = :index
+
     def set_redirect_action(action)
       @@redirect_action = action
     end
