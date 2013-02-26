@@ -1,99 +1,83 @@
 require 'spec_helper'
 
 describe VacanciesController do
-  describe 'GET' do
-    before :each do
-      approved = true
-      10.times do |i|
-        FactoryGirl.create(
-          :vacancy,
-          :expired_at => (5 - i).days.ago,
-          :approved => approved
-        )
-        approved = !approved
-      end
-    end
+  describe '#index' do
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
 
-    describe '#index' do
-      it 'should return all approved vacancies' do
-        get :index
-        assigns[:vacancies].length.should == 5
-        response.should render_template(:index)
-      end
-    end
-
-    context '#feed' do
-      it 'should return all approved vacancies' do
-        get :feed, :format => :rss
-        assigns[:vacancies].length.should == 5
-        response.should render_template('feed')
-        response.content_type.should eq('application/rss+xml')
-      end
-    end
-
-    describe '#show' do
-      let(:expired_vacancy) do
-        Vacancy.live.where('expired_at < ?', 1.day.ago).last
-      end
-
-      let(:not_approved_vacancy) do
-        Vacancy.where(:approved => false).last
-      end
-
-      it 'should render expired vacancy' do
-        get :show, :id => expired_vacancy.id
-        response.should render_template(:show)
-      end
-
-      it 'should render 404' do
-        get :show, :id => not_approved_vacancy.id
-        response.status.should == 404
-      end
+    it 'should return approved vacancies' do
+      get :index
+      response.should render_template(:index)
     end
   end
 
-  describe 'POST' do
-    context '#create' do
-      context 'when created successfull' do
-        before :each do
-          @vacancy = FactoryGirl.build(:vacancy)
-          Vacancy.should_receive(:new).and_return(@vacancy)
-        end
+  describe '#feed' do
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
 
-        it 'assigns created vacancy' do
-          post :create
-          assigns[:vacancy].should_not be_nil
-        end
+    it 'should return approved vacancies' do
+      get :feed, :format => :rss
+      response.should render_template(:feed)
+    end
+  end
 
-        it 'sets flash[:message] message' do
-          post :create
-          flash[:message].should eq I18n.t('.vacancy_created_successfull',
-                                           :email => assigns[:vacancy].contact_email)
-        end
+  describe '#show' do
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
 
-        it 'sends created email' do
-          VacancyMailer.should_receive(:delay).and_return(VacancyMailer)
-          VacancyMailer.should_receive(:created).with(@vacancy)
-          post :create
-        end
+    it 'should render vacancy' do
+      get :show, :id => vacancy.id
+      response.should render_template(:show)
+    end
 
-        it 'redirects to root url' do
-          post :create
-          response.should redirect_to(root_url)
-        end
+    it 'should render expired vacancy' do
+      vacancy.update_attribute(:expired_at, 5.days.ago)
+      get :show, :id => vacancy.id
+      response.should render_template(:show)
+    end
+
+    it 'should render 404' do
+      vacancy.update_attribute(:approved, false)
+      get :show, :id => vacancy.id
+      response.status.should == 404
+    end
+  end
+
+  context '#create' do
+    let(:params) do
+      FactoryGirl.build(:vacancy).attributes.slice(
+        'title', 'body', 'company_name', 'contact_email', 'agreed_to_offer'
+      )
+    end
+
+    context 'when created successfull' do
+      it 'should save record to database' do
+        expect {
+          post :create, :vacancy => params
+        }.to change(Vacancy, :count).by(1)
       end
 
-      context 'when created unsuccessfull' do
-        before :each do
-          vacancy = mock_model(Vacancy)
-          Vacancy.stub(:new).and_return(vacancy)
-          vacancy.stub(:save).and_return(false)
-        end
+      it 'should show flash message' do
+        post :create, :vacancy => params
+        flash[:message].should == I18n.t(
+          '.vacancy_created_successfull',
+          :email => params['contact_email']
+        )
+      end
 
-        it 'should render new action again' do
-          post :create
-          response.should render_template('new')
-        end
+      it 'should send created email' do
+        VacancyMailer.should email_about_created
+        post :create, :vacancy => params
+      end
+
+      it 'should redirect to root_url' do
+        post :create, :vacancy => params
+        response.should redirect_to(root_url)
+      end
+    end
+
+    context 'when created unsuccessfull' do
+      it 'should render new vacancy form again' do
+        Vacancy.any_instance.stub(:save).and_return(false)
+        post :create, :vacancy => params
+        response.should render_template(:new)
       end
     end
   end

@@ -1,6 +1,5 @@
 class VacanciesController < ApplicationController
   before_filter :load_vacancy, :only => [:show, :edit, :update]
-  after_filter :send_created_email, :only => :create
 
   def index
     @finder = Finder.new(params)
@@ -13,10 +12,12 @@ class VacanciesController < ApplicationController
 
   def create
     @vacancy = Vacancy.new(params[:vacancy])
-    
     if @vacancy.save
-      flash[:message] = t('.vacancy_created_successfull',
-                          :email => @vacancy.contact_email)
+      flash[:message] = t(
+        '.vacancy_created_successfull',
+        :email => @vacancy.contact_email
+      )
+      VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
       redirect_to root_url
     else
       render 'new'
@@ -49,10 +50,5 @@ class VacanciesController < ApplicationController
 
   def load_vacancy
     @vacancy = Vacancy.find(params[:id])
-  end
-
-  def send_created_email
-    return unless @vacancy
-    VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
   end
 end

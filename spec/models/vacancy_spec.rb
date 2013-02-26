@@ -13,8 +13,10 @@ describe Vacancy do
   it { should validate_attachment_size(:logo).in(0..100.kilobytes) }
 
   it 'can have several occupations' do
-    occupations = [FactoryGirl.build(:occupation, :name => 'Fulltime'),
-                   FactoryGirl.build(:occupation, :name => 'Freelance')]
+    occupations = [
+      FactoryGirl.build(:occupation, :name => 'Fulltime'),
+      FactoryGirl.build(:occupation, :name => 'Freelance')
+    ]
     subject.occupations = occupations
     
     subject.save! and subject.reload
@@ -56,15 +58,14 @@ describe Vacancy do
     end
 
     it 'should generate expired_at' do
-      lifetime = Rails.application.config.default_vacancy_lifetime
-      
       Time.stub(:now).and_return(Time.new)
-      
+      subject.expired_at = nil
       subject.save!
-      subject.expired_at.should == Time.now + lifetime
+      subject.expired_at.should == Time.now + 30.days
     end
 
     it 'should leave expired_at empty if not approved' do
+      subject.expired_at = nil
       subject.approved = false
       subject.save!
       subject.expired_at.should be_nil
