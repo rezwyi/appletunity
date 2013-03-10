@@ -49,8 +49,10 @@ class Vacancy < ActiveRecord::Base
           utm_medium: 'referral',
           utm_campaign: Date.today.strftime('%b').downcase
         })
-        status = "[#{v.company_name}] #{v.title} #{url} #appletunity"
-        Twitter.delay(:queue => 'tweeting').update(status)
+
+        Twitter.delay(:queue => 'tweeting').update(
+          "[#{v.company_name}] #{v.title} #{url} #appletunity"
+        )
       end
     end
   end
@@ -58,7 +60,7 @@ class Vacancy < ActiveRecord::Base
   # Used from whenever task
   def self.notify_about_not_approved_vacancies
     vs = Vacancy.awaiting_approve.where(:expired_at => nil).to_a
-    unless vs.empty?
+    if vs.any?
       VacancyMailer.delay(:queue => 'mailing').awaiting_approve(vs)
     end
   end
