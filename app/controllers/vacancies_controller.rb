@@ -20,16 +20,16 @@ class VacanciesController < ApplicationController
       VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
       redirect_to root_url
     else
-      render 'new'
+      render :new
     end
   end
 
   def show
-    render_404 and return unless @vacancy.approved?
+    render_404 if !@vacancy.approved? && !current_admin
   end
 
   def edit
-    render_404 and return unless @vacancy.edit_token == params[:token]
+    render_404 if @vacancy.edit_token != params[:token] && !current_admin
   end
 
   def update
@@ -37,7 +37,7 @@ class VacanciesController < ApplicationController
       flash[:message] = t('.vacancy_updated_successfull')
       redirect_to :action => :show
     else
-      render 'edit'
+      render :edit
     end
   end
 

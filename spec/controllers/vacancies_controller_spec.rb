@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe VacanciesController do
-  describe '#index' do
-    let(:vacancy) { FactoryGirl.create(:vacancy) }
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:vacancy) { FactoryGirl.create(:vacancy) }
 
+  describe '#index' do
     it 'should return approved vacancies' do
       get :index
       response.should render_template(:index)
@@ -11,8 +12,6 @@ describe VacanciesController do
   end
 
   describe '#feed' do
-    let(:vacancy) { FactoryGirl.create(:vacancy) }
-
     it 'should return approved vacancies' do
       get :feed, :format => :rss
       response.should render_template(:feed)
@@ -20,8 +19,6 @@ describe VacanciesController do
   end
 
   describe '#show' do
-    let(:vacancy) { FactoryGirl.create(:vacancy) }
-
     it 'should render vacancy' do
       get :show, :id => vacancy.id
       response.should render_template(:show)
@@ -33,10 +30,19 @@ describe VacanciesController do
       response.should render_template(:show)
     end
 
-    it 'should render 404' do
-      vacancy.update_attribute(:approved, false)
-      get :show, :id => vacancy.id
-      response.status.should == 404
+    context 'if vacancy is not approved' do
+      before { vacancy.update_attribute(:approved, false) }
+
+      it 'should render vacancy' do
+        sign_in admin
+        get :show, :id => vacancy.id
+        response.should render_template(:show)
+      end
+
+      it 'should render 404' do
+        get :show, :id => vacancy.id
+        response.status.should == 404
+      end
     end
   end
 
@@ -79,6 +85,71 @@ describe VacanciesController do
         post :create, :vacancy => params
         response.should render_template(:new)
       end
+    end
+  end
+
+  describe '#edit' do
+    it 'should render edit vacancy form' do
+      get :edit, :id => vacancy.id, :token => vacancy.edit_token
+      response.should render_template(:edit)
+    end
+
+    it 'should render edit vacancy form' do
+      sign_in admin
+      get :edit, :id => vacancy.id, :token => 'some-bad-token'
+      response.should render_template(:edit)
+    end
+
+    it 'should render 404' do
+      get :edit, :id => vacancy.id, :token => 'some-bad-token'
+      response.status.should == 404
+    end
+
+    it 'should render 404' do
+      get :edit, :id => vacancy.id
+      response.status.should == 404
+    end
+  end
+
+  describe '#update' do
+    before { FactoryGirl.create(:vacancy) }
+
+    let(:params) {{
+      :title => 'New title',
+      :body => 'New body',
+      :contact_email => 'new_email@example.com'
+    }}
+
+    it 'should update vacancy title' do
+      post :update, :id => vacancy.id, :vacancy => params
+
+      vacancy.reload
+
+      vacancy.title.should == 'New title'
+      vacancy.body.should == 'New body'
+      vacancy.contact_email.should == 'new_email@example.com'
+    end
+
+    it 'shouldnt update vacancy edit token' do
+      expect {
+        post :update, :id => vacancy.id, :vacancy => {:edit_token => 'new-token'}
+      }.to raise_error
+    end
+
+    it 'should redirect to vacancy' do
+      post :update, :id => vacancy.id, :vacancy => params
+      response.should redirect_to(vacancy_path(vacancy.id))
+    end
+
+    it 'should show flash message' do
+      post :update, :id => vacancy.id, :vacancy => params
+      flash[:message].should == I18n.t('.vacancy_updated_successfull')
+    end
+
+    it 'should render edit form again' do
+      Vacancy.any_instance.stub(:update_attributes).and_return(false)
+      post :update, :id => vacancy.id, :vacancy => params
+      response.should render_template(:edit)
     end
   end
 end

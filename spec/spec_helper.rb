@@ -16,4 +16,5 @@ RSpec.configure do |config|
   # Include additional modules
   config.include Matchers
   config.include Paperclip::Shoulda::Matchers
+  config.include Devise::TestHelpers, :type => :controller
 end
