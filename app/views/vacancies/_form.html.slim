@@ -14,7 +14,7 @@
       });
     });
 
-= form_for vacancy do |f|
+= form_for vacancy, :html => {:class => 'form-inline'} do |f|
   == render :partial => 'shared/honeypot_captcha'
   
   fieldset
