@@ -136,14 +136,15 @@ describe VacanciesController do
       }.to raise_error
     end
 
-    it 'should redirect to vacancy' do
-      post :update, :id => vacancy.id, :vacancy => params
-      response.should redirect_to(vacancy_path(vacancy.id))
-    end
-
     it 'should show flash message' do
       post :update, :id => vacancy.id, :vacancy => params
       flash[:message].should == I18n.t('.vacancy_updated_successfull')
+    end
+
+    it 'should render edit form again' do
+      post :update, :id => vacancy.id, :vacancy => params
+      flash[:message].should == I18n.t('.vacancy_updated_successfull')
+      response.should render_template(:edit)
     end
 
     it 'should render edit form again' do

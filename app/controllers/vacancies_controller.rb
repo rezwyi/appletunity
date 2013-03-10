@@ -35,10 +35,8 @@ class VacanciesController < ApplicationController
   def update
     if @vacancy.update_attributes(params[:vacancy])
       flash[:message] = t('.vacancy_updated_successfull')
-      redirect_to :action => :show
-    else
-      render :edit
     end
+    render :edit
   end
 
   def feed
