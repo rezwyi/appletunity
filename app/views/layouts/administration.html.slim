@@ -13,7 +13,7 @@ html
 body
   = render 'shared/flash', flash: flash.discard
   
-  .navbar.navbar-inverse.navbar-fixed-top
+  .navbar.navbar-inverse
     .navbar-inner
       .container-fluid
         .navbar-text.pull-right
@@ -28,16 +28,12 @@ body
           ul.nav
             - %w(vacancies occupations admins).each do |i|
               - href = "/administration/#{i}"
-              - active = 'active' if request.path.starts_with?(href)
-              li{ class="#{active}" } = link_to t(".#{i}"), href
+              li{class='#{'active' if request.path.starts_with?(href)}'} = link_to t(".#{i}"), href
 
   header#overview.jumbotron.subhead
     .container-fluid
       h1
-        = t(".management_of_#{controller_name}")
-        | &nbsp;&#47;&nbsp;
-        = t(".#{action_name}")
-      br
+        | #{t(".management_of_#{controller_name}")} &#47; #{t(".#{action_name}")}
       p.lead
         = link_to t(".new_#{controller_name.singularize}"),
                   url_for(:action => :new, :controller => controller_name),
