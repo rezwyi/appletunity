@@ -1,12 +1,12 @@
 head
   = title_and_metas
-
-  = stylesheet_link_tag 'all', :media => 'all'
-  = javascript_include_tag 'application'
+  
+  = javascript_include_tag :application
+  = stylesheet_link_tag :application
   = csrf_meta_tags
 
   = yield :head
 
-  link{ href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css' }
+  link{href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'}
 
   == render partial: 'shared/flash_message'

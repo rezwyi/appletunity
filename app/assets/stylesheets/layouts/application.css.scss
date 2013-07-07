@@ -1,4 +1,5 @@
-@import "mixins";
+@import "bootstrap";
+@import "import/mixins";
 
 $defaultHeight: 70px;
 $defaultShadowColor: #999;
@@ -7,6 +8,44 @@ $defaultButtonNormalColor: #08c;
 $defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
 $defaultNoscriptBackgroundColor: #b94a48;
 $defaultNoscriptBorderColor: darken($defaultNoscriptBackgroundColor, 15%);
+
+body { 
+  background: image-url('bg.png') 0 0 repeat;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  padding: 30px 0 30px 0;
+  text-shadow: 0px 1px 0px #fff;
+  font-size: 1em;
+  color: #666;
+}
+
+.form-horizontal .controls {
+  margin-left: 111px;
+}
+
+.form-horizontal .form-actions {
+  padding-left: 111px;
+}
+
+.form-horizontal .control-label {
+  width: 101px;
+}
+
+.form-actions .control-group {
+  margin-left: 0;
+}
+
+.control-group {
+  margin-left: 20px;
+}
+
+.control-group label.error {
+  color: $errorText;
+}
+
+.pager {
+  margin: 0;
+}
+
 
 a:hover {
   text-decoration: none;
@@ -577,4 +616,3 @@ noscript {
 .alert .jGrowl-close {
   display: none;
 }
-

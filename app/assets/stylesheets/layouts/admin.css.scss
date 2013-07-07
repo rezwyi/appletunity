@@ -1,7 +1,14 @@
-@import "mixins";
+@import "bootstrap";
+@import "import/mixins";
 
 $defaultBoxShadow: #bbb;
 $defaultBorderColor: #bbb;
+
+body { 
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  padding-top: 40px;
+  font-size: 1em;
+}
 
 header {
   background-color: #ddd;

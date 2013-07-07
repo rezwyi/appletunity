@@ -1,7 +1,0 @@
-$defaultShadowColor: #999;
-
-@mixin box_shadow($h, $v, $f) {
-	-webkit-box-shadow: $h $v $f $defaultShadowColor;
-	-moz-box-shadow: $h $v $f $defaultShadowColor;
-	box-shadow: $h $v $f $defaultShadowColor;
-}
