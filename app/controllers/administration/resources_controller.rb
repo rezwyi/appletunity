@@ -1,7 +1,7 @@
 class Administration::ResourcesController < ActionController::Base
   protect_from_forgery
 
-  layout 'administration/layouts/application'
+  layout 'layouts/administration'
 
   before_filter :authenticate_admin!
   before_filter :load_resource, :only => [:edit, :update, :destroy]

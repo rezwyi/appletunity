@@ -109,26 +109,25 @@ ru:
       no_javascript: 'В вашем браузере отключен Javascript. Напоминаем, что
                       Appletunity работает лучше, если его включить.'
 
-  administration:
-    layouts:
-      application:
-        administration: 'Панель администрирования'
-        vacancies: 'Вакансии'
-        occupations: 'Виды занятости'
-        admins: 'Администраторы'
-        home: 'На главную'
-        logout: 'Выйти'
-        management_of_vacancies: 'Управление вакансиями'
-        management_of_occupations: 'Управление видами занятости'
-        management_of_admins: 'Управление администраторами'
-        index: 'Список'
-        new: 'Создание'
-        edit: 'Редактирование'
-        new_vacancy: 'Добавить вакансию'
-        new_occupation: 'Добавить вид занятости'
-        new_admin: 'Добавить администратора'
-        awaiting_approve: 'Ожидают подтверждения'
+    administration:
+      administration: 'Панель администрирования'
+      vacancies: 'Вакансии'
+      occupations: 'Виды занятости'
+      admins: 'Администраторы'
+      home: 'На главную'
+      logout: 'Выйти'
+      management_of_vacancies: 'Управление вакансиями'
+      management_of_occupations: 'Управление видами занятости'
+      management_of_admins: 'Управление администраторами'
+      index: 'Список'
+      new: 'Создание'
+      edit: 'Редактирование'
+      new_vacancy: 'Добавить вакансию'
+      new_occupation: 'Добавить вид занятости'
+      new_admin: 'Добавить администратора'
+      awaiting_approve: 'Ожидают подтверждения'
 
+  administration:
     vacancies:
       index:
         title: 'Заголовок'

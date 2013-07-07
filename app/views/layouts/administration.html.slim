@@ -10,9 +10,9 @@ html
 
     = yield :head
 
-    == render partial: 'shared/flash_message'
-
 body
+  = render 'shared/flash', flash: flash.discard
+  
   .navbar.navbar-inverse.navbar-fixed-top
     .navbar-inner
       .container-fluid
