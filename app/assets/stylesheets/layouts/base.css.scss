@@ -7,7 +7,7 @@ $defaultShadowColor: #999;
 $defaultBorderColor: #ddd;
 $defaultButtonNormalColor: $linkColor;
 $defaultHeight: 70px;
-$defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
+$defaultButtonHoverColor: darken($defaultButtonNormalColor, 5%);
 $defaultNoscriptBackgroundColor: $lightRedColor;
 $defaultNoscriptBorderColor: darken($lightRedColor, 15%);
 
