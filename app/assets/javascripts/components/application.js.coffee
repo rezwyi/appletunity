@@ -1,10 +1,8 @@
 $(document).ready ->
-  # By javascript enable hide the filter
   if $.cookie('_appletunity_hide_filter')
     $('@filter-form').css('margin-top', '-100px')
                      .siblings('@filter-form-switcher').addClass('hidden')
 
-  # Shows the filter
   $('@filter-form-switcher').click (e) ->
     e.preventDefault
     
@@ -20,6 +18,5 @@ $(document).ready ->
 
     that.toggleClass 'hidden'
 
-  # Flashes
   if (flash = $('head script[type="text/flash"]')).length
     $.jGrowl flash.text(), {theme: flash.attr('theme')}

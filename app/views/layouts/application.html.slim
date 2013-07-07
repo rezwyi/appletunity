@@ -1,9 +1,36 @@
 doctype html
 
 html
-  == render :partial => 'shared/head'
+  head
+    = title_and_metas
+    
+    = javascript_include_tag :application
+    = stylesheet_link_tag :application
+    = csrf_meta_tags
 
-body{ data-spy='scroll' data-target='.subnav' }
+    link{href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'}
+
+    - if Rails.env.production?
+      javascript:
+        var root = (typeof exports !== 'undefined' && exports !== null) ? exports : this;
+        root._gaq = [['_setAccount', 'UA-24462942-2'], ['_trackPageview']];
+
+        (function() {
+          var ga = document.createElement('script'),
+              proto = document.location.protocol,
+              s = document.getElementsByTagName('script');
+          
+          ga.type = 'text/javascript';
+          ga.async = true;
+          proto = (proto === 'https:') ? 'https://ssl' : 'http://www';
+          ga.src = proto + '.google-analytics.com/ga.js';
+          s[0].parentNode.insertBefore(ga, s);
+        })();
+
+    == render partial: 'shared/flash_message'
+    = yield :head
+
+body{data-spy='scroll' data-target='.subnav'}
   noscript
     .container
       p = t('.no_javascript')

@@ -3,8 +3,9 @@ doctype html
 html
   head
     title = t('.administration')
-    = stylesheet_link_tag 'administration/all', :media => 'all'
-    = javascript_include_tag 'application'
+    
+    = javascript_include_tag :admin
+    = stylesheet_link_tag :admin
     = csrf_meta_tags
 
     = yield :head
