@@ -17,8 +17,7 @@ class Administration::ResourcesController < ActionController::Base
 
   def index
     params[:per_page] ||= Rails.application.config.default_per_page
-    @resources = resource_name.constantize.order('id DESC')\
-                              .page(params[:page]).per(params[:per_page])
+    @resources = resource_class.order('id DESC').page(params[:page]).per(params[:per_page])
   end
 
   def new
@@ -27,10 +26,7 @@ class Administration::ResourcesController < ActionController::Base
 
   def create
     if @resource.save
-      flash[:message] = t(
-        ".#{resource_name.downcase}_created_successfull",
-        :email => nil
-      )
+      flash[:notice] = t(".#{resource_name.downcase}_created_successfull", :email => nil)
       redirect_to :action => @@redirect_action
     else
       render :new
@@ -42,7 +38,7 @@ class Administration::ResourcesController < ActionController::Base
 
   def update
     if @resource.update_attributes(params[resource_name.downcase])
-      flash[:message] = t(".#{resource_name.downcase}_updated_successfull")
+      flash[:notice] = t(".#{resource_name.downcase}_updated_successfull")
       redirect_to :action => @@redirect_action
     else
       render :edit
@@ -51,16 +47,19 @@ class Administration::ResourcesController < ActionController::Base
 
   def destroy
     if @resource.destroy
-      flash[:message] = t(".#{resource_name.downcase}_deleted_successfull")
+      flash[:notice] = t(".#{resource_name.downcase}_deleted_successfull")
     end
     redirect_to :action => @@redirect_action
   end
 
   protected
 
-  # Classify current controller name
   def resource_name
     controller_name.classify
+  end
+
+  def resource_class
+    resource_name.constantize
   end
 
   def load_resource

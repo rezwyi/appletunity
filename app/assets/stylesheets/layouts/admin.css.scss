@@ -8,13 +8,42 @@ body {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   padding-top: 40px;
   font-size: 1em;
+  .flash {
+    position: fixed;
+    font-size: 0.9em;
+    right: -1000px;
+    bottom: 60px;
+    z-index: 9999;
+    &.noscript {
+      right: 30px;
+    }
+    > .body {
+      @include box_shadow(3px, 3px, 5px, $defaultBoxShadow);
+      opacity: 0.9;
+      border-radius: 6px;
+      color: #fff;
+      width: 300px;
+      margin: 0 auto;
+      padding: 10px 12px;
+      text-align: center;
+      text-shadow: none;
+      &.notice {
+        background-color: #468847;
+        border: 1px solid darken(#468847, 5%);
+      }
+      &.alert {
+        background-color: #b94a48;
+        border: 1px solid darken(#b94a48, 5%);
+      }
+    }
+  }
 }
 
 header {
+  @include box_shadow(0, 0, 5px, $defaultBoxShadow);
   background-color: #ddd;
   padding: 40px 20px 20px 60px;
   border-bottom: 1px solid $defaultBorderColor;
-  @include box_shadow(0, 0, 5px);
 }
 
 header h1 {
@@ -230,6 +259,7 @@ header h1 {
 }
 
 .redactor_dropdown {
+  @include box_shadow(0, 2px, 4px, $defaultBoxShadow);
   top: 28px;
   left: 0;
   z-index: 2004;
@@ -238,7 +268,6 @@ header h1 {
   background-color: #fff;
   border: 1px solid #ccc;
   font-size: 13px;
-  @include box_shadow(0, 2px, 4px);
   line-height: 21px;  
   padding: 10px;  
 }
@@ -261,18 +290,4 @@ header h1 {
   color: #444;
   text-decoration: none;
   background-color: #dde4ef;
-}
-
-// Flashes
-.alert {
-  display: none;
-  position: fixed;
-  bottom: 30px;
-  right: 60px;
-  width: 300px;
-  @include box_shadow(4px, 4px, 4px);
-}
-
-.alert .jGrowl-close {
-  display: none;
 }
