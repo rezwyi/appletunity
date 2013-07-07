@@ -1,0 +1,114 @@
+@import "layouts/application";
+
+.page-vacancies {
+  .vacancies {
+    > .vacancy {
+      border-bottom: 1px solid $defaultBorderColor;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      min-height: 90px;
+      &:last-child {
+        border: none;
+      }
+      &.expired {
+        > * {
+          -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+          filter: alpha(opacity=50);
+          -moz-opacity: 0.5;
+          -khtml-opacity: 0.5;
+          opacity: 0.5;
+        }
+      }
+      > .company-logo {
+        width: 80px;
+        min-height: $defaultHeight;
+        margin-right: 15px;
+        padding: 5px 0 0 0;
+      }
+      > .title {
+        @include ellipsis_overflow;
+        color: $linkColor;
+        margin: 0;
+        font-size: 1.5em;
+        line-height: 32px;
+      }
+      > .created {
+        font-size: 0.9em;
+        line-height: 24px;
+      }
+      > .location {
+        @include ellipsis_overflow;
+        display: inline-block;
+        font-size: 0.9em;
+        line-height: 24px;
+      }
+    }
+  }
+  .vacancy-in {
+    min-height: $defaultHeight;
+    > .header {
+      min-height: $defaultHeight;
+      > .company-logo {
+        margin-bottom: 10px;
+      }
+      > .title {
+        font-size: 1.5em;
+      }
+      > .created {
+        font-size: 0.9em;
+        line-height: 24px;
+      }
+      > .location {
+        @include ellipsis_overflow;
+        display: inline-block;
+        font-size: 0.9em;
+        line-height: 24px;
+      }
+    }
+    > .body {
+      font-size: 14px;
+      h1, h2, h3, h4, h5, h6 {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 16px;
+        margin: 0px 0px 10px 0px;
+      }
+    }
+    > .footer {
+      > .expired-note {
+        color: #B94A48;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        background-color: #F2DEDE;
+        border-color: #EED3D7;
+        padding: 8px 35px 8px 14px;
+        margin-bottom: 20px;
+        border: 1px solid #EED3D7;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+    }
+  }
+  #new_vacancy {
+    > #captcha {
+      display: none;
+    }
+    > fieldset {
+      > .form-actions {
+        .checkbox {
+          > a {
+            color: #08c;
+            border-bottom: 1px dashed;
+            &:hover {
+              color: #08c;
+              border-bottom: 1px dashed; 
+            }
+          }
+          > input[type="checkbox"] {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+}

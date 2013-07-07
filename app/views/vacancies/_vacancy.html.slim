@@ -1,5 +1,5 @@
 .vacancy-in
-  .vacancy-in-header
+  .header
     - if vacancy.logo?
       .company-logo.pull-right
         - unless vacancy.company_website.empty?
@@ -22,10 +22,10 @@
           span.label = o.name
           | &nbsp;
   hr.clear
-  .vacancy-in-body
+  .body
     = raw vacancy.rendered_body
   hr
-  .vacancy-in-footer
+  .footer
     - if vacancy.expired?
       .expired-note
         = t(:expired_note)

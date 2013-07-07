@@ -1,3 +1,2 @@
-== render :partial => 'shared/filter'
-== render :partial => 'vacancies', :locals => {:vacancies => @vacancies}
-== render :partial => 'shared/pagination', :locals => {:resources => @vacancies}
+= render :partial => 'vacancies', :locals => {:vacancies => @vacancies}
+= render :partial => 'shared/pagination', :locals => {:resources => @vacancies}

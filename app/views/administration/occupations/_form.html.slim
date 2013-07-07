@@ -1,9 +1,9 @@
-= form_for [:administration, @resource], :html => {:class => 'well'} do |f|
+= form_for [:administration, @resource] do |f|
   fieldset
-    .control-group{ class="#{'error' if @resource.errors[:name].present?}"}
+    .control-group{class='#{'error' if @resource.errors[:name].present?}'}
       = label_tag '', t('.name'), :class => 'control-label'
       .controls
-        = f.text_field :name, :class => 'input-xlarge'
+        = f.text_field :name, :class => 'span8'
   .form-actions
     = f.submit t(action_name), :class => 'btn'
     | &nbsp;
