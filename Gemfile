@@ -13,7 +13,6 @@ gem 'paperclip'
 gem 'devise', '~> 2.2.3'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'role-rails'
 gem 'russian'
 gem 'twitter'
 gem 'whenever', :require => false
