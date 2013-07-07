@@ -1,5 +1,6 @@
-@import "bootstrap";
-@import "import/mixins";
+$gridColumnWidth: 75px;
+$gridGutterWidth: 0px;
+$linkColor: #08c;
 
 $defaultHeight: 70px;
 $defaultShadowColor: #999;
@@ -8,6 +9,9 @@ $defaultButtonNormalColor: #08c;
 $defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
 $defaultNoscriptBackgroundColor: #b94a48;
 $defaultNoscriptBorderColor: darken($defaultNoscriptBackgroundColor, 15%);
+
+@import "bootstrap";
+@import "import/mixins";
 
 body { 
   background: image-url('bg.png') 0 0 repeat;
