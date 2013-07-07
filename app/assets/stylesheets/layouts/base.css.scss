@@ -1,0 +1,30 @@
+$whiteColor: #fff;
+$lightGrayColor: darken($whiteColor, 5%);
+$lightRedColor: #b94a48;
+
+$linkColor: #08c;
+$defaultShadowColor: #999;
+$defaultBorderColor: #ddd;
+$defaultButtonNormalColor: $linkColor;
+$defaultHeight: 70px;
+$defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
+$defaultNoscriptBackgroundColor: $lightRedColor;
+$defaultNoscriptBorderColor: darken($lightRedColor, 15%);
+
+// Twitter overrides
+$gridColumnWidth: 75px;
+$gridGutterWidth: 0px;
+
+@mixin box_shadow($h, $v, $f, $c) {
+  -webkit-box-shadow: $h $v $f $c;
+  -moz-box-shadow: $h $v $f $c;
+  box-shadow: $h $v $f $c;
+}
+
+@mixin ellipsis_overflow {
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@import "bootstrap";
