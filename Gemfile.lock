@@ -91,6 +91,9 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.2.0)
+    flight-for-rails (1.0.9)
+      jquery-rails (>= 2.1.4)
+      rails (>= 3.1.0)
     guard (1.6.1)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -286,6 +289,7 @@ DEPENDENCIES
   dynamic_form
   exception_notification
   factory_girl_rails
+  flight-for-rails
   guard-rspec
   high_voltage
   jquery-rails
