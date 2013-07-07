@@ -3,15 +3,16 @@ doctype html
 html
   head
     title = t('.administration')
-    = stylesheet_link_tag 'administration/all', :media => 'all'
-    = javascript_include_tag 'application'
+    
+    = javascript_include_tag :admin
+    = stylesheet_link_tag :admin
     = csrf_meta_tags
 
     = yield :head
 
-    == render partial: 'shared/flash_message'
-
 body
+  = render 'shared/flash', flash: flash.discard
+  
   .navbar.navbar-inverse.navbar-fixed-top
     .navbar-inner
       .container-fluid
@@ -44,9 +45,9 @@ body
 
   .container-fluid
     .row-fluid
-      .span8
+      .span9
         .contentable
           = yield
-      .span4
+      .span3
         .sidebar
           = yield :sidebar

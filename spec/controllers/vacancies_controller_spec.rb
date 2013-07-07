@@ -60,12 +60,9 @@ describe VacanciesController do
         }.to change(Vacancy, :count).by(1)
       end
 
-      it 'should show flash message' do
+      it 'should show flash notice' do
         post :create, :vacancy => params
-        flash[:message].should == I18n.t(
-          '.vacancy_created_successfull',
-          :email => params['contact_email']
-        )
+        flash[:notice].should == I18n.t('.vacancy_created_successfull', :email => params['contact_email'])
       end
 
       it 'should send created email' do
@@ -136,14 +133,13 @@ describe VacanciesController do
       }.to raise_error
     end
 
-    it 'should show flash message' do
+    it 'should show flash notice' do
       post :update, :id => vacancy.id, :vacancy => params
-      flash[:message].should == I18n.t('.vacancy_updated_successfull')
+      flash[:notice].should == I18n.t('.vacancy_updated_successfull')
     end
 
     it 'should render edit form again' do
       post :update, :id => vacancy.id, :vacancy => params
-      flash[:message].should == I18n.t('.vacancy_updated_successfull')
       response.should render_template(:edit)
     end
 

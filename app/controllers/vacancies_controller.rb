@@ -13,10 +13,7 @@ class VacanciesController < ApplicationController
   def create
     @vacancy = Vacancy.new(params[:vacancy])
     if @vacancy.save
-      flash[:message] = t(
-        '.vacancy_created_successfull',
-        :email => @vacancy.contact_email
-      )
+      flash[:notice] = t('.vacancy_created_successfull', :email => @vacancy.contact_email)
       VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
       redirect_to root_url
     else
@@ -34,7 +31,7 @@ class VacanciesController < ApplicationController
 
   def update
     if @vacancy.update_attributes(params[:vacancy])
-      flash[:message] = t('.vacancy_updated_successfull')
+      flash[:notice] = t('.vacancy_updated_successfull')
     end
     render :edit
   end
@@ -44,7 +41,7 @@ class VacanciesController < ApplicationController
     @vacancies = @finder.retrieve
   end
 
-  private
+  protected
 
   def load_vacancy
     @vacancy = Vacancy.find(params[:id])

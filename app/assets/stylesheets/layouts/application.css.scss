@@ -1,4 +1,5 @@
-@import "mixins";
+@import "bootstrap";
+@import "import/mixins";
 
 $defaultHeight: 70px;
 $defaultShadowColor: #999;
@@ -7,6 +8,84 @@ $defaultButtonNormalColor: #08c;
 $defaultButtonHoverColor: darken($defaultButtonNormalColor, 15%);
 $defaultNoscriptBackgroundColor: #b94a48;
 $defaultNoscriptBorderColor: darken($defaultNoscriptBackgroundColor, 15%);
+
+body { 
+  background: image-url('bg.png') 0 0 repeat;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 14px;
+  color: #666;
+  text-shadow: 0px 1px 0px #fff;
+  padding: 30px 0 30px 0;
+  .flash {
+    position: fixed;
+    right: -1000px;
+    bottom: 60px;
+    z-index: 9999;
+    &.noscript {
+      right: 30px;
+    }
+    > .body {
+      @include box_shadow(3px, 3px, 5px, $defaultShadowColor);
+      opacity: 0.9;
+      border-radius: 6px;
+      color: #fff;
+      width: 300px;
+      margin: 0 auto;
+      padding: 10px 12px;
+      text-align: center;
+      text-shadow: none;
+      &.notice {
+        background-color: #468847;
+        border: 1px solid darken(#468847, 5%);
+      }
+      &.alert {
+        background-color: #b94a48;
+        border: 1px solid darken(#b94a48, 5%);
+      }
+    }
+  }
+  .system-warnings {
+    position: fixed;
+    background-color: $defaultNoscriptBackgroundColor;
+    border-bottom: $defaultNoscriptBorderColor;
+    line-height: 2em;
+    text-shadow: none;
+    text-align: center;
+    color: #fff;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
+}
+
+.form-horizontal .controls {
+  margin-left: 111px;
+}
+
+.form-horizontal .form-actions {
+  padding-left: 111px;
+}
+
+.form-horizontal .control-label {
+  width: 101px;
+}
+
+.form-actions .control-group {
+  margin-left: 0;
+}
+
+.control-group {
+  margin-left: 20px;
+}
+
+.control-group label.error {
+  color: $errorText;
+}
+
+.pager {
+  margin: 0;
+}
+
 
 a:hover {
   text-decoration: none;
@@ -68,8 +147,8 @@ label.terms a:hover {
 }
 
 .container .row {
+  @include box_shadow(0, 0, 10px, $defaultShadowColor);
   background: image-url('container.png') right 0 repeat-y #fff;
-  @include box_shadow(0, 0, 10px);
   border-radius: 5px;
 }
 
@@ -265,13 +344,13 @@ label.terms a:hover {
 
 // Filter form
 #filter-form {
+  @include box_shadow(0, 0, 6px, $defaultShadowColor);
   margin: -37px 0 30px 0;
   background-color: #eee;
   border-left: 1px solid $defaultBorderColor;
   border-right: 1px solid $defaultBorderColor;
   border-bottom: 1px solid $defaultBorderColor;
   border-radius: 0 0 5px 5px;
-  @include box_shadow(0, 0, 6px);
   overflow: hidden;
 }
 
@@ -308,6 +387,7 @@ label.terms a:hover {
 
 // Zurb buttons
 .zurb-btn {
+  @include box_shadow(0, 1px, 3px, $defaultShadowColor);
   position: relative;
   background-color: $defaultButtonNormalColor;
   display: inline-block;
@@ -315,7 +395,6 @@ label.terms a:hover {
   border-bottom: 1px solid rgba(0,0,0,0.25);
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  @include box_shadow(0, 1px, 3px);
   font-size: 14px;
   text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
   text-decoration: none;
@@ -336,20 +415,6 @@ label.terms a:hover {
 // Captcha
 #captcha {
   display: none;
-}
-
-// Noscript
-noscript {
-  font-size: 14px;
-  color: #fff;
-  text-shadow: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 20px;
-  background-color: $defaultNoscriptBackgroundColor;
-  border-bottom: $defaultNoscriptBorderColor;
 }
 
 // Redactor
@@ -531,7 +596,8 @@ noscript {
 }
 
 .redactor_dropdown {
-	top: 28px;
+	@include box_shadow(0, 2px, 4px, $defaultShadowColor);
+  top: 28px;
 	left: 0;
 	z-index: 2004;
 	position: absolute;
@@ -539,7 +605,6 @@ noscript {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	font-size: 13px;
-	@include box_shadow(0, 2px, 4px);
 	line-height: 21px;	
 	padding: 10px;	
 }
@@ -562,19 +627,4 @@ noscript {
 	color: #444;
 	text-decoration: none;
 	background-color: #dde4ef;
-}		
-
-// Flashes
-.alert {
-  display: none;
-  position: fixed;
-  bottom: 30px;
-  right: 60px;
-  width: 300px;
-  @include box_shadow(4px, 4px, 4px);
 }
-
-.alert .jGrowl-close {
-  display: none;
-}
-

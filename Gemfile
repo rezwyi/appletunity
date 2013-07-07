@@ -13,7 +13,6 @@ gem 'paperclip'
 gem 'devise', '~> 2.2.3'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'role-rails'
 gem 'russian'
 gem 'twitter'
 gem 'whenever', :require => false
@@ -23,6 +22,7 @@ gem 'exception_notification'
 gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'therubyracer'
 gem 'libv8', '~> 3.11.8'
+gem 'flight-for-rails'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
