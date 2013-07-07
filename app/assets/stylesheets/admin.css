@@ -1,4 +1,4 @@
 /*
- *= require layouts/admin
+ *= require ./layouts/admin
  *= require_directory ./plugins
  */
