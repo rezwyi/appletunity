@@ -37,7 +37,7 @@ body{data-spy='scroll' data-target='.subnav'}
   
   .container
     == render :partial => 'shared/header'
-    .row
+    .row{class='page-#{controller_name}'}
       .span8
         .contentable = yield
       .span4 == render :partial => 'shared/sidebar'

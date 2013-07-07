@@ -1,12 +1,10 @@
 - content_for :head do
   javascript:
     $(document).ready(function(){
-      var redactor_buttons = ['formatting', '|',
-                              'bold', 'italic', 'deleted', '|', 
-                              'unorderedlist', 'orderedlist'];
+      var redactor_buttons = [
+        'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist','orderedlist'
+      ];
 
-      // Transform body textarea to modern
-      // WYSIWYG editor
       $('#vacancy_body').redactor({
         lang: '#{I18n.locale}',
         buttons: redactor_buttons,
@@ -20,27 +18,24 @@
   fieldset
     h2 = t('.what_you_want')
     hr
-    .control-group{ class="#{'error' if vacancy.errors[:title].present?}"}
+    .control-group{class="#{'error' if vacancy.errors[:title].present?}"}
       = label_tag '', :class => 'control-label' do
         = t('.title')
         span.required &nbsp;&#42;
       .controls
-        = f.text_field :title, :class => 'input-xlarge',
-                       :placeholder => t('.title_placeholder')
+        = f.text_field :title, :class => 'span5', :placeholder => t('.title_placeholder')
     .control-group
       = label_tag '', t('.location'), :class => 'control-label'
       .controls
-        = f.text_field :location, :class => 'input-xlarge',
-                       :placeholder => t('.location_placeholder')
+        = f.text_field :location, :class => 'span5', :placeholder => t('.location_placeholder')
 
-    .control-group{ class="#{'error' if vacancy.errors[:body].present?}"}
+    .control-group{class="#{'error' if vacancy.errors[:body].present?}"}
       = label_tag '', :class => 'control-label' do
         = t('.body')
         span.required &nbsp;&#42;
-      = f.text_area :body, :class => 'input-xlarge', :rows => 15,
-                    :placeholder => t('.body_placeholder')
+      = f.text_area :body, :class => 'span5', :rows => 15, :placeholder => t('.body_placeholder')
     .control-group
-      label.control-label{ for='optionsCheckbox' } = t('.occupation')
+      label.control-label{for='optionsCheckbox'} = t('.occupation')
       .controls
         = hidden_field_tag 'vacancy[occupation_ids][]'
         - Occupation.all.each do |o|
@@ -52,22 +47,22 @@
 
     h2 = t('.about_your_company')
     hr
-    .control-group{ class="#{'error' if vacancy.errors[:company_name].present?}"}
+    .control-group{class="#{'error' if vacancy.errors[:company_name].present?}"}
       = label_tag '', :class => 'control-label' do
         = t('.name')
         span.required &nbsp;&#42;
       .controls
-        = f.text_field :company_name, :class => 'input-xlarge'
+        = f.text_field :company_name, :class => 'span5'
     .control-group
       = label_tag '', t('.website'), :class => 'control-label'
       .controls
-        = f.text_field :company_website, :class => 'input-xlarge'
+        = f.text_field :company_website, :class => 'span5'
     .control-group
       = label_tag '', t('.logo'), :class => 'control-label'
       .controls
         = logo_for vacancy, :medium, :class => 'well'
       .controls
-        = f.file_field :logo, :class => 'input-xlarge'
+        = f.file_field :logo, :class => 'span5'
 
     .clearfix
 
@@ -78,11 +73,11 @@
         = t('.email')
         span.required &nbsp;&#42;
       .controls
-        = f.text_field :contact_email, :class => 'input-xlarge'
+        = f.text_field :contact_email, :class => 'span5'
     .control-group
       = label_tag '', t('.phone'), :class => 'control-label'
       .controls
-        = f.text_field :contact_phone, :class => 'input-xlarge'
+        = f.text_field :contact_phone, :class => 'span5'
 
     .clearfix
 
