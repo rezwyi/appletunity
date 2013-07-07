@@ -3,5 +3,6 @@
 //= require flight-for-rails
 //= require jquery.role
 //= require plugins/jquery.cookie
-//= require plugins/jquery.jgrowl
+//= require plugins/redactor
+//= require plugins/redactor.locale
 //= require components/application
