@@ -6,7 +6,6 @@ Capfile
 config/deploy.rb
 config/database.yml
 db/data.yml
-.rvmrc
 
 # Folders
 .bundle
