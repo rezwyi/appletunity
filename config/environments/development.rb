@@ -37,12 +37,12 @@ Appletunity::Application.configure do
 
   # Action Mailer and Mailcatcher
   ActionMailer::Base.default :from => 'test@appletunity.ru'
-  config.action_mailer.default_url_options = {:host => 'localhost:8888'}
+  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {:address => 'localhost', :port => 1025 }
 
   # Default host
   config.after_initialize do
-    Rails.application.routes.default_url_options = {:host => 'localhost:8888'}
+    Rails.application.routes.default_url_options = {:host => 'localhost:3000'}
   end
 end

@@ -65,11 +65,6 @@ describe VacanciesController do
         flash[:notice].should == I18n.t('.vacancy_created_successfull', :email => params['contact_email'])
       end
 
-      it 'should send created email' do
-        VacancyMailer.should email_about_created
-        post :create, :vacancy => params
-      end
-
       it 'should redirect to root_url' do
         post :create, :vacancy => params
         response.should redirect_to(root_url)

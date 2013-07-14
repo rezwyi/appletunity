@@ -24,45 +24,13 @@ class Vacancy < ActiveRecord::Base
   before_save :render_body
   before_save :generate_expired_at
 
-  has_attached_file :logo, :styles => {
-    :small => '80x80',
-    :medium => '100x100'
-  }
+  has_attached_file :logo, :styles => {:small => '80x80', :medium => '100x100'}
 
   scope :live, -> { where(:approved => true) }
   scope :awaiting_approve, -> { where(:approved => false) }
 
-  # Simple random token generator
   def self.friendly_token
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
-  end
-
-  # Used from whenever task
-  def self.tweet_about_new_vacancies
-    now = Time.now
-    Vacancy.live.each do |v|
-      # Approved date
-      ap = v.expired_at - Rails.application.config.default_vacancy_lifetime
-      if (now - 1.hour) <= ap && now >= ap
-        url = Rails.application.routes.url_helpers.vacancy_url(v, {
-          utm_source: 'twitter',
-          utm_medium: 'referral',
-          utm_campaign: Date.today.strftime('%b').downcase
-        })
-
-        Twitter.delay(:queue => 'tweeting').update(
-          "[#{v.company_name}] #{v.title} #{url} #appletunity"
-        )
-      end
-    end
-  end
-
-  # Used from whenever task
-  def self.notify_about_not_approved_vacancies
-    vs = Vacancy.awaiting_approve.where(:expired_at => nil).to_a
-    if vs.any?
-      VacancyMailer.delay(:queue => 'mailing').awaiting_approve(vs)
-    end
   end
 
   def to_param
@@ -88,16 +56,14 @@ class Vacancy < ActiveRecord::Base
 
   def generate_expired_at
     return if self.expired_at
-    
     if self.approved?
-      lifetime = Rails.application.config.default_vacancy_lifetime
-      self.expired_at = Time.now + lifetime
+      self.expired_at = Time.now + Rails.application.config.default_vacancy_lifetime
     end
   end
 
   def generate_edit_token
     token = Vacancy.friendly_token
-    while Vacancy.find(:first, :conditions => {:edit_token => token})
+    while Vacancy.where(:edit_token => token).any?
       token = Vacancy.friendly_token
     end
     self.edit_token = token

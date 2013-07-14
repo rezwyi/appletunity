@@ -15,7 +15,7 @@ describe VacanciesHelper do
     end
   end
 
-   describe '#link_to_delete_resource' do
+  describe '#link_to_delete_resource' do
     it 'should return nil' do
       helper.link_to_delete_resource(nil).should be_nil
     end

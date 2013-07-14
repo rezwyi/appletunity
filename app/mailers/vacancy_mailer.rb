@@ -4,8 +4,8 @@ class VacancyMailer < ActionMailer::Base
     mail :to => vacancy.contact_email, :subject => t('.created_email')
   end
 
-  def awaiting_approve(vacancies)
-    @vacancies = vacancies
+  def awaiting_approve(vacancy)
+    @vacancy = vacancy
     mail :to => Admin.all.map(&:email), :subject => t('.notify_email')
   end
 end
