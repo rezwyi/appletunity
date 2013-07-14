@@ -23,6 +23,7 @@ gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'therubyracer'
 gem 'libv8', '~> 3.11.8'
 gem 'flight-for-rails'
+gem 'resque'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
