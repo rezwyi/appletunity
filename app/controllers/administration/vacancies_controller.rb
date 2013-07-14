@@ -8,7 +8,7 @@ class Administration::VacanciesController < Administration::ResourcesController
     render :index
   end
   
-  private
+  protected
 
   def set_approved
     @resource.approved = params[:approved].present?
