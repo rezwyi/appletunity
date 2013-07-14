@@ -14,7 +14,6 @@ class VacanciesController < ApplicationController
     @vacancy = Vacancy.new(params[:vacancy])
     if @vacancy.save
       flash[:notice] = t('.vacancy_created_successfull', :email => @vacancy.contact_email)
-      VacancyMailer.delay(:queue => 'mailing').created(@vacancy)
       redirect_to root_url
     else
       render :new
