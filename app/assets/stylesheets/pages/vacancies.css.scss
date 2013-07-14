@@ -1,6 +1,9 @@
 @import "layouts/application";
 
 .page-vacancies {
+  #captcha {
+    display: none;
+  }
   .vacancies {
     > .vacancy {
       border-bottom: 1px solid $defaultBorderColor;
@@ -89,10 +92,7 @@
       }
     }
   }
-  #new_vacancy {
-    > #captcha {
-      display: none;
-    }
+  form {
     > fieldset {
       > .form-actions {
         .checkbox {
