@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_captcha, :only => :create
 
-  protected
+  respond_to :html
 
   def render_404
     respond_to do |format|
@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
       format.all { render(:status => :not_found, :nothing => true) }
     end
   end
+  protected
 
   def check_captcha
     redirect_to(root_url) and return if params[:captcha].present?
