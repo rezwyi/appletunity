@@ -94,6 +94,11 @@
   }
   form {
     > fieldset {
+      > .control-group {
+        .help-inline {
+          padding: 0;
+        }
+      }
       > .form-actions {
         .checkbox {
           > a {
@@ -106,6 +111,9 @@
           }
           > input[type="checkbox"] {
             margin-right: 8px;
+          }
+          > .error {
+            color: #b94a48;
           }
         }
       }
