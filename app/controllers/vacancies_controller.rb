@@ -23,12 +23,16 @@ class VacanciesController < ApplicationController
   end
 
   def show
-    render_404 if !@vacancy.approved? && !current_admin
+    unless @vacancy.approved? || admin_signed_in?
+      raise ActionController::RoutingError, 'Not found'
+    end
     respond_with @vacancy
   end
 
   def edit
-    render_404 if @vacancy.edit_token != params[:token] && !current_admin
+    unless @vacancy.edit_token == params[:token] || admin_signed_in?
+      raise ActionController::RoutingError, 'Not found'
+    end
     respond_with @vacancy
   end
 

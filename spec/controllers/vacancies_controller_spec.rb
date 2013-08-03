@@ -76,9 +76,10 @@ describe VacanciesController do
     context 'if vacancy is not approved' do
       let(:not_approved_vacancy) { FactoryGirl.create(:vacancy, :approved => false) }      
 
-      it 'should render 404' do
-        get :show, :id => vacancy.id
-        response.status.should == 404
+      it 'should raise routing error if user is not logged in' do
+        expect {
+          get :show, :id => not_approved_vacancy.id
+        }.to raise_error(ActionController::RoutingError)
       end
 
       it 'should find vacancy if user is logged in' do
@@ -96,7 +97,6 @@ describe VacanciesController do
       )
     end
 
-      end
     it 'should save record to database' do
       expect { post(:create, :vacancy => params) }.to change(Vacancy, :count).by(1)
     end
@@ -133,14 +133,16 @@ describe VacanciesController do
       response.should render_template(:edit)
     end
 
-    it 'should render 404' do
-      get :edit, :id => vacancy.id, :token => 'some-bad-token'
-      response.status.should == 404
+    it 'should raise error' do
+      expect {
+        get :edit, :id => vacancy.id, :token => 'some-bad-token'
+      }.to raise_error(ActionController::RoutingError)
     end
 
-    it 'should render 404' do
-      get :edit, :id => vacancy.id
-      response.status.should == 404
+    it 'should raise error' do
+      expect {
+        get :edit, :id => vacancy.id
+      }.to raise_error(ActionController::RoutingError)
     end
   end
 
