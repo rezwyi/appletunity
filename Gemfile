@@ -4,14 +4,13 @@ gem 'rake', '0.9.2.2'
 gem 'unicorn'
 gem 'mysql2', '0.3.11'
 gem 'rails', '~> 3.2.10'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 2.1.4'
 gem 'slim-rails'
 gem 'high_voltage'
 gem 'kaminari'
 gem 'dynamic_form'
-gem 'paperclip'
-gem 'devise', '~> 2.2.3'
-gem 'daemons'
+gem 'paperclip', '3.4.2'
+gem 'devise', '~> 3.0.0'
 gem 'russian'
 gem 'twitter'
 gem 'whenever', :require => false
@@ -27,13 +26,12 @@ gem 'resque'
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier'
 end
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
-  gem 'guard-rspec'
   gem 'capybara'
 end
