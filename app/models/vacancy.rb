@@ -14,7 +14,7 @@ class Vacancy < ActiveRecord::Base
 
   validates :contact_email, :format => {:with => Devise.email_regexp}
 
-  validates_attachment :logo, :size => {:in => 0..100.kilobytes}
+  validates_attachment :logo, :size => {:in => 0..1.megabytes}
 
   attr_accessible :company_name, :company_website, :title, :body, :location,
                   :occupation_ids, :contact_email, :contact_phone,
