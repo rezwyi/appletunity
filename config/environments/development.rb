@@ -33,7 +33,7 @@ Appletunity::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 
   # Action Mailer and Mailcatcher
   ActionMailer::Base.default :from => 'test@appletunity.ru'
