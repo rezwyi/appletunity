@@ -12,13 +12,13 @@
       });
     });
 
-= form_for vacancy, :html => {:class => 'form-inline'} do |f|
+= form_for vacancy, :remote => true, :html => {:class => 'form-inline', :novalidate => true, :data => {:type => :json}} do |f|
   == render :partial => 'shared/honeypot_captcha'
   
   fieldset
     h2 = t('.what_you_want')
     hr
-    .control-group{class="#{'error' if vacancy.errors[:title].present?}"}
+    .control-group class=('error' if vacancy.errors[:title].present?)
       = label_tag '', :class => 'control-label' do
         = t('.title')
         span.required &nbsp;&#42;
@@ -29,13 +29,13 @@
       .controls
         = f.text_field :location, :class => 'span5', :placeholder => t('.location_placeholder')
 
-    .control-group{class="#{'error' if vacancy.errors[:body].present?}"}
+    .control-group class=('error' if vacancy.errors[:body].present?)
       = label_tag '', :class => 'control-label' do
         = t('.body')
         span.required &nbsp;&#42;
       = f.text_area :body, :class => 'span5', :rows => 15, :placeholder => t('.body_placeholder')
     .control-group
-      label.control-label{for='optionsCheckbox'} = t('.occupation')
+      label.control-label for='optionsCheckbox' = t('.occupation')
       .controls
         = hidden_field_tag 'vacancy[occupation_ids][]'
         - Occupation.all.each do |o|
@@ -47,7 +47,7 @@
 
     h2 = t('.about_your_company')
     hr
-    .control-group{class="#{'error' if vacancy.errors[:company_name].present?}"}
+    .control-group class=('error' if vacancy.errors[:company_name].present?)
       = label_tag '', :class => 'control-label' do
         = t('.name')
         span.required &nbsp;&#42;
@@ -68,7 +68,7 @@
 
     h2 = t('.contacts')
     hr
-    .control-group{ class="#{'error' if vacancy.errors[:contact_email].present?}"}
+    .control-group class=('error' if vacancy.errors[:contact_email].present?)
       = label_tag '', :class => 'control-label' do
         = t('.email')
         span.required &nbsp;&#42;

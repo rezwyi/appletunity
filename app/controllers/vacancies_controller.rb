@@ -16,10 +16,10 @@ class VacanciesController < ApplicationController
 
   def create
     @vacancy = Vacancy.new(params[:vacancy])
-    if (saved = @vacancy.save)
+    if @vacancy.save
       flash[:notice] = t('.vacancy_created_successfull', :email => @vacancy.contact_email)
     end
-    respond_with @vacancy, :location => (saved ? root_url : nil)
+    respond_with @vacancy, :location => root_url
   end
 
   def show
