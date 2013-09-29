@@ -7,7 +7,6 @@ class Vacancy < ActiveRecord::Base
   validates :title, :presence => true, :length => {:maximum => 70}
   validates :body, :presence => true
   validates :company_name, :presence => true, :length => {:maximum => 30}
-  validates_attachment :logo, :size => {:in => 0..1.megabytes}
   validates :contact_email, :presence => true, :format => {:with => Devise.email_regexp}
   validates :agreed_to_offer, :presence => true
   validates :edit_token, :uniqueness => true
