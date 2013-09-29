@@ -201,6 +201,19 @@ body {
         min-height: 600px;
         margin: 30px 30px 30px 35px;
         text-shadow: none;
+        > .post-vacancy {
+          > p {
+            margin-bottom: 20px;
+          }
+          > .post-vacancy-button {
+            > .zurb-btn {
+              @include box-sizing(border-box);
+              line-height: 32px;
+              font-size: 1.5em;
+              width: 100%;
+            }
+          }
+        }
         > .clearfix {
           border-bottom: 1px solid #ddd;
           height: 30px;
