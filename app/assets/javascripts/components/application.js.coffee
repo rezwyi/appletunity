@@ -40,8 +40,8 @@ $ ->
             text: error[0]
             cssClass: 'error'
             beforeShow: (bubble) =>
-              if (targetTop = target.offset().top) < @node.scrollTop
-                $(@node).animate scrollTop: parseFloat(bubble.css('top')) - 30, 700, =>
+              if (targetTop = target.offset().top) < $(document).scrollTop()
+                $('body, html').animate scrollTop: parseFloat(bubble.css('top')) - 30, 700, =>
                   target.focus()
               else
                 target.focus()
