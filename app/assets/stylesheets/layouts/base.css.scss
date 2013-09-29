@@ -11,6 +11,10 @@ $defaultButtonHoverColor: darken($defaultButtonNormalColor, 5%);
 $defaultNoscriptBackgroundColor: $lightRedColor;
 $defaultNoscriptBorderColor: darken($lightRedColor, 15%);
 
+$bubbleErrorBgColor: #da7676;
+$bubbleErrorTextColor: $whiteColor;
+$bubbleErrorBorderColor: darken($bubbleErrorBgColor, 8%);
+
 // Twitter overrides
 $gridColumnWidth: 75px;
 $gridGutterWidth: 0px;
