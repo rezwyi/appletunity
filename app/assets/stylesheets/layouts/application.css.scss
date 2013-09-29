@@ -46,8 +46,7 @@ button, input[type="submit"] {
   display: inline-block;
   color: $whiteColor;
   border-bottom: 1px solid rgba(0,0,0,0.25);
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-radius: 5px;
   font-size: 14px;
   text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
   text-decoration: none;

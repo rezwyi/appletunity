@@ -38,12 +38,14 @@
       > .created {
         font-size: 0.9em;
         line-height: 24px;
+        vertical-align: middle;
       }
       > .location {
         @include ellipsis_overflow;
         display: inline-block;
         font-size: 0.9em;
         line-height: 24px;
+        vertical-align: middle;
       }
     }
   }
@@ -61,12 +63,14 @@
       > .created {
         font-size: 0.9em;
         line-height: 24px;
+        vertical-align: middle;
       }
       > .location {
         @include ellipsis_overflow;
         display: inline-block;
         font-size: 0.9em;
         line-height: 24px;
+        vertical-align: middle;
       }
     }
     > .body {
