@@ -56,7 +56,7 @@ $ ->
       if options.cssClass && options.cssClass.length
         bubble.addClass options.cssClass
       
-      bubble.html($('<span>').text(options.text))
+      bubble.html($('<span>').html(options.text))
         .insertAfter(options.insertAfter)
         .css(top: targetCoords.top - bubble.outerHeight() - 50, left: targetCoords.left)
 
