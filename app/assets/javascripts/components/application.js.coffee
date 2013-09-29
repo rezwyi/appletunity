@@ -66,6 +66,6 @@ $ ->
 
       setTimeout ->
         bubble.animate top: '-=35', opacity: '0', 150, -> @remove()
-      , 2000
+      , options.text.length * 72
 
   Application.attachTo 'body'
