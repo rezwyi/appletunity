@@ -233,6 +233,12 @@ body {
           }
           > a {
             margin-right: 9px;
+            &:last-child {
+            	margin-right: 0;
+            }
+            > img {
+            	max-width: 72px;
+            }
           }
         }
       }
