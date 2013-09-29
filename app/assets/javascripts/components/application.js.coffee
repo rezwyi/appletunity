@@ -15,6 +15,10 @@ $ ->
       @select('remoteForms').find(':input').on 'change keyup', (event) =>
         $(event.target).parents('.error').removeClass('error')
       
+      @select('remoteForms').on 'ajax:success', (event) =>
+        event.preventDefault()
+        window.location = '/'
+      
       @select('remoteForms').on 'ajax:error', (event, xhr) =>
         form = $(event.target)
         errors = JSON.parse(xhr.responseText).errors
