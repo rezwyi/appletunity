@@ -1,167 +1,191 @@
 ru:
-  appletunity: 'Appletunity'
-  best_vacancies: 'лучшие вакансии для iOS/Mac разработчиков'
-  wtf?: 'О проекте'
-  a?: 'Что это?'
-  add_vacancy: 'Разместить'
-  add_vacancy_description: 'Это не требует регистрации и бесплатно на %{d} дней!'
-  stay_connected: 'Будь в курсе!'
-  stay_connected_description: 'Следи за нами в Twitter или подпишись на Rss!'
-  reply: 'Откликнуться на вакансию'
+  appletunity: Appletunity
+  best_vacancies: лучшие вакансии для iOS/Mac разработчиков
+  wtf?: О проекте
+  a?: Что это?
+  add_vacancy: Разместить
+  add_vacancy_description: Это не требует регистрации и бесплатно на %{d} дней!
+  stay_connected: Будь в курсе!
+  stay_connected_description: Следи за нами в Twitter или подпишись на Rss!
+  reply: Откликнуться на вакансию
 
-  vacancy_created_successfull: 'Вакансия создана и будет опубликована в ближайшее время.
-                                На электронный адрес %{email} отправлена инструкция.'
-  vacancy_updated_successfull: 'Вакансия успешно изменена!'
-  vacancy_deleted_successfull: 'Вакансия успешно удалена!'
+  vacancy_created_successfull: Вакансия создана и будет опубликована в ближайшее время.
+                               На электронный адрес %{email} отправлена инструкция.
+  vacancy_updated_successfull: Вакансия успешно изменена!
+  vacancy_deleted_successfull: Вакансия успешно удалена!
 
-  occupation_created_successfull: 'Вид занятости создан успешно!'
-  occupation_updated_successfull: 'Вид занятости успешно изменен!'
-  occupation_deleted_successfull: 'Вид занятости успешно удален!'
+  occupation_created_successfull: Вид занятости создан успешно!
+  occupation_updated_successfull: Вид занятости успешно изменен!
+  occupation_deleted_successfull: Вид занятости успешно удален!
 
-  admin_created_successfull: 'Администратор создан успешно!'
-  admin_updated_successfull: 'Администратор успешно изменен!'
-  admin_deleted_successfull: 'Администратор успешно удален!'
+  admin_created_successfull: Администратор создан успешно!
+  admin_updated_successfull: Администратор успешно изменен!
+  admin_deleted_successfull: Администратор успешно удален!
   
-  created_email: 'Уведомление о создании вакансии на сайте appletunity.ru'
-  notify_email: 'Уведомление о неподтвержденных вакансиях на сайте appletunity.ru'
+  created_email: Уведомление о создании вакансии на сайте appletunity.ru
+  notify_email: Уведомление о неподтвержденных вакансиях на сайте appletunity.ru
 
-  new: 'Создать'
-  create: 'Создать'
-  edit: 'Редактировать'
-  update: 'Редактировать'
-  cancel: 'Отменить'
-  delete: 'Удалить'
-  sure?: 'Уверен?'
+  new: Создать
+  create: Создать
+  edit: Редактировать
+  update: Редактировать
+  cancel: Отменить
+  delete: Удалить
+  sure?: Уверен?
 
-  expired_note: 'Срок данной вакансии истек. Размещенная информация может
-                 быть уже неактуальной.'
+  expired_note: Срок данной вакансии истек. Размещенная информация может
+                быть уже неактуальной.
 
-  sign_in: 'Войти'
+  sign_in: Войти
 
-  intro: 'Вы ищете iOS/Mac-разработчика? Тогда мы вам предлагаем интересную услугу!
-          Разместите свое объявление на нашем сайте и вы непременно получите отзывы.
-          Размещение абсолютно бесплатно и не требует регистрации!'
+  intro: Вы ищете iOS/Mac-разработчика? Тогда мы вам предлагаем интересную услугу!
+         Разместите свое объявление на нашем сайте и вы непременно получите отзывы.
+         Размещение абсолютно бесплатно и не требует регистрации!
+
+  activerecord:
+    errors:
+      models:
+        vacancy:
+          attributes:
+            title:
+              blank: Придумайте заголовок вакансии
+              too_long: Заголовок не может быть больше 70-ти символов
+            body:
+              blank: Опишите Вашу компанию, обязанности соискателя, плюсы работы
+                     в Вашей компании, ставку по зарплате, бонусы и прочее
+            company_name:
+              blank: Укажите название Вашей компании
+              too_long: Название компании не может быть больше 30-ти символов
+            contact_email:
+              blank: Нам необходим какой-либо адрес электронной почты, т.к. без
+                     него соискатель не сможет связаться с Вами (адрес будет
+                     защищен от сканирования спам-роботами)
+              invalid: Адрес электронной почты должен соотвествовать формату, что-то
+                       вроде your-company@example.com
+            agreed_to_offer:
+              blank: Чтобы мы могли создать и опубликовать вакансию, Вам необходимо принять
+                     условия соглашения
 
   shared:
     header:
-      manage: 'Управление'
-      logout: 'Выход'
+      manage: Управление
+      logout: Выход
 
     filter:
-      search: 'Поиск...'
-      clear: 'Сбросить'
+      search: Поиск...
+      clear: Сбросить
 
     pagination:
-      older: 'Старее'
-      newer: 'Новее'
+      older: Старее
+      newer: Новее
 
     social_buttons:
-      share: 'Поделиться ссылкой'
+      share: Поделиться ссылкой
 
     search_form:
-      search: 'Поиск...'
+      search: Поиск...
 
   vacancies:
     form:
-      what_you_want: 'Опишите вакансию'
-      title: 'Заголовок'
-      body: 'Описание'
-      occupation: 'Виды занятости'
-      location: 'Местоположение'
-      about_your_company: 'Опишите вашу компанию'
-      name: 'Название'
-      website: 'Сайт'
-      logo: 'Логотип'
-      contacts: 'Контактная информация'
-      email: 'Email'
-      phone: 'Телефон'
-      term_of_service: 'Пользовательское соглашение'
-      i_agree: 'Я принимаю условия'
-      terms: 'пользовательского соглашения'
-      new: 'Разместить'
-      create: 'Разместить'
-      edit: 'Сохранить'
-      update: 'Сохранить'
-      cancel: 'Отмена'
-      need_to_agree!: 'необходимо принять условия соглашения'
+      what_you_want: Опишите вакансию
+      title: Заголовок
+      body: Описание
+      occupation: Виды занятости
+      location: Местоположение
+      about_your_company: Опишите вашу компанию
+      name: Название
+      website: Сайт
+      logo: Логотип
+      contacts: Контактная информация
+      email: Email
+      phone: Телефон
+      term_of_service: Пользовательское соглашение
+      i_agree: Я принимаю условия
+      terms: пользовательского соглашения
+      new: Разместить
+      create: Разместить
+      edit: Сохранить
+      update: Сохранить
+      cancel: Отмена
+      need_to_agree!: необходимо принять условия соглашения
 
-      title_placeholder: "Например, 'Дизайнер интерфейсов iOS'"
-      body_placeholder: 'Опишите что вам нужно, какие у вас преимущества и т.д.'
-      location_placeholder: "Например, 'Россия, Москва'"
+      title_placeholder: Например, Дизайнер интерфейсов iOS
+      body_placeholder: Опишите что вам нужно, какие у вас преимущества и т.д.
+      location_placeholder: Например, Россия, Москва
 
   pages:
     about:
-      header: 'О проекте'
+      header: О проекте
     terms:
-      header: 'Пользовательское соглашение'
+      header: Пользовательское соглашение
 
   devise:
     sessions:
       new:
-        email: 'Email'
-        password: 'Пароль'
-        remember_me: 'Запомнить меня'
-        sign_in: 'Войти'
-        cancel: 'Отмена'
+        email: Email
+        password: Пароль
+        remember_me: Запомнить меня
+        sign_in: Войти
+        cancel: Отмена
 
   layouts:
     application:
-      no_javascript: 'В вашем браузере отключен Javascript. Напоминаем, что
-                      Appletunity работает лучше, если его включить.'
+      no_javascript: В вашем браузере отключен Javascript. Напоминаем, что
+                     Appletunity работает лучше, если его включить.
 
     administration:
-      administration: 'Панель администрирования'
-      vacancies: 'Вакансии'
-      occupations: 'Виды занятости'
-      admins: 'Администраторы'
-      home: 'На главную'
-      logout: 'Выйти'
-      management_of_vacancies: 'Управление вакансиями'
-      management_of_occupations: 'Управление видами занятости'
-      management_of_admins: 'Управление администраторами'
-      index: 'Список'
-      new: 'Создание'
-      create: 'Создание'
-      edit: 'Редактирование'
-      update: 'Редактирование'
-      new_vacancy: 'Добавить вакансию'
-      new_occupation: 'Добавить вид занятости'
-      new_admin: 'Добавить администратора'
-      awaiting_approve: 'Ожидают подтверждения'
+      administration: Панель администрирования
+      vacancies: Вакансии
+      occupations: Виды занятости
+      admins: Администраторы
+      home: На главную
+      logout: Выйти
+      management_of_vacancies: Управление вакансиями
+      management_of_occupations: Управление видами занятости
+      management_of_admins: Управление администраторами
+      index: Список
+      new: Создание
+      create: Создание
+      edit: Редактирование
+      update: Редактирование
+      new_vacancy: Добавить вакансию
+      new_occupation: Добавить вид занятости
+      new_admin: Добавить администратора
+      awaiting_approve: Ожидают подтверждения
 
   administration:
     vacancies:
       index:
-        title: 'Заголовок'
-        expired_at: 'Истекает'
-        all: 'Все'
-        awaiting_approve: 'Ожидают подтверждения'
+        title: Заголовок
+        expired_at: Истекает
+        all: Все
+        awaiting_approve: Ожидают подтверждения
 
       form:
-        title: 'Заголовок'
-        body: 'Описание'
-        occupation: 'Виды занятости'
-        location: 'Местоположение'
-        name: 'Название'
-        website: 'Сайт'
-        logo: 'Логотип'
-        email: 'Email'
-        phone: 'Телефон'
-        approved: 'Не спам!'
+        title: Заголовок
+        body: Описание
+        occupation: Виды занятости
+        location: Местоположение
+        name: Название
+        website: Сайт
+        logo: Логотип
+        email: Email
+        phone: Телефон
+        approved: Не спам!
 
     occupations:
       index:
-        name: 'Имя'
+        name: Имя
 
       form:
-        name: 'Имя'
+        name: Имя
 
     admins:
       index:
-        email: 'Эл. адрес'
-        last_sign_in_at: 'Последний вход'
+        email: Эл. адрес
+        last_sign_in_at: Последний вход
 
       form:
-        email: 'Эл. адрес'
-        password: 'Пароль'
-        password_confirmation: 'Подтверждение пароля'
+        email: Эл. адрес
+        password: Пароль
+        password_confirmation: Подтверждение пароля

@@ -63,6 +63,52 @@ button, input[type="submit"] {
   }
 }
 
+.bubble {
+  @include opacity(0);
+  position: absolute;
+  border-radius: 10px;
+  font-size: 0.9em;
+  padding: 10px;
+  max-width: 360px;
+  z-index: 1;
+  &:before, &:after {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  &:before {
+    border-color: rgba(194, 225, 245, 0);
+    border-width: 12px;
+    left: 10px;
+  }
+  &:after {
+    border-color: rgba(136, 183, 213, 0);
+    border-width: 10px;
+    left: 12px;
+  }
+  &.error {
+    background-color: $bubbleErrorBgColor;
+    color: $bubbleErrorTextColor;
+    border: 1px solid $bubbleErrorBorderColor;
+    &:after {
+      border-top-color: $bubbleErrorBgColor;
+    }
+    &:before {
+      border-top-color: $bubbleErrorBorderColor;
+    }
+  }
+  > span {
+    display: block;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
+
 body {
   background: image-url('bg.png') 0 0 repeat;
   font-family: "Trebuchet MS", Helvetica, sans-serif;

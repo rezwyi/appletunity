@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_captcha, :only => :create
 
-  respond_to :html
+  respond_to :html, :json
 
   protected
 

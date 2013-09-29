@@ -108,7 +108,7 @@ describe VacanciesController do
 
     it 'should redirect to root' do
       post :create, :vacancy => params
-      response.should redirect_to(root_url)
+      response.should redirect_to(root_path)
     end
 
     context 'if not successfull' do
@@ -116,7 +116,7 @@ describe VacanciesController do
 
       it 'should redirect to vacancies' do
         post :create, :vacancy => params
-        response.should redirect_to(vacancies_path)
+        response.should redirect_to(root_path)
       end
     end
   end
