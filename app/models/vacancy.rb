@@ -4,17 +4,13 @@ class Vacancy < ActiveRecord::Base
   has_many :vacancies_occupations, :dependent => :destroy
   has_many :occupations, :through => :vacancies_occupations
 
-  validates :title, :body, :company_name, :contact_email, :agreed_to_offer,
-            :presence => true
-
-  validates :edit_token, :uniqueness => true
-
-  validates :title, :length => {:maximum => 70}
-  validates :company_name, :length => {:maximum => 30}
-
-  validates :contact_email, :format => {:with => Devise.email_regexp}
-
+  validates :title, :presence => true, :length => {:maximum => 70}
+  validates :body, :presence => true
+  validates :company_name, :presence => true, :length => {:maximum => 30}
   validates_attachment :logo, :size => {:in => 0..1.megabytes}
+  validates :contact_email, :presence => true, :format => {:with => Devise.email_regexp}
+  validates :agreed_to_offer, :presence => true
+  validates :edit_token, :uniqueness => true
 
   attr_accessible :company_name, :company_website, :title, :body, :location,
                   :occupation_ids, :contact_email, :contact_phone,
