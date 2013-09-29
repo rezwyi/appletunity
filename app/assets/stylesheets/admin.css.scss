@@ -1,7 +1,10 @@
-@import "layouts/base";
+/*
+ *= require_directory ./plugins
+ *= require_self
+ */
 
-$defaultBoxShadow: #bbb;
-$defaultBorderColor: #bbb;
+@import "global/env";
+@import "global/mixins";
 
 .fullwidth {
   width: 100%;
@@ -26,7 +29,7 @@ body {
       right: 30px;
     }
     > .body {
-      @include box_shadow(3px 3px 5px $defaultBoxShadow);
+      @include box_shadow(3px 3px 5px #bbb);
       opacity: 0.9;
       border-radius: 6px;
       color: #fff;
@@ -46,7 +49,7 @@ body {
     }
   }
   > header {
-    @include box_shadow(0 0 5px $defaultBoxShadow);
+    @include box_shadow(0 0 5px #bbb);
     background-color: #ddd;
     border-bottom: 1px solid $defaultBorderColor;
     padding: 10px 10px 10px 60px;
