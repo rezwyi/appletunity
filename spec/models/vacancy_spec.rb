@@ -10,7 +10,6 @@ describe Vacancy do
   it { should validate_presence_of :company_name }
   it { should validate_presence_of :contact_email }
   it { should validate_presence_of :agreed_to_offer }
-  it { should validate_attachment_size(:logo).in(0..1.megabytes) }
 
   it 'can have several occupations' do
     occupations = [

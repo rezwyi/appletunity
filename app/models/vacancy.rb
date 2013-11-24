@@ -1,6 +1,10 @@
 class Vacancy < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
+  attr_accessible :company_name, :company_website, :title, :body, :location,
+                  :occupation_ids, :contact_email, :contact_phone,
+                  :agreed_to_offer, :logo
+
   has_many :vacancies_occupations, :dependent => :destroy
   has_many :occupations, :through => :vacancies_occupations
 
@@ -10,10 +14,6 @@ class Vacancy < ActiveRecord::Base
   validates :contact_email, :presence => true, :format => {:with => Devise.email_regexp}
   validates :agreed_to_offer, :presence => true
   validates :edit_token, :uniqueness => true
-
-  attr_accessible :company_name, :company_website, :title, :body, :location,
-                  :occupation_ids, :contact_email, :contact_phone,
-                  :agreed_to_offer, :logo
 
   before_create :generate_edit_token
   before_save :render_body
