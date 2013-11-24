@@ -22,6 +22,7 @@ gem 'therubyracer'
 gem 'libv8', '~> 3.11.8'
 gem 'flight-for-rails'
 gem 'resque'
+gem 'rconsole'
 
 group :assets do
 	gem 'quiet_assets'
@@ -35,5 +36,4 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'capybara'
-  gem 'rconsole'
 end
