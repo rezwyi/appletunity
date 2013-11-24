@@ -25,7 +25,7 @@ Appletunity::Application.routes.draw do
     resources :occupations
   end
 
-  match '/:id' => 'high_voltage/pages#show', :as => :static, :via => :get
+  get '/pages/:id' => 'high_voltage/pages#show', :as => :static
   
   root :to => 'vacancies#index'
 end

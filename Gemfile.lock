@@ -148,6 +148,7 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (0.9.2.2)
+    rconsole (0.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.4)
@@ -253,6 +254,7 @@ DEPENDENCIES
   quiet_assets
   rails (~> 3.2.10)
   rake (= 0.9.2.2)
+  rconsole
   resque
   rspec-rails
   russian
