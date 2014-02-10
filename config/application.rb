@@ -65,31 +65,19 @@ module Appletunity
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Custom Appletunity configuration
-    config.default_per_page = 12
-    config.default_vacancy_lifetime = 30.days
-
     # Custom error messages html
     ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
       errors = Array(instance.error_message).join(',')
       
       # If errors present on checkboxes then ignore it
-      case
-      when html_tag =~ /type="checkbox"/ then
+      case html_tag
+      when /type="checkbox"/ then
         html = html_tag
       else
         html = %(#{html_tag}<label class="help-inline">#{errors}</label>)
       end
 
       html.html_safe
-    end
-
-    # Twitter configuration
-    Twitter.configure do |config|
-      config.consumer_key = 'B8XQvgbHCmtnX2oyYIjQ8A'
-      config.consumer_secret = 'vXFDjaQTyfYOkUV0t0iAxYkxv5AHOjwriOtsjrw'
-      config.oauth_token = '437674309-iK1mrKR7hVCnmaHfK9qXiFcoAIUaKSafK9QvIQ5J'
-      config.oauth_token_secret = 'euo6X3fOyMlAwpkV5626PFrTPH7370lKqauPmd9VI'
     end
   end
 end

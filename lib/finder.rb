@@ -42,7 +42,7 @@ class Finder
   end
 
   def normalize_params(params)
-    params[:per_page] ||= Rails.application.config.default_per_page
+    params[:per_page] ||= 12
     params
   end
 end

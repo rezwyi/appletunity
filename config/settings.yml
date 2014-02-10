@@ -1,0 +1,9 @@
+vacancies:
+  lifetime: 30
+
+credentials:
+  twitter:
+    consumer_key: 'test'
+    consumer_secret: 'test'
+    oauth_token: 'test'
+    oauth_token_secret: 'test'

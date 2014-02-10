@@ -52,7 +52,7 @@ class Vacancy < ActiveRecord::Base
   def generate_expired_at
     return if self.expired_at
     if self.approved?
-      self.expired_at = Time.now + Rails.application.config.default_vacancy_lifetime
+      self.expired_at = Time.now + Settings.vacancies.lifetime.days
     end
   end
 

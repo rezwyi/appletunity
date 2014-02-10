@@ -16,7 +16,7 @@ class Administration::ResourcesController < ActionController::Base
   end
 
   def index
-    params[:per_page] ||= Rails.application.config.default_per_page
+    params[:per_page] ||= 12
     @resources = resource_class.order('id DESC').page(params[:page]).per(params[:per_page])
   end
 

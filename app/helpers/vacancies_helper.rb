@@ -115,7 +115,7 @@ module VacanciesHelper
   #
   # Returns html safe String
   def default_vacancy_lifetime
-    lifetime = Rails.application.config.default_vacancy_lifetime / 86400
+    lifetime = Settings.vacancies.lifetime.days / 86400
     lifetime.to_s.html_safe
   end
 end
