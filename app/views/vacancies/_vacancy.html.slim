@@ -3,7 +3,7 @@
     - if vacancy.logo?
       .company-logo.pull-right
         - unless vacancy.company_website.empty?
-          = link_to(vacancy.company_website, :target => '_blank') do
+          = link_to(vacancy.company_website, target: '_blank') do
             = logo_for vacancy, :medium
         - else
           = logo_for vacancy, :medium
@@ -30,5 +30,5 @@
       .expired-note
         = t(:expired_note)
     - else
-      == render :partial => 'shared/social_buttons'
-      = link_to t('reply'), mailto_for(vacancy), :class => 'zurb-btn'
+      == render partial: 'shared/social_buttons'
+      = link_to t('reply'), mailto_for(vacancy), class: 'zurb-btn'

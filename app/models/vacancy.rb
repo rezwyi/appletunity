@@ -5,24 +5,24 @@ class Vacancy < ActiveRecord::Base
                   :occupation_ids, :contact_email, :contact_phone,
                   :agreed_to_offer, :logo
 
-  has_many :vacancies_occupations, :dependent => :destroy
-  has_many :occupations, :through => :vacancies_occupations
+  has_many :vacancies_occupations, dependent: :destroy
+  has_many :occupations, through: :vacancies_occupations
 
-  validates :title, :presence => true, :length => {:maximum => 70}
-  validates :body, :presence => true
-  validates :company_name, :presence => true, :length => {:maximum => 30}
-  validates :contact_email, :presence => true, :format => {:with => Devise.email_regexp}
-  validates :agreed_to_offer, :presence => true
-  validates :edit_token, :uniqueness => true
+  validates :title, presence: true, length: {maximum: 70}
+  validates :body, presence: true
+  validates :company_name, presence: true, length: {maximum: 30}
+  validates :contact_email, presence: true, format: {with: Devise.email_regexp}
+  validates :agreed_to_offer, presence: true
+  validates :edit_token, uniqueness: true
 
   before_create :generate_edit_token
   before_save :render_body
   before_save :generate_expired_at
 
-  has_attached_file :logo, :styles => {:small => '80x80', :medium => '100x100'}
+  has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
 
-  scope :live, -> { where(:approved => true) }
-  scope :awaiting_approve, -> { where(:approved => false) }
+  scope :live, -> { where(approved: true) }
+  scope :awaiting_approve, -> { where(approved: false) }
 
   def self.friendly_token
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
@@ -58,7 +58,7 @@ class Vacancy < ActiveRecord::Base
 
   def generate_edit_token
     token = Vacancy.friendly_token
-    while Vacancy.where(:edit_token => token).any?
+    while Vacancy.where(edit_token: token).any?
       token = Vacancy.friendly_token
     end
     self.edit_token = token
@@ -66,6 +66,6 @@ class Vacancy < ActiveRecord::Base
 
   def render_body
     allowed_tags = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
-    self.rendered_body = sanitize(self.body, :tags => allowed_tags)
+    self.rendered_body = sanitize(self.body, tags: allowed_tags)
   end
 end

@@ -1,7 +1,7 @@
 ul.nav.nav-tabs
-  li{class='#{'active' if current_page?(administration_vacancies_path)}'}
+  li class=('active' if current_page?(administration_vacancies_path))
     = link_to t('.all'), administration_vacancies_path
-  li{class='#{'active' if current_page?(awaiting_approve_administration_vacancies_path)}'}
+  li class=('active' if current_page?(awaiting_approve_administration_vacancies_path))
     = link_to t('.awaiting_approve'), awaiting_approve_administration_vacancies_path
 
 table.table
@@ -17,11 +17,11 @@ table.table
       tr
         td = r.id
         td == '&#10004;' if r.approved?
-        td = link_to r.title, vacancy_path(r), :target => '_blank'
+        td = link_to r.title, vacancy_path(r), target: '_blank'
         td = Russian::strftime(r.expired_at, '%d %B') if r.expired_at
         td
-          = link_to_edit_resource r, :class => 'btn'
+          = link_to_edit_resource r, class: 'btn'
           | &nbsp;
-          = link_to_delete_resource r, :class => 'btn btn-danger'
+          = link_to_delete_resource r, class: 'btn btn-danger'
 
-= paginate @resources, :theme => 'administration'
+= paginate @resources, theme: 'administration'

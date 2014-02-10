@@ -19,31 +19,31 @@ body
         .navbar-text.pull-right
           em = current_admin.email
           | &nbsp;
-          = link_to t('.home'), root_url, :class => 'navbar-link'
+          = link_to t('.home'), root_url, class: 'navbar-link'
           | &nbsp;
           = link_to t('.logout'), destroy_admin_session_path,
-                    :method => :delete, :class => 'navbar-link'
+                    method: :delete, class: 'navbar-link'
         .brand = t('.administration')
         .nav-collapse.collapse
           ul.nav
             - %w(vacancies occupations admins).each do |i|
               - href = "/administration/#{i}"
-              li{class='#{'active' if request.path.starts_with?(href)}'} = link_to t(".#{i}"), href
+              li class=('active' if request.path.starts_with?(href)) = link_to t(".#{i}"), href
 
   header#overview.jumbotron.subhead
     .container-fluid
       h1
         | #{t(".management_of_#{controller_name}")} &#47; #{t(".#{action_name}")}
+      
       p.lead
-        = link_to t(".new_#{controller_name.singularize}"),
-                  url_for(:action => :new, :controller => controller_name),
-                  :class => 'btn btn-success'
+        = link_to t(".new_#{controller_name.singularize}"), url_for(action: :new, controller: controller_name), class: 'btn btn-success'
 
   .container-fluid
     .row-fluid
       .span9
         .contentable
           = yield
+      
       .span3
         .sidebar
           = yield :sidebar

@@ -1,13 +1,15 @@
 #login-form.modal.hide.fade.in
   .modal-header
-    button.close{ type='button' data-dismiss='modal' } ×
+    button.close type='button' data-dismiss='modal' ×
     h3 = t('login')
+  
   .modal-body
-    == render :partial => 'shared/error_messages'
-    = form_tag sessions_path, :remote => local_assigns.has_key?(:remote) do
+    == render partial: 'shared/error_messages'
+    = form_tag sessions_path, remote: local_assigns.has_key?(:remote) do
       p = label_tag :login, t('.login')
-      p = text_field_tag :login, params[:login], :autofocus => true
+      p = text_field_tag :login, params[:login], autofocus: true
       p = label_tag :password, t('.password')
       p = password_field_tag :password
+  
   .modal-footer
-    = link_to t('login'), admin_path, :class => 'btn pull-left'
+    = link_to t('login'), admin_path, class: 'btn pull-left'

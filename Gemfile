@@ -14,7 +14,7 @@ gem 'paperclip', '3.4.2'
 gem 'devise', '~> 3.0.0'
 gem 'russian'
 gem 'twitter'
-gem 'whenever', :require => false
+gem 'whenever', require: false
 gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'exception_notification'

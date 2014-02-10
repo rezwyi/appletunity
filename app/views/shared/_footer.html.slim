@@ -1,11 +1,13 @@
 footer
   h5.pull-right
-    = link_to 'http://rezvanov.info', :target => '_blank' do
+    = link_to 'http://rezvanov.info', target: '_blank' do
       = copyright_years
       | &nbsp;&copy;&nbsp;
       | rezvanov.info
+  
   h5.pull-left
     = link_to t('wtf?'), static_path('about')
+  
   - unless current_admin
     h5.pull-left
       = link_to t('sign_in'), new_admin_session_path

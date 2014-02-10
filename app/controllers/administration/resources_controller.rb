@@ -4,8 +4,8 @@ class Administration::ResourcesController < ActionController::Base
   layout 'layouts/administration'
 
   before_filter :authenticate_admin!
-  before_filter :load_resource, :only => [:edit, :update, :destroy]
-  before_filter :create_resource, :only => :create
+  before_filter :load_resource, only: [:edit, :update, :destroy]
+  before_filter :create_resource, only: :create
 
   class << self
     @@redirect_action = :index
@@ -26,8 +26,8 @@ class Administration::ResourcesController < ActionController::Base
 
   def create
     if @resource.save
-      flash[:notice] = t(".#{resource_name.downcase}_created_successfull", :email => nil)
-      redirect_to :action => @@redirect_action
+      flash[:notice] = t(".#{resource_name.downcase}_created_successfull", email: nil)
+      redirect_to action: @@redirect_action
     else
       render :new
     end
@@ -39,7 +39,7 @@ class Administration::ResourcesController < ActionController::Base
   def update
     if @resource.update_attributes(params[resource_name.downcase])
       flash[:notice] = t(".#{resource_name.downcase}_updated_successfull")
-      redirect_to :action => @@redirect_action
+      redirect_to action: @@redirect_action
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class Administration::ResourcesController < ActionController::Base
     if @resource.destroy
       flash[:notice] = t(".#{resource_name.downcase}_deleted_successfull")
     end
-    redirect_to :action => @@redirect_action
+    redirect_to action: @@redirect_action
   end
 
   protected

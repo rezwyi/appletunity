@@ -9,7 +9,7 @@ html
     = stylesheet_link_tag :application
     = csrf_meta_tags
 
-    link{href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'}
+    link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'
 
     - if Rails.env.production?
       javascript:
@@ -25,21 +25,21 @@ html
           ga.async = true;
           proto = (proto === 'https:') ? 'https://ssl' : 'http://www';
           ga.src = proto + '.google-analytics.com/ga.js';
-          s[0].parentNode.insertBefore(ga, s);
+          s[0].parentNode.insertBefore(ga, s);s
         })();
 
     = yield :head
 
-body{data-spy='scroll' data-target='.subnav'}
+body data-spy='scroll' data-target='.subnav'
   == render 'shared/flash', flash: flash.discard
   
   noscript
     .system-warnings = t('.no_javascript')
   
   .container
-    == render :partial => 'shared/header'
-    .row{class='page-#{controller_name}'}
+    == render partial: 'shared/header'
+    .row class='page-#{controller_name}'
       .span8
         .contentable = yield
-      .span4 == render :partial => 'shared/sidebar'
-    == render :partial => 'shared/footer'
+      .span4 == render partial: 'shared/sidebar'
+    == render partial: 'shared/footer'

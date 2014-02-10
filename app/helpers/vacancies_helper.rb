@@ -46,13 +46,8 @@ module VacanciesHelper
   def logo_for(vacancy, size = :small, options = {})
     return unless vacancy
 
-    options = {:alt => vacancy.company_name}.merge(options)
-    
-    if vacancy.logo?
-      html = image_tag(vacancy.logo.url(size), options)
-    else
-      html = image_tag('no_logo.png', options)
-    end
+    options = {alt: vacancy.company_name}.merge(options)
+    html = vacancy.logo? ? image_tag(vacancy.logo.url(size), options) : image_tag('no_logo.png', options)
     
     html.html_safe
   end
@@ -78,44 +73,22 @@ module VacanciesHelper
   def build_share_link_for(network, vacancy)
     return unless network && vacancy
 
-    url = vacancy_url(vacancy, {
-      utm_source: network.to_s,
-      utm_medium: 'referral',
-      utm_campaign: Date.today.strftime('%b').downcase
-    })
+    url = vacancy_url(vacancy, utm_source: network.to_s, utm_medium: 'referral', utm_campaign: Date.today.strftime('%b').downcase)
     
     case network
     when :twitter then
       uri = URI.parse 'https://twitter.com/share'
-      uri.query = URI.encode_www_form(
-        text: title_for(vacancy),
-        url: url,
-        hashtags: 'appletunity',
-        via: 'appletunity'
-      )
+      uri.query = URI.encode_www_form(text: title_for(vacancy), url: url, hashtags: 'appletunity', via: 'appletunity')
 
       uri.to_s.html_safe
     when :facebook then
       uri = URI.parse 'https://facebook.com/sharer/sharer.php'
-      uri.query = URI.encode_www_form :u => url
+      uri.query = URI.encode_www_form u: url
     when :gplus then
       uri = URI.parse 'https://plus.google.com/share'
-      uri.query = URI.encode_www_form :url => url
+      uri.query = URI.encode_www_form url: url
     end
 
     uri.to_s.html_safe if uri
-  end
-
-  # Public: Convert default_vacancy_lifetime config option to string
-  #
-  # Examples
-  #
-  #   default_vacancy_lifetime
-  #   # => '14'
-  #
-  # Returns html safe String
-  def default_vacancy_lifetime
-    lifetime = Settings.vacancies.lifetime.days / 86400
-    lifetime.to_s.html_safe
   end
 end

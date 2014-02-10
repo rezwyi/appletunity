@@ -1,9 +1,9 @@
 .vacancies
   - vacancies.each do |v|
-    .vacancy{id='vacancy_#{v.id}' class='#{'expired' if v.expired?}'}
+    .vacancy id='vacancy_#{v.id}' class=('expired' if v.expired?)
       .company-logo.pull-left
         - unless v.company_website.empty?
-          = link_to(v.company_website, :target => '_blank') { logo_for v }
+          = link_to(v.company_website, target: '_blank') { logo_for v }
         - else
           = logo_for v
 
@@ -12,6 +12,7 @@
 
       span.created
         = Russian::strftime(v.created_at, '%d %B')
+      
       - if v.location.present?
         span.location
           | &nbsp;&#47;&nbsp;

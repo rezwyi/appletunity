@@ -1,18 +1,21 @@
 = form_for [:administration, @resource] do |f|
   fieldset
-    .control-group{class='#{'error' if @resource.errors[:email].present?}'}
-      = label_tag '', t('.email'), :class => 'control-label'
+    .control-group class=('error' if @resource.errors[:email].present?)
+      = label_tag '', t('.email'), class: 'control-label'
       .controls
-        = f.email_field :email, :class => 'span8'
-    .control-group{class='#{'error' if @resource.errors[:password].present?}'}
-      = label_tag '', t('.password'), :class => 'control-label'
+        = f.email_field :email, class: 'span8'
+    
+    .control-group class=('error' if @resource.errors[:password].present?)
+      = label_tag '', t('.password'), class: 'control-label'
       .controls
-        = f.password_field :password, :class => 'span8'
-    .control-group{class='#{'error' if @resource.errors[:password_confirmation].present?}'}
-      = label_tag '', t('.password_confirmation'), :class => 'control-label'
+        = f.password_field :password, class: 'span8'
+    
+    .control-group class=('error' if @resource.errors[:password_confirmation].present?)
+      = label_tag '', t('.password_confirmation'), class: 'control-label'
       .controls
-        = f.password_field :password_confirmation, :class => 'span8'
+        = f.password_field :password_confirmation, class: 'span8'
+  
   .form-actions
-    = f.submit t(action_name), :class => 'btn'
+    = f.submit t(action_name), class: 'btn'
     | &nbsp;
-    = link_to t('cancel'), :back, :class => 'btn'
+    = link_to t('cancel'), :back, class: 'btn'

@@ -3,8 +3,7 @@
     h3 = t('a?')
     p = t('intro')
     .post-vacancy-button
-      = link_to t('add_vacancy'), new_vacancy_path,
-                class: 'zurb-btn center-aligned-text'
+      = link_to t('add_vacancy'), new_vacancy_path, class: 'zurb-btn center-aligned-text'
 
   .clearfix
 
@@ -12,6 +11,6 @@
     h3 = t('stay_connected')
     p = t('stay_connected_description')
 
-    = link_to image_tag('rss-128.png'), feed_vacancies_path, :target => '_blank'
-    = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', :target => '_blank'
-    = link_to image_tag('facebook-128.png'), 'https://www.facebook.com/pages/Appletunity/425636904190790', :target => '_blank'
+    = link_to image_tag('rss-128.png'), feed_vacancies_path, target: '_blank'
+    = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', target: '_blank'
+    = link_to image_tag('facebook-128.png'), 'https://www.facebook.com/pages/Appletunity/425636904190790', target: '_blank'
