@@ -1,35 +1,46 @@
 class Vacancy < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
-  attr_accessible :company_name, :company_website, :title, :body, :location,
-                  :occupation_ids, :contact_email, :contact_phone,
-                  :agreed_to_offer, :logo
+  has_many :vacancies_occupations, dependent: :destroy
+  has_many :occupations, through: :vacancies_occupations
 
-  has_many :vacancies_occupations, :dependent => :destroy
-  has_many :occupations, :through => :vacancies_occupations
+  accepts_nested_attributes_for :vacancies_occupations, allow_destroy: true
 
-  validates :title, :presence => true, :length => {:maximum => 70}
-  validates :body, :presence => true
-  validates :company_name, :presence => true, :length => {:maximum => 30}
-  validates :contact_email, :presence => true, :format => {:with => Devise.email_regexp}
-  validates :agreed_to_offer, :presence => true
-  validates :edit_token, :uniqueness => true
+  validates :title, presence: true, length: {maximum: 70}
+  validates :body, presence: true
+  validates :company_name, presence: true, length: {maximum: 30}
+  validates :contact_email, presence: true, format: {with: Devise.email_regexp}
+  validates :agreed_to_offer, presence: true
+  validates :edit_token, uniqueness: true
 
   before_create :generate_edit_token
   before_save :render_body
   before_save :generate_expired_at
 
-  has_attached_file :logo, :styles => {:small => '80x80', :medium => '100x100'}
+  after_create do
+    Resque.enqueue VacancyNotificationsWorker, self.id
+  end
 
-  scope :live, -> { where(:approved => true) }
-  scope :awaiting_approve, -> { where(:approved => false) }
+  after_save do
+    if self.expired_at && self.expired_at_changed?
+      Resque.enqueue TwitterNotificationsWorker, self.id
+    end
+  end
+
+  paginates_per 12
+  
+  has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
+  validates_attachment_content_type :logo, content_type: %w(image/jpeg image/jpg image/png)
+
+  scope :live, -> { where(approved: true) }
+  scope :awaiting_approve, -> { where(approved: false) }
 
   def self.friendly_token
     SecureRandom.base64(15).tr('+/=', '-_ ').strip.delete("\n")
   end
 
   def to_param
-    "#{self.id.to_s}-#{self.ascii_title}"
+    "#{self.id}-#{ascii_title}"
   end
 
   def approved?
@@ -58,7 +69,7 @@ class Vacancy < ActiveRecord::Base
 
   def generate_edit_token
     token = Vacancy.friendly_token
-    while Vacancy.where(:edit_token => token).any?
+    while Vacancy.where(edit_token: token).any?
       token = Vacancy.friendly_token
     end
     self.edit_token = token
@@ -66,6 +77,6 @@ class Vacancy < ActiveRecord::Base
 
   def render_body
     allowed_tags = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
-    self.rendered_body = sanitize(self.body, :tags => allowed_tags)
+    self.rendered_body = sanitize(self.body, tags: allowed_tags)
   end
 end

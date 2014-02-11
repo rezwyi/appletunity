@@ -14,59 +14,65 @@
       });
     });
 
-= form_for [:administration, @resource] do |f|
-  = f.hidden_field :agreed_to_offer, :value => 1
+= form_for [:administration, resource] do |f|
+  = f.hidden_field :agreed_to_offer, value: 1
   
   fieldset
-    .control-group{class='#{'error' if @resource.errors[:title].present?}'}
-      = label_tag '', t('.title'), :class => 'control-label'
+    .control-group class=('error' if resource.errors[:title].present?)
+      = f.label :title, class: 'control-label'
       .controls
-        = f.text_field :title, :class => 'span8'
+        = f.text_field :title, class: 'span8'
+    
     .control-group
-      = label_tag '', t('.location'), :class => 'control-label'
+      = f.label :location, class: 'control-label'
       .controls
-        = f.text_field :location, :class => 'span8'
-    .control-group{class='#{'error' if @resource.errors[:body].present?}'}
-      = label_tag '', t('.body'), :class => 'control-label'
+        = f.text_field :location, class: 'span8'
+    
+    .control-group class=('error' if resource.errors[:body].present?)
+      = f.label :body, class: 'control-label'
       .controls
-        = f.text_area :body, :class => 'input-xxlarge', :rows => 15
+        = f.text_area :body, class: 'input-xxlarge', rows: 15
+    
     .control-group
-      label.control-label{for='optionsCheckbox' } = t('.occupation')
+      = f.label :occupations, class: 'control-label'
       .controls
-        = hidden_field_tag 'vacancy[occupation_ids][]'
-        - Occupation.all.each do |o|
-          label.checkbox.inline
-            - checked = @resource.occupation_ids.include?(o.id)
-            = check_box_tag 'vacancy[occupation_ids][]', o.id, checked
-            = o.name
-    .control-group{class='#{'error' if @resource.errors[:company_name].present?}'}
-      = label_tag '', t('.name'), :class => 'control-label'
+        = f.fields_for :vacancies_occupations, setup_vacancies_occupations_for(resource) do |ff|
+          label.inline.checkbox
+            = ff.hidden_field :occupation_id
+            = ff.check_box :_destroy, {checked: ff.object.persisted?}, '0', '1'
+            = ff.label :_destroy, ff.object.occupation.name
+    
+    .control-group class=('error' if resource.errors[:company_name].present?)
+      = f.label :comany_name, class: 'control-label'
       .controls
-        = f.text_field :company_name, :class => 'span8'
+        = f.text_field :company_name, class: 'span8'
+    
     .control-group
-      = label_tag '', t('.website'), :class => 'control-label'
+      = f.label :website, class: 'control-label'
       .controls
-        = f.text_field :company_website, :class => 'span8'
+        = f.text_field :company_website, class: 'span8'
+    
     .control-group
-      = label_tag '', t('.logo'), :class => 'control-label'
+      = f.label :logo, class: 'control-label'
       .controls
-        = logo_for @resource, :medium, :class => 'well'
+        = logo_for resource, :medium, class: 'well'
       .controls
-        = f.file_field :logo, :class => 'span8'
-    .control-group{class='#{'error' if @resource.errors[:contact_email].present?}'}
-      = label_tag '', t('.email'), :class => 'control-label'
+        = f.file_field :logo, class: 'span8'
+    
+    .control-group class=('error' if resource.errors[:contact_email].present?)
+      = f.label :contact_email, class: 'control-label'
       .controls
-        = f.text_field :contact_email, :class => 'span8'
+        = f.text_field :contact_email, class: 'span8'
+    
     .control-group
-      = label_tag '', t('.phone'), :class => 'control-label'
+      = f.label :contact_phone, class: 'control-label'
       .controls
-        = f.text_field :contact_phone, :class => 'span8'
+        = f.text_field :contact_phone, class: 'span8'
+    
     .control-group
       .controls
         label.checkbox.inline.fullwidth
-          = check_box_tag 'approved', 'yes', @resource.approved?
-          = t('.approved')
-  .form-actions
-    = f.submit t(action_name), :class => 'btn'
-    | &nbsp;
-    = link_to t('cancel'), :back, :class => 'btn'
+          = check_box_tag 'approved', 'yes', resource.approved?
+          | Not spam!
+  
+  = render 'administration/shared/form_actions', resource: resource

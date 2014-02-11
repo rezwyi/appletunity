@@ -7,9 +7,9 @@ body
     strong Здравствуйте!
   
   p
-    | Уведомляем вас, что ваша вакансия успешно создана и будет опубликована в ближайшее время. Если вы допустили ошибку, то можете отредактировать вакансию по #{link_to('этой', edit_vacancy_url(@vacancy.id, :token => @vacancy.edit_token), :target => '_blank', :rel => 'nofollow')} ссылке.
+    | Уведомляем вас, что ваша вакансия успешно создана и будет опубликована в ближайшее время. Если вы допустили ошибку, то можете отредактировать вакансию по #{link_to('этой', edit_vacancy_url(@vacancy.id, token: @vacancy.edit_token), target: '_blank', rel: 'nofollow')} ссылке.
 
   p
     | Спасибо, что воспользовались нашим сайтом!
     br
-    | С любовью, #{link_to('appletunity.ru', root_url, :target => '_blank')}.
+    | С любовью, #{link_to('appletunity.ru', root_url, target: '_blank')}.

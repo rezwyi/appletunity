@@ -13,8 +13,8 @@ describe Vacancy do
 
   it 'can have several occupations' do
     occupations = [
-      FactoryGirl.build(:occupation, :name => 'Fulltime'),
-      FactoryGirl.build(:occupation, :name => 'Freelance')
+      FactoryGirl.build(:occupation, name: 'Fulltime'),
+      FactoryGirl.build(:occupation, name: 'Freelance')
     ]
     subject.occupations = occupations
     

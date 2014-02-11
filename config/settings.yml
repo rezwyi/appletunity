@@ -7,3 +7,10 @@ credentials:
     consumer_secret: 'test'
     oauth_token: 'test'
     oauth_token_secret: 'test'
+
+  mailer:
+    address: 'localhost'
+    port: 1025
+    user_name: 'no-reply@appletunity.ru'
+    password: 'test'
+    authentication: 'plain'

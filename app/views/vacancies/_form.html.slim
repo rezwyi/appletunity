@@ -12,86 +12,86 @@
       });
     });
 
-= form_for vacancy, :remote => true, :html => {:class => 'form-inline', :novalidate => true, :data => {:type => :json}} do |f|
-  == render :partial => 'shared/honeypot_captcha'
+= form_for vacancy, remote: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
+  = render partial: 'shared/honeypot_captcha'
   
   fieldset
-    h2 = t('.what_you_want')
+    h2 = t('ui.vacancies.text.what_you_want')
     hr
     .control-group class=('error' if vacancy.errors[:title].present?)
-      = label_tag '', :class => 'control-label' do
-        = t('.title')
-        span.required &nbsp;&#42;
+      = f.label :title, class: 'control-label'
+      span.required &nbsp;&#42;
       .controls
-        = f.text_field :title, :class => 'span5', :placeholder => t('.title_placeholder')
+        = f.text_field :title, class: 'span5', placeholder: t('ui.vacancies.placeholders.title')
+    
     .control-group
-      = label_tag '', t('.location'), :class => 'control-label'
+      = f.label :location, class: 'control-label'
       .controls
-        = f.text_field :location, :class => 'span5', :placeholder => t('.location_placeholder')
+        = f.text_field :location, class: 'span5', placeholder: t('ui.vacancies.placeholders.location')
 
     .control-group class=('error' if vacancy.errors[:body].present?)
-      = label_tag '', :class => 'control-label' do
-        = t('.body')
-        span.required &nbsp;&#42;
-      = f.text_area :body, :class => 'span5', :rows => 15, :placeholder => t('.body_placeholder')
+      = f.label :body, class: 'control-label'
+      span.required &nbsp;&#42;
+      = f.text_area :body, class: 'span5', rows: 15, placeholder: t('ui.vacancies.placeholders.body')
+    
     .control-group
-      label.control-label for='optionsCheckbox' = t('.occupation')
+      = f.label :occupations, class: 'control-label'
       .controls
-        = hidden_field_tag 'vacancy[occupation_ids][]'
-        - Occupation.all.each do |o|
-          label.checkbox.inline
-            - checked = vacancy.occupation_ids.include?(o.id)
-            = check_box_tag 'vacancy[occupation_ids][]', o.id, checked
-            = o.name
+        = f.fields_for :vacancies_occupations, setup_vacancies_occupations_for(vacancy) do |ff|
+          label.inline.checkbox
+            = ff.hidden_field :occupation_id
+            = ff.check_box :_destroy, {checked: ff.object.persisted?}, '0', '1'
+            = ff.label :_destroy, ff.object.occupation.name
+    
     .clearfix
 
-    h2 = t('.about_your_company')
+    h2 = t('ui.vacancies.text.about_your_company')
     hr
     .control-group class=('error' if vacancy.errors[:company_name].present?)
-      = label_tag '', :class => 'control-label' do
-        = t('.name')
-        span.required &nbsp;&#42;
+      = f.label :company_name, class: 'control-label'
+      span.required &nbsp;&#42;
       .controls
-        = f.text_field :company_name, :class => 'span5'
+        = f.text_field :company_name, class: 'span5'
+    
     .control-group
-      = label_tag '', t('.website'), :class => 'control-label'
+      = f.label :company_website, class: 'control-label'
       .controls
-        = f.text_field :company_website, :class => 'span5'
+        = f.text_field :company_website, class: 'span5'
+    
     .control-group
-      = label_tag '', t('.logo'), :class => 'control-label'
+      = f.label :logo, class: 'control-label'
       .controls
-        = logo_for vacancy, :medium, :class => 'well'
+        = logo_for vacancy, :medium, class: 'well'
       .controls
-        = f.file_field :logo, :class => 'span5'
+        = f.file_field :logo, class: 'span5'
 
     .clearfix
 
-    h2 = t('.contacts')
+    h2 = t('ui.vacancies.text.contacts')
     hr
     .control-group class=('error' if vacancy.errors[:contact_email].present?)
-      = label_tag '', :class => 'control-label' do
-        = t('.email')
-        span.required &nbsp;&#42;
+      = f.label :contact_email, class: 'control-label'
+      span.required &nbsp;&#42;
       .controls
-        = f.text_field :contact_email, :class => 'span5'
+        = f.text_field :contact_email, class: 'span5'
+    
     .control-group
-      = label_tag '', t('.phone'), :class => 'control-label'
+      = f.label :contact_phone, class: 'control-label'
       .controls
-        = f.text_field :contact_phone, :class => 'span5'
+        = f.text_field :contact_phone, class: 'span5'
 
     .clearfix
 
     .form-actions
       .control-group
         label.checkbox.inline.terms.fullwidth
-          = f.check_box :agreed_to_offer, :value => 0
-          = t('.i_agree')
+          = f.check_box :agreed_to_offer, value: 0
+          = t('ui.vacancies.text.i_agree')
           | &nbsp;
-          = link_to t('.terms'), static_path('terms'), :target => '_blank'
+          = link_to t('ui.vacancies.text.terms'), static_path('terms'), target: '_blank'
           span.required &nbsp;&#42;
-          - if vacancy.errors[:agreed_to_offer].present?
-            label.error = t('.need_to_agree!')
+      
       div
-        = f.submit t(".#{action_name}"), :class => 'zurb-btn'
+        = f.submit t("ui.vacancies.buttons.#{vacancy.persisted? ? 'save' : 'add'}"), class: 'zurb-btn'
         | &nbsp;
-        = link_to t('.cancel'), root_url
+        = link_to t('ui.links.cancel'), root_path

@@ -7,10 +7,10 @@ body
     strong Здравствуйте!
   
   p
-    | Вы получили это уведомление, потому что находитесь в списках администраторов сайта #{link_to('appletunity.ru', root_url, :target => '_blank')}.
+    | Вы получили это уведомление, потому что находитесь в списках администраторов сайта #{link_to('appletunity.ru', root_url, target: '_blank')}.
   
   p
-    | На сайте находится неподтвержденная вакансия, требующая вашей реакции: #{link_to(@vacancy.title, edit_administration_vacancy_url(@vacancy.id), :target => '_blank')}.
+    | На сайте находится неподтвержденная вакансия, требующая вашей реакции: #{link_to(@vacancy.title, edit_administration_vacancy_url(@vacancy.id), target: '_blank')}.
 
   p
-    | С уважением, #{link_to('appletunity.ru', root_url, :target => '_blank')}.
+    | С уважением, #{link_to('appletunity.ru', root_url, target: '_blank')}.

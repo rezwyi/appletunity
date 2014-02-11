@@ -1,2 +1,29 @@
-= render :partial => 'vacancies', :locals => {:vacancies => @vacancies}
-= render :partial => 'shared/pagination', :locals => {:resources => @vacancies}
+.vacancies
+  - @vacancies.each do |v|
+    .vacancy id='vacancy-#{v.id}' class=('expired' if v.expired?)
+      .company-logo.pull-left
+        - unless v.company_website.empty?
+          = link_to(v.company_website, target: '_blank') { logo_for v }
+        - else
+          = logo_for v
+
+      h1.title
+        = link_to title_for(v), vacancy_path(v)
+
+      span.created
+        = Russian::strftime(v.created_at, '%d %B')
+      
+      - if v.location.present?
+        span.location
+          | &nbsp;&#47;&nbsp;
+          = v.location
+
+      - if v.occupations.any?
+        .occupations
+          - v.occupations.each do |o|
+            span.label = o.name
+            | &nbsp;
+
+      .clearfix
+
+= render 'shared/pagination', resources: @vacancies
