@@ -58,14 +58,14 @@ module ApplicationHelper
     output = ''
     ivar = instance_variable_get("@#{controller_name.singularize}")
     
-    title = content_tag(:title, [t(:appletunity), t(:best_vacancies)].join(' - '))
+    title = content_tag(:title, [t('ui.text.appletunity'), t('ui.text.best_vacancies')].join(' - '))
     image = tag(:meta, property: 'og:image', content: image_path('appletunity.png'))
     
-    meta = {'description' => t(:intro)}
+    meta = {'description' => t('ui.text.intro')}
 
     if ivar
       if ivar.respond_to?(:title) && ivar.title.present?
-        title = content_tag(:title, [t(:appletunity), ivar.company_name, ivar.title].join(' - '))
+        title = content_tag(:title, [t('ui.text.appletunity'), ivar.company_name, ivar.title].join(' - '))
       end
 
       if ivar.respond_to?(:logo) && ivar.respond_to?(:logo?)

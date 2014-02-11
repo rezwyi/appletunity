@@ -1,10 +1,10 @@
 .pull-right
-  | #{t('.share')}&#58;&nbsp;
-  = link_to build_share_link_for(:twitter, @vacancy), target: '_blank' do
+  | #{t('ui.vacancies.text.share')}&#58;&nbsp;
+  = link_to build_share_link_for(:twitter, resource), target: '_blank' do
     = image_tag 'twitter-32.png'
   | &nbsp;
-  = link_to build_share_link_for(:facebook, @vacancy), target: '_blank' do
+  = link_to build_share_link_for(:facebook, resource), target: '_blank' do
     = image_tag 'facebook-32.png'
   | &nbsp;
-  = link_to build_share_link_for(:gplus, @vacancy), target: '_blank' do
+  = link_to build_share_link_for(:gplus, resource), target: '_blank' do
     = image_tag 'googleplus-32.png'

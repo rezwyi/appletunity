@@ -2,15 +2,15 @@ table.table
   thead
     tr
       th #
-      th = t('.email')
-      th = t('.last_sign_in_at')
+      th Email
+      th Last sign in at
       th
   tbody
     - @resources.each do |r|
       tr
         td = r.id
         td = r.email
-        td = Russian::strftime(r.last_sign_in_at, '%d %B %Y')
+        td = Russian::strftime(r.last_sign_in_at, '%d %B %Y') if r.last_sign_in_at
         td
           = link_to_edit_resource r, class: 'btn'
           | &nbsp;

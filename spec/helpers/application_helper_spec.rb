@@ -3,11 +3,11 @@ require 'spec_helper'
 describe ApplicationHelper do
   describe '#copyright_years' do
     it "should return '2012'" do
-      helper.copyright_years(:to => 2012).should eq '2012'
+      helper.copyright_years(to: 2012).should eq '2012'
     end
 
     it "should return '2012-2015'" do
-      helper.copyright_years(:to => 2015).should eq '2012-2015'
+      helper.copyright_years(to: 2015).should eq '2012-2015'
     end
   end
 
@@ -48,10 +48,10 @@ describe ApplicationHelper do
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
-          [I18n.t(:appletunity), I18n.t(:best_vacancies)].join(' - ')
+          [I18n.t('ui.text.appletunity'), I18n.t('ui.text.best_vacancies')].join(' - ')
         ),
-        tag(:meta, :property => 'og:image', :content => '/assets/appletunity.png'),
-        tag(:meta, :name => 'description', :content => I18n.t(:intro))
+        tag(:meta, property: 'og:image', content: '/assets/appletunity.png'),
+        tag(:meta, name: 'description', content: I18n.t('ui.text.intro'))
       ]
     end
 
@@ -61,23 +61,23 @@ describe ApplicationHelper do
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
-          [I18n.t(:appletunity), @vacancy.company_name, @vacancy.title].join(' - ')
+          [I18n.t('ui.text.appletunity'), @vacancy.company_name, @vacancy.title].join(' - ')
         ),
-        tag(:meta, :property => 'og:image', :content => image_path(@vacancy.logo)),
-        tag(:meta, :name => 'description', :content => 'Some body')
+        tag(:meta, property: 'og:image', content: image_path(@vacancy.logo)),
+        tag(:meta, name: 'description', content: 'Some body')
       ]
     end
 
     it 'should set default title and meta tags related to the object' do
-      @vacancy = FactoryGirl.build(:vacancy, :logo => nil)
+      @vacancy = FactoryGirl.build(:vacancy, logo: nil)
 
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
-          [I18n.t(:appletunity), @vacancy.company_name, @vacancy.title].join(' - ')
+          [I18n.t('ui.text.appletunity'), @vacancy.company_name, @vacancy.title].join(' - ')
         ),
-        tag(:meta, :property => 'og:image', :content => '/assets/appletunity.png'),
-        tag(:meta, :name => 'description', :content => 'Some body')
+        tag(:meta, property: 'og:image', content: '/assets/appletunity.png'),
+        tag(:meta, name: 'description', content: 'Some body')
       ]
     end
   end

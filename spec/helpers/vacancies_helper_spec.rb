@@ -12,8 +12,7 @@ describe VacanciesHelper do
       vacancy.stub(:title).and_return('some_title')
       vacancy.stub(:contact_email).and_return('some@email.com')
       
-      helper.mailto_for(vacancy)\
-            .should eq 'mailto:some@email.com?subject=some_title'
+      helper.mailto_for(vacancy).should eq 'mailto:some@email.com?subject=some_title'
     end
   end
 
@@ -27,8 +26,7 @@ describe VacanciesHelper do
         vacancy = mock_model(Vacancy)
         vacancy.stub(:title).and_return('some_title')
         vacancy.stub(:company_name).and_return('some_company_name')
-        helper.title_for(vacancy)\
-              .should eq '[some_company_name] some_title'.html_safe
+        helper.title_for(vacancy).should eq '[some_company_name] some_title'.html_safe
       end
     end
   end
@@ -47,20 +45,18 @@ describe VacanciesHelper do
       
       it 'should return no logo image tag' do
         @vacancy.stub(:logo?).and_return(false)
-        helper.logo_for(@vacancy)\
-              .should eq %(<img alt="some_company_name" src="/assets/no_logo.png" />)
+        helper.logo_for(@vacancy).should eq %(<img alt="some_company_name" src="/assets/no_logo.png" />)
       end
 
       it 'should return vacancy logo image tag' do
         @vacancy.stub(:logo?).and_return(true)
-        helper.logo_for(@vacancy)\
-              .should eq %(<img alt="some_company_name" src="/assets/some_logo.png" />)
+        helper.logo_for(@vacancy).should eq %(<img alt="some_company_name" src="/assets/some_logo.png" />)
       end
 
       it 'should return vacancy logo image tag with class' do
         @vacancy.stub(:logo?).and_return(true)
         s = %(<img alt="some_company_name" class="well" src="/assets/some_logo.png" />)
-        helper.logo_for(@vacancy, :medium, :class => 'well').should eq s
+        helper.logo_for(@vacancy, :medium, class: 'well').should eq s
       end
     end
   end

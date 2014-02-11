@@ -1,40 +1,58 @@
 source 'https://rubygems.org'
 
-gem 'rake', '0.9.2.2'
-gem 'unicorn'
-gem 'mysql2', '0.3.11'
-gem 'rails', '~> 3.2.10'
+gem 'rails', '~> 4.0.0'
+
 gem 'rails_config'
 gem 'jquery-rails', '~> 2.1.4'
-gem 'slim-rails'
-gem 'high_voltage'
-gem 'kaminari'
-gem 'dynamic_form'
-gem 'paperclip', '3.4.2'
-gem 'devise', '~> 3.0.0'
-gem 'russian'
-gem 'twitter'
-gem 'whenever', require: false
-gem 'capistrano'
-gem 'rvm-capistrano'
-gem 'exception_notification'
-gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'therubyracer'
-gem 'libv8', '~> 3.11.8'
 gem 'flight-for-rails'
+
+gem 'unicorn-rails'
+gem 'mysql2', '0.3.12b5'
+
+gem 'kaminari'
 gem 'resque'
+gem 'russian'
+gem 'paperclip'
+gem 'devise', '~> 3.0.0'
+
+gem 'slim-rails'
+gem 'bootstrap-sass', '~> 2.3.0.0'
+
+gem 'slim-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'compass-rails', '~> 1.1.2'
+
+gem 'whenever', require: false
+gem 'exception_notification'
+
+gem 'high_voltage'
+gem 'twitter'
 gem 'rconsole'
 
 group :assets do
-	gem 'quiet_assets'
-  gem 'sass-rails', '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier'
 end
 
-group :development, :test do
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
+group :development do
+  gem 'quiet_assets'
+  gem 'mailcatcher'
+  gem 'capistrano', '~> 2.15.5'
+  gem 'capistrano-ext'
+  gem 'capistrano_colors'
+  gem 'ruby-prof'
+end
+
+group :test do
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers'
+  gem 'webmock'
+  gem 'simplecov', require: false
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.14.0'
   gem 'capybara'
+  gem 'konacha'
 end

@@ -21,14 +21,17 @@
         - vacancy.occupations.each do |o|
           span.label = o.name
           | &nbsp;
+  
   hr.clear
+  
   .body
     = raw vacancy.rendered_body
+  
   hr
+  
   .footer
     - if vacancy.expired?
-      .expired-note
-        = t(:expired_note)
+      .expired-note = t('ui.vacancies.text.expired_note')
     - else
-      == render partial: 'shared/social_buttons'
-      = link_to t('reply'), mailto_for(vacancy), class: 'zurb-btn'
+      = render 'shared/social_buttons', resource: vacancy
+      = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'zurb-btn'

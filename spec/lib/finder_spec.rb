@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Finder do
   subject do
     Finder.new({
-      :first => 'first',
-      :second => 'second',
-      :filter => {'keywords' => 'Some body'}
+      first: 'first',
+      second: 'second',
+      filter: {'keywords' => 'Some body'}
     })
   end
 
@@ -19,7 +19,7 @@ describe Finder do
   end
 
   it 'should find no vacancies' do
-    vacancy = FactoryGirl.create(:vacancy, :approved => false)
+    vacancy = FactoryGirl.create(:vacancy, approved: false)
     subject.retrieve.should be_empty
   end
 
@@ -29,7 +29,7 @@ describe Finder do
   end
 
   it 'should find some vacancies' do
-    vacancy = FactoryGirl.create(:vacancy, :body => 'Some *body*')
+    vacancy = FactoryGirl.create(:vacancy, body: 'Some *body*')
     subject.retrieve.map(&:id).include?(vacancy.id).should be_true
   end
 end

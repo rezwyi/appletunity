@@ -5,9 +5,15 @@
 
 @import "global/env";
 @import "global/mixins";
+@import "bootstrap";
 
 .fullwidth {
   width: 100%;
+}
+
+.radio.inline ~ .radio.inline,
+.checkbox.inline ~ .checkbox.inline {
+  margin-left: 10px;
 }
 
 body { 

@@ -2,7 +2,7 @@ doctype html
 
 html
   head
-    title = t('.administration')
+    title Administration
     
     = javascript_include_tag :admin
     = stylesheet_link_tag :admin
@@ -19,24 +19,22 @@ body
         .navbar-text.pull-right
           em = current_admin.email
           | &nbsp;
-          = link_to t('.home'), root_url, class: 'navbar-link'
+          = link_to 'Home', root_url, class: 'navbar-link'
           | &nbsp;
-          = link_to t('.logout'), destroy_admin_session_path,
-                    method: :delete, class: 'navbar-link'
-        .brand = t('.administration')
+          = link_to 'Logout', destroy_admin_session_path, method: :delete, class: 'navbar-link'
+        .brand Administration
         .nav-collapse.collapse
           ul.nav
-            - %w(vacancies occupations admins).each do |i|
-              - href = "/administration/#{i}"
-              li class=('active' if request.path.starts_with?(href)) = link_to t(".#{i}"), href
+            - %w(Vacancies Occupations Admins).each do |i|
+              - href = url_for([:administration, i.downcase])
+              li class=('active' if request.path.starts_with?(href)) = link_to i, href
 
   header#overview.jumbotron.subhead
     .container-fluid
-      h1
-        | #{t(".management_of_#{controller_name}")} &#47; #{t(".#{action_name}")}
+      h1 Management of #{controller_name} &#47; #{action_name.humanize}
       
       p.lead
-        = link_to t(".new_#{controller_name.singularize}"), url_for(action: :new, controller: controller_name), class: 'btn btn-success'
+        = link_to "New #{controller_name.singularize}", url_for(action: :new, controller: controller_name), class: 'btn btn-success'
 
   .container-fluid
     .row-fluid

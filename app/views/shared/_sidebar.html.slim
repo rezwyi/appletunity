@@ -1,15 +1,15 @@
 .sidebar
   .post-vacancy
-    h3 = t('a?')
-    p = t('intro')
+    h3 = t('ui.text.a?')
+    p = t('ui.text.intro')
     .post-vacancy-button
-      = link_to t('add_vacancy'), new_vacancy_path, class: 'zurb-btn center-aligned-text'
+      = link_to t('ui.vacancies.links.add'), new_vacancy_path, class: 'zurb-btn center-aligned-text'
 
   .clearfix
 
   .stay-connected
-    h3 = t('stay_connected')
-    p = t('stay_connected_description')
+    h3 = t('ui.text.stay_connected')
+    p = t('ui.text.stay_connected_description')
 
     = link_to image_tag('rss-128.png'), feed_vacancies_path, target: '_blank'
     = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', target: '_blank'

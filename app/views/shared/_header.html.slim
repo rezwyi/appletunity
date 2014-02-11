@@ -1,11 +1,11 @@
 header.jumbotron.subhead#overview
   - if current_admin
     .manage-buttons.pull-right
-      = link_to t('.manage'), awaiting_approve_administration_vacancies_path, class: 'zurb-btn'
+      = link_to t('ui.links.manage'), administration_vacancies_path(awaiting_approve: '1'), class: 'zurb-btn'
       | &nbsp;
-      = link_to t('.logout'), destroy_admin_session_path, class: 'zurb-btn', method: :delete
+      = link_to t('ui.links.logout'), destroy_admin_session_path, class: 'zurb-btn', method: :delete
   
   = image_tag 'appletunity.png'
   
   h1.logo = link_to "#{content_tag(:strong, 'apple')}tunity".html_safe, root_url
-  p.lead = t('best_vacancies')
+  p.lead = t('ui.text.best_vacancies')

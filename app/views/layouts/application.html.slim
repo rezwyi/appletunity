@@ -31,15 +31,18 @@ html
     = yield :head
 
 body data-spy='scroll' data-target='.subnav'
-  == render 'shared/flash', flash: flash.discard
+  = render 'shared/flash', flash: flash.discard
   
   noscript
-    .system-warnings = t('.no_javascript')
+    .system-warnings = t('ui.no_javascript')
   
   .container
-    == render partial: 'shared/header'
+    = render partial: 'shared/header'
+    
     .row class='page-#{controller_name}'
       .span8
         .contentable = yield
-      .span4 == render partial: 'shared/sidebar'
-    == render partial: 'shared/footer'
+      .span4
+        = render 'shared/sidebar'
+    
+    = render 'shared/footer'

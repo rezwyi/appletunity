@@ -1,57 +1,56 @@
 class VacanciesController < ApplicationController
-  before_filter :load_vacancy, only: [:show, :edit, :update]
+  before_action only: :show do
+    unless @resource.approved? || admin_signed_in?
+      raise ActionController::RoutingError, 'Not found'
+    end
+  end
+  
+  before_action only: :edit do
+    unless @resource.edit_token == params[:token] || admin_signed_in?
+      raise ActionController::RoutingError, 'Not found'
+    end
+  end
 
+  respond_to :json, only: %i(create update)
   respond_to :rss, only: :feed
 
   def index
-    @finder = Finder.new(params)
-    @vacancies = @finder.retrieve
+    @vacancies = Finder.new(params).retrieve
     respond_with @vacancies
-  end
-
-  def new
-    @vacancy = Vacancy.new
-    respond_with @vacancy
   end
 
   def create
-    @vacancy = Vacancy.new(params[:vacancy])
-    if @vacancy.save
-      flash[:notice] = t('.vacancy_created_successfull', email: @vacancy.contact_email)
+    if @resource.save
+      flash[:notice] = t('messages.vacancy_created_successfull', email: @resource.contact_email)
     end
-    respond_with @vacancy, location: root_url
-  end
-
-  def show
-    unless @vacancy.approved? || admin_signed_in?
-      raise ActionController::RoutingError, 'Not found'
-    end
-    respond_with @vacancy
-  end
-
-  def edit
-    unless @vacancy.edit_token == params[:token] || admin_signed_in?
-      raise ActionController::RoutingError, 'Not found'
-    end
-    respond_with @vacancy
+    respond_with @resource, location: root_path
   end
 
   def update
-    if (updated = @vacancy.update_attributes(params[:vacancy]))
-      flash[:notice] = t('.vacancy_updated_successfull')
+    if @resource.save
+      flash[:notice] = t('messages.vacancy_updated_successfull')
     end
-    respond_with @vacancy
+    respond_with @resource
   end
 
   def feed
-    @finder = Finder.new
-    @vacancies = @finder.retrieve
+    @vacancies = Finder.new(params).retrieve
     respond_with @vacancies
   end
 
-  protected
+  private
 
-  def load_vacancy
-    @vacancy = Vacancy.find(params[:id])
+  def create_params(namespace)
+    params.require(namespace).permit(
+      :company_name, :company_website, :title, :body, :location, :contact_email, :contact_phone, :agreed_to_offer, :logo,
+      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+    )
+  end
+
+  def update_params(namespace)
+    params.require(namespace).permit(
+      :company_name, :company_website, :body, :location, :contact_email,:contact_phone, :logo,
+      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+    )
   end
 end

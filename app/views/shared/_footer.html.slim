@@ -6,8 +6,8 @@ footer
       | rezvanov.info
   
   h5.pull-left
-    = link_to t('wtf?'), static_path('about')
+    = link_to t('ui.links.wtf?'), static_path('about')
   
   - unless current_admin
     h5.pull-left
-      = link_to t('sign_in'), new_admin_session_path
+      = link_to t('ui.links.sign_in'), new_admin_session_path

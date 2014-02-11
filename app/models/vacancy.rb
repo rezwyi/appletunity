@@ -1,12 +1,10 @@
 class Vacancy < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
-  attr_accessible :company_name, :company_website, :title, :body, :location,
-                  :occupation_ids, :contact_email, :contact_phone,
-                  :agreed_to_offer, :logo
-
   has_many :vacancies_occupations, dependent: :destroy
   has_many :occupations, through: :vacancies_occupations
+
+  accepts_nested_attributes_for :vacancies_occupations, allow_destroy: true
 
   validates :title, presence: true, length: {maximum: 70}
   validates :body, presence: true
@@ -19,7 +17,20 @@ class Vacancy < ActiveRecord::Base
   before_save :render_body
   before_save :generate_expired_at
 
+  after_create do
+    Resque.enqueue VacancyNotificationsWorker, self.id
+  end
+
+  after_save do
+    if self.expired_at && self.expired_at_changed?
+      Resque.enqueue TwitterNotificationsWorker, self.id
+    end
+  end
+
+  paginates_per 12
+  
   has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
+  validates_attachment_content_type :logo, content_type: %w(image/jpeg image/jpg image/png)
 
   scope :live, -> { where(approved: true) }
   scope :awaiting_approve, -> { where(approved: false) }
@@ -29,7 +40,7 @@ class Vacancy < ActiveRecord::Base
   end
 
   def to_param
-    "#{self.id.to_s}-#{self.ascii_title}"
+    "#{self.id}-#{ascii_title}"
   end
 
   def approved?

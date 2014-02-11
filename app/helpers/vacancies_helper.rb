@@ -79,7 +79,6 @@ module VacanciesHelper
     when :twitter then
       uri = URI.parse 'https://twitter.com/share'
       uri.query = URI.encode_www_form(text: title_for(vacancy), url: url, hashtags: 'appletunity', via: 'appletunity')
-
       uri.to_s.html_safe
     when :facebook then
       uri = URI.parse 'https://facebook.com/sharer/sharer.php'
@@ -90,5 +89,23 @@ module VacanciesHelper
     end
 
     uri.to_s.html_safe if uri
+  end
+
+  # Public: Build new VacancyOccupation for each unchecked occupations
+  #         of vacancy
+  #
+  # vacancy - Instance of Vacancy (required)
+  #
+  # Examples
+  #
+  #   setup_occupations_for(vacancy)
+  #   # => nil
+  #
+  # Returns sorted array of vacancy.vacancies_occupations
+  def setup_vacancies_occupations_for(vacancy)
+    (Occupation.all - vacancy.occupations).each do |occupation|
+      vacancy.vacancies_occupations.build occupation: occupation
+    end
+    vacancy.vacancies_occupations.sort { |a,b| b.occupation_id <=> a.occupation_id }
   end
 end

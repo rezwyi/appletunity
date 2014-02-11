@@ -1,7 +1,0 @@
-- if local_assigns.has_key?(:target) && target.errors.present?
-  .alert.alert-error
-    a.close{ data-dismiss='alert' href='#' } ×
-    p = t(:there_were_problems_with_the_following_fields)
-    ul
-      = target.errors.full_messages.each do |msg|
-        li = msg

@@ -1,9 +1,19 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  include Controllers::Secure
+  include Controllers::Resourceable
 
-  before_filter :check_captcha, only: :create
+  before_action { I18n.locale = :ru }
+  before_action :check_captcha, only: :create
 
-  respond_to :html, :json
+  respond_to :html
+
+  def new
+    respond_with @resource
+  end
+
+  def edit
+    respond_with @resource
+  end
 
   protected
 

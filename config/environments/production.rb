@@ -1,5 +1,9 @@
 Appletunity::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
+  # Setting up the exception notification middleware
+  config.middleware.use ExceptionNotification::Rack, email: {
+    sender_address: 'no-reply@appletunity.ru',
+    exception_recipients: 'support@appletunity.ru'
+  }
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -7,6 +11,9 @@ Appletunity::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Do not eager load code on boot.
+  config.eager_load = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -20,7 +27,7 @@ Appletunity::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  # Defaults to nil and saved in location specified by config.assets.prefix
+  # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
   # Specifies the header that your server uses for sending files
@@ -31,13 +38,10 @@ Appletunity::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
-
-  # Prepend all log lines with the following tags
-  # config.log_tags = [ :subdomain, :uuid ]
+  config.log_level = :debug
 
   # Use a different logger for distributed setups
-  # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
@@ -60,23 +64,12 @@ Appletunity::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-
-  # Default host
-  config.after_initialize do
-    Rails.application.routes.default_url_options = {:host => 'appletunity.ru'}
-  end
+  
+  config.action_mailer.smtp_settings = Settings.mailer.default.to_h
 
   # ActionMailer
-  ActionMailer::Base.default :from => 'no-reply@appletunity.ru'
-  config.action_mailer.default_url_options = {:host => 'appletunity.ru'}
+  ActionMailer::Base.default from: 'no-reply@appletunity.ru'
+  config.action_mailer.default_url_options = {host: 'appletunity.ru'}
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {:address => 'mail.locum.ru',
-                                        :port => 25,
-                                        :user_name => 'no-reply@appletunity.ru',
-                                        :password => '1xEaD419sl4dw38y',
-                                        :authentication => 'plain'}
+  config.action_mailer.smtp_settings = Settings.credentials.mailer
 end
