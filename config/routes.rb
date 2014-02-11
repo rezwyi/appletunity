@@ -4,7 +4,7 @@ Appletunity::Application.routes.draw do
   resque_constraint = Proc.new { |request| request.env['warden'].authenticate? }
   
   constraints resque_constraint do
-    mount Resque::Server.new, at: '/resque'
+    mount Resque::Server.new, at: '/resque', as: :resque
   end
   
   devise_for :admins

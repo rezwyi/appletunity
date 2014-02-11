@@ -15,6 +15,7 @@ ru:
       sign_in: Войти
       logout: Выход
       cancel: Отмена
+      resque: Resque
 
     buttons:
       new: Создать
