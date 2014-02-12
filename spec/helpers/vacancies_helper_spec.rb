@@ -102,8 +102,8 @@ describe VacanciesHelper do
           utm_campaign: 'jan'
         })
 
-        result = URI.parse 'https://facebook.com/sharer/sharer.php'
-        result.query = URI.encode_www_form u: url
+        result = URI.parse('https://facebook.com/sharer/sharer.php')
+        result.query = URI.encode_www_form(u: url)
         
         helper.build_share_link_for(:facebook, vacancy).should eq result.to_s
       end
@@ -115,10 +115,38 @@ describe VacanciesHelper do
           utm_campaign: 'jan'
         })
 
-        result = URI.parse 'https://plus.google.com/share'
-        result.query = URI.encode_www_form url: url
+        result = URI.parse('https://plus.google.com/share')
+        result.query = URI.encode_www_form(url: url)
         
         helper.build_share_link_for(:gplus, vacancy).should eq result.to_s
+      end
+    end
+  end
+
+  describe '#format_website_url_for' do
+    let(:vacancy) { FactoryGirl.build(:vacancy) }
+
+    it 'should return nil' do
+      helper.format_website_url_for(nil).should be_nil
+    end
+
+    it 'should return nil' do
+      vacancy.company_website = nil
+      helper.format_website_url_for(vacancy).should be_nil
+    end
+
+    it 'should return nil' do
+      vacancy.company_website = 'bad url'
+      helper.format_website_url_for(vacancy).should be_nil
+    end
+
+    context 'when http is not present' do
+      before { vacancy.company_website = url }
+
+      let(:url) { "#{('a'..'z').to_a.shuffle[0,8].join}.com" }
+      
+      it 'should return url started with http://' do
+        helper.format_website_url_for(vacancy).should == "http://#{url}"
       end
     end
   end

@@ -2,20 +2,22 @@
   .header
     - if vacancy.logo?
       .company-logo.pull-right
-        - unless vacancy.company_website.empty?
-          = link_to(vacancy.company_website, target: '_blank') do
-            = logo_for vacancy, :medium
+        - if vacancy.company_website.present?
+          = link_to logo_for(vacancy, :medium), format_website_url_for(vacancy), target: '_blank'
         - else
           = logo_for vacancy, :medium
+    
     h1.title
       = title_for vacancy
     
     span.created
       = Russian::strftime(vacancy.created_at, '%d %B')
+    
     - if vacancy.location.present?
       span.location
         | &nbsp;&#47;&nbsp;
         = vacancy.location
+    
     - if vacancy.occupations.any?
       .occupations
         - vacancy.occupations.each do |o|

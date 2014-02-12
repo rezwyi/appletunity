@@ -2,8 +2,8 @@
   - @vacancies.each do |v|
     .vacancy id='vacancy-#{v.id}' class=('expired' if v.expired?)
       .company-logo.pull-left
-        - unless v.company_website.empty?
-          = link_to(v.company_website, target: '_blank') { logo_for v }
+        - if v.company_website.present?
+          = link_to logo_for(v), format_website_url_for(v), target: '_blank'
         - else
           = logo_for v
 

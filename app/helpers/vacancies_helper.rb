@@ -108,4 +108,33 @@ module VacanciesHelper
     end
     vacancy.vacancies_occupations.sort { |a,b| b.occupation_id <=> a.occupation_id }
   end
+
+  # Public: Fix company website url
+  #
+  # vacancy - Instance of Vacancy (required)
+  #
+  # Examples
+  #   
+  #   vacancy.company_website = nil
+  #   fomat_website_url(vacancy)
+  #   # => nil
+  #
+  #   vacancy.company_website = 'bad website'
+  #   fomat_website_url(vacancy)
+  #   # => nil
+  #
+  #   vacancy.company_website = 'example.com'
+  #   fomat_website_url(vacancy)
+  #   # => "http://example.com"
+  #
+  # Returns company website url started with http(s)://
+  def format_website_url_for(vacancy)
+    return unless vacancy && vacancy.company_website
+    
+    url = URI(vacancy.company_website).to_s
+    url = "http://#{url}" unless url.start_with?('http')
+    
+    url
+  rescue URI::InvalidURIError
+  end
 end
