@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
   before_action { I18n.locale = :ru }
   before_action :check_captcha, only: :create
 
-  respond_to :html
-
   def new
+    respond_with @resource
+  end
+
+  def show
     respond_with @resource
   end
 

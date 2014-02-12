@@ -11,6 +11,7 @@ class VacanciesController < ApplicationController
     end
   end
 
+  respond_to :html, except: :feed
   respond_to :json, only: %i(create update)
   respond_to :rss, only: :feed
 

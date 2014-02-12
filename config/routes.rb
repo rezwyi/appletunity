@@ -18,7 +18,7 @@ Appletunity::Application.routes.draw do
   end
 
   namespace :administration do
-    resources :vacancies
+    resources :vacancies, except: :show
     resources :admins
     resources :occupations
   end
