@@ -1,13 +1,11 @@
 footer
-  h5.pull-right
-    = link_to 'http://rezvanov.info', target: '_blank' do
-      = copyright_years
-      | &nbsp;&copy;&nbsp;
-      | rezvanov.info
-  
-  h5.pull-left
+  .about
     = link_to t('ui.links.wtf?'), static_path('about')
+    = link_to t('ui.links.terms'), static_path('terms')
   
-  - unless current_admin
-    h5.pull-left
+    - unless current_admin
       = link_to t('ui.links.sign_in'), new_admin_session_path
+  
+  .copyright
+    = link_to 'http://rezvanov.info', target: '_blank' do
+      | #{copyright_years}&nbsp;&copy;&nbsp;rezvanov.info
