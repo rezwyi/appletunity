@@ -62,8 +62,9 @@ ru:
     vacancy_updated_successfull: Вакансия успешно изменена!
 
   mailers:
-    created_email: Уведомление о создании вакансии на сайте appletunity.ru
-    notify_email: Уведомление о неподтвержденных вакансиях на сайте appletunity.ru
+    subjects:
+      created: Уведомление о создании вакансии на сайте appletunity.ru
+      notify: Уведомление о неподтвержденных вакансиях на сайте appletunity.ru
 
   activerecord:
     attributes:
