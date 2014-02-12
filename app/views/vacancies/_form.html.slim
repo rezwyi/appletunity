@@ -22,7 +22,7 @@
       = f.label :title, class: 'control-label'
       span.required &nbsp;&#42;
       .controls
-        = f.text_field :title, class: 'span5', placeholder: t('ui.vacancies.placeholders.title')
+        = f.text_field :title, class: 'span5', placeholder: t('ui.vacancies.placeholders.title'), disabled: vacancy.persisted?
     
     .control-group
       = f.label :location, class: 'control-label'
@@ -85,7 +85,7 @@
     .form-actions
       .control-group
         label.checkbox.inline.terms.fullwidth
-          = f.check_box :agreed_to_offer, value: 0
+          = f.check_box :agreed_to_offer, value: vacancy.persisted? ? '1' : '0', disabled: vacancy.persisted?
           = t('ui.vacancies.text.i_agree')
           | &nbsp;
           = link_to t('ui.vacancies.text.terms'), static_path('terms'), target: '_blank'

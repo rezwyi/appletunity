@@ -1,6 +1,8 @@
 class Vacancy < ActiveRecord::Base
   include ActionView::Helpers::SanitizeHelper
 
+  ALLOWED_TAGS = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
+
   has_many :vacancies_occupations, dependent: :destroy
   has_many :occupations, through: :vacancies_occupations
 
@@ -13,8 +15,8 @@ class Vacancy < ActiveRecord::Base
   validates :agreed_to_offer, presence: true
   validates :edit_token, uniqueness: true
 
+  before_validation :fix_body
   before_create :generate_edit_token
-  before_save :render_body
   before_save :generate_expired_at
 
   after_create do
@@ -56,6 +58,11 @@ class Vacancy < ActiveRecord::Base
     title.join('-').gsub(/[-]+/, '-').gsub(/^-/, '').gsub(/-$/, '')
   end
 
+  def fix_body
+    self.body = self.body.gsub(/\A\<p\>\<br\>\<\/p\>\Z/, '')
+    self.rendered_body = sanitize(self.body, tags: ALLOWED_TAGS)
+  end
+
   def generate_expired_at
     return if self.expired_at
     if self.approved?
@@ -69,10 +76,5 @@ class Vacancy < ActiveRecord::Base
       token = Vacancy.friendly_token
     end
     self.edit_token = token
-  end
-
-  def render_body
-    allowed_tags = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
-    self.rendered_body = sanitize(self.body, tags: allowed_tags)
   end
 end
