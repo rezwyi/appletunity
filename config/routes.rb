@@ -14,7 +14,7 @@ Appletunity::Application.routes.draw do
   end 
 
   resources :vacancies, except: :delete do
-    get 'feed', on: :collection, format: :rss
+    get 'feed', on: :collection, defaults: {format: 'rss'}
   end
 
   namespace :administration do
