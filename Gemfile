@@ -11,9 +11,9 @@ gem 'unicorn-rails'
 gem 'mysql2', '0.3.12b5'
 
 gem 'kaminari'
-gem 'resque'
 gem 'russian'
 gem 'paperclip'
+gem 'resque', '~> 1.24.1'
 gem 'devise', '~> 3.0.0'
 
 gem 'slim-rails'
