@@ -9,7 +9,7 @@ Appletunity::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Do not eager load code on boot.
@@ -64,8 +64,6 @@ Appletunity::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
-  config.action_mailer.smtp_settings = Settings.mailer.default.to_h
 
   # ActionMailer
   ActionMailer::Base.default from: 'no-reply@appletunity.ru'
