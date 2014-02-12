@@ -59,7 +59,7 @@ class Vacancy < ActiveRecord::Base
   end
 
   def fix_body
-    self.body = self.body.gsub(/\A\<p\>\<br\>\<\/p\>\Z/, '')
+    self.body.gsub!(/\A\<p\>\<br\>\<\/p\>\Z/, '') if self.body
     self.rendered_body = sanitize(self.body, tags: ALLOWED_TAGS)
   end
 
