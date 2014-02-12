@@ -69,5 +69,5 @@ Appletunity::Application.configure do
   ActionMailer::Base.default from: 'no-reply@appletunity.ru'
   config.action_mailer.default_url_options = {host: 'appletunity.ru'}
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = Settings.credentials.mailer
+  config.action_mailer.smtp_settings = Settings.credentials.mailer.to_h
 end
