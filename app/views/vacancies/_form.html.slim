@@ -12,7 +12,7 @@
       });
     });
 
-= form_for vacancy, remote: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
+= form_for vacancy, remote: true, authenticity_token: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
   = render partial: 'shared/honeypot_captcha'
   
   fieldset
