@@ -1,4 +1,4 @@
-.vacancy-in
+.vacancy id="vacancy-#{vacancy.id}"
   .header
     - if vacancy.logo?
       .company-logo.pull-right
@@ -7,11 +7,8 @@
         - else
           = logo_for vacancy, :medium
     
-    h1.title
-      = title_for vacancy
-    
-    span.created
-      = Russian::strftime(vacancy.created_at, '%d %B')
+    h1.title = title_for vacancy
+    span.created = Russian::strftime(vacancy.created_at, '%d %B')
     
     - if vacancy.location.present?
       span.location
@@ -26,8 +23,7 @@
   
   hr.clear
   
-  .body
-    = raw vacancy.rendered_body
+  .body == vacancy.rendered_body
   
   hr
   
@@ -35,5 +31,5 @@
     - if vacancy.expired?
       .expired-note = t('ui.vacancies.text.expired_note')
     - else
-      = render 'shared/social_buttons', resource: vacancy
+      = render 'vacancies/social_buttons', resource: vacancy
       = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'zurb-btn'

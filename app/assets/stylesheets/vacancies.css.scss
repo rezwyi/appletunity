@@ -1,54 +1,52 @@
-.page-vacancies {
-  #captcha {
-    display: none;
-  }
-  .vacancies {
-    > .vacancy {
-      border-bottom: 1px solid $defaultBorderColor;
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      min-height: 90px;
-      &:last-child {
-        border: none;
-      }
-      &.expired {
-        > * {
-          @include opacity(50);
-        }
-      }
-      > .company-logo {
-        width: 80px;
-        min-height: $defaultHeight;
-        margin-right: 15px;
-        padding: 5px 0 0 0;
-      }
-      > .title {
-        @include ellipsis_overflow;
-        color: $linkColor;
-        margin: 0;
-        font-size: 1.5em;
-        line-height: 32px;
-        > a {
-          &:hover {
-            color: $linkHoverColor;
-          }
-        }
-      }
-      > .created {
-        font-size: 0.9em;
-        line-height: 24px;
-        vertical-align: middle;
-      }
-      > .location {
-        @include ellipsis_overflow;
-        display: inline-block;
-        font-size: 0.9em;
-        line-height: 24px;
-        vertical-align: middle;
+.container[class*="ns-vacancies-index"] {
+  .vacancy {
+    border-bottom: 1px solid $defaultBorderColor;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    min-height: 90px;
+    &:last-child {
+      border: none;
+    }
+    &.expired {
+      > * {
+        @include opacity(50);
       }
     }
+    > .company-logo {
+      width: 80px;
+      min-height: $defaultHeight;
+      margin-right: 15px;
+      padding: 5px 0 0 0;
+    }
+    > .title {
+      @include ellipsis_overflow;
+      color: $linkColor;
+      margin: 0;
+      font-size: 1.5em;
+      line-height: 32px;
+      > a {
+        &:hover {
+          color: $linkHoverColor;
+        }
+      }
+    }
+    > .created {
+      font-size: 0.9em;
+      line-height: 24px;
+      vertical-align: middle;
+    }
+    > .location {
+      @include ellipsis_overflow;
+      display: inline-block;
+      font-size: 0.9em;
+      line-height: 24px;
+      vertical-align: middle;
+    }
   }
-  .vacancy-in {
+}
+
+.container[class*="ns-vacancies-show"] {
+  .vacancy {
     min-height: $defaultHeight;
     > .header {
       min-height: $defaultHeight;
@@ -94,6 +92,9 @@
       }
     }
   }
+}
+
+.container[class*="ns-vacancies-"] {
   form {
     > fieldset {
       > .control-group {

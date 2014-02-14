@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def check_captcha
-    redirect_to(root_url) if params[:captcha].present?
+    redirect_to(root_path) if params[:captcha].present?
+  end
+
+  def pjax_layout
+    'pjax'
   end
 end

@@ -20,6 +20,10 @@ button, input[type="submit"] {
   font-family: inherit;
 }
 
+#captcha {
+  display: none;
+}
+
 .center-aligned-text {
   text-align: center;
 }
@@ -124,11 +128,24 @@ button, input[type="submit"] {
 
 body {
   background: image-url('bg.png') 0 0 repeat;
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   font-size: 14px;
   color: $grayColor;
-  text-shadow: 0px 1px 0px $whiteColor;
   padding: 30px 0 30px 0;
+  .system-warnings {
+    position: fixed;
+    background-color: $defaultNoscriptBackgroundColor;
+    border-bottom: $defaultNoscriptBorderColor;
+    line-height: 2em;
+    text-shadow: none;
+    text-align: center;
+    color: $whiteColor;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+  }
   .flash {
     position: fixed;
     right: -1000px;
@@ -157,31 +174,20 @@ body {
       }
     }
   }
-  .system-warnings {
-    position: fixed;
-    background-color: $defaultNoscriptBackgroundColor;
-    border-bottom: $defaultNoscriptBorderColor;
-    line-height: 2em;
-    text-shadow: none;
-    text-align: center;
-    color: $whiteColor;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1;
-  }
-  > .container {
-    header {
+  .container {
+    > header, footer {
+      text-shadow: 0px 1px 0px darken($whiteColor, 10%);
+    }
+    > header {
       > .logo {
         display: inline-block;
-        font-family: 'Open Sans', sans-serif;
         font-size: 1.9em;
         font-weight: 400;
         margin-left: 12px;
         text-transform: uppercase;
         a {
           text-decoration: none;
-          color: #333;
+          color: $blackColor;
           &:hover {
             text-decoration: none;
           }
@@ -206,9 +212,9 @@ body {
         @include box_shadow(7px 0 7px darken($whiteColor, 20%));
         background-color: $whiteColor;
         border-radius: 5px 0 0 5px;
-        overflow: hidden;
         min-height: 600px;
         padding: 30px 45px 45px 45px;
+        overflow: hidden;
         text-shadow: none;
       }
       .sidebar {
@@ -222,8 +228,8 @@ body {
           > .post-vacancy-button {
             > .zurb-btn {
               @include box-sizing(border-box);
-              line-height: 32px;
               font-size: 1.5em;
+              line-height: 32px;
               width: 100%;
             }
           }
@@ -254,8 +260,8 @@ body {
       margin-bottom: 2em;
       text-align: right;
       a {
-        color: #333;
-        font-weight: bold;
+        color: $blackColor;
+        font-weight: 300;
         text-decoration: none;
         &:hover {
           text-decoration: none;
