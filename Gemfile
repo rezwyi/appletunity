@@ -6,6 +6,7 @@ gem 'rails_config'
 gem 'jquery-rails', '~> 2.1.4'
 gem 'therubyracer'
 gem 'flight-for-rails'
+gem 'pjax_rails'
 
 gem 'unicorn-rails'
 gem 'mysql2', '0.3.12b5'
