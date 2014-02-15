@@ -1,18 +1,4 @@
-- content_for :head do
-  javascript:
-    $(document).ready(function(){
-      var redactor_buttons = [
-        'formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist','orderedlist'
-      ];
-
-      $('#vacancy_body').redactor({
-        lang: '#{I18n.locale}',
-        buttons: redactor_buttons,
-        autoresize: false
-      });
-    });
-
-= form_for vacancy, remote: true, authenticity_token: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
+= form_for vacancy, remote: true, authenticity_token: true, multipart: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
   = render partial: 'shared/honeypot_captcha'
   
   fieldset
@@ -32,7 +18,7 @@
     .control-group class=('error' if vacancy.errors[:body].present?)
       = f.label :body, class: 'control-label'
       span.required &nbsp;&#42;
-      = f.text_area :body, class: 'span5', rows: 15, placeholder: t('ui.vacancies.placeholders.body')
+      = f.text_area :body, rows: 15, class: 'span5', data: {redactor: ''}, placeholder: t('ui.vacancies.placeholders.body')
     
     .control-group
       = f.label :occupations, class: 'control-label'
@@ -88,7 +74,7 @@
           = f.check_box :agreed_to_offer, value: vacancy.persisted? ? '1' : '0', disabled: vacancy.persisted?
           = t('ui.vacancies.text.i_agree')
           | &nbsp;
-          = link_to t('ui.vacancies.text.terms'), static_path('terms'), target: '_blank'
+          = link_to t('ui.vacancies.text.terms'), terms_page_path, target: '_blank'
           span.required &nbsp;&#42;
       
       div

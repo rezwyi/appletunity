@@ -32,4 +32,4 @@
       .expired-note = t('ui.vacancies.text.expired_note')
     - else
       = render 'vacancies/social_buttons', resource: vacancy
-      = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'zurb-btn'
+      = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'zurb-btn', data: {'skip-pjax' => ''}

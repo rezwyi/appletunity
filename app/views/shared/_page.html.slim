@@ -4,11 +4,11 @@
   header#overview.jumbotron.subhead
     - if current_admin
       .manage-buttons.pull-right
-        = link_to t('ui.links.resque'), resque_path, class: 'zurb-btn', target: '_blank'
+        = link_to t('ui.links.resque'), resque_path, class: 'zurb-btn', data: {'skip-pjax' => ''}, target: '_blank'
         | &nbsp;
-        = link_to t('ui.links.manage'), administration_vacancies_path(awaiting_approve: '1'), class: 'zurb-btn'
+        = link_to t('ui.links.manage'), administration_vacancies_path(awaiting_approve: '1'), class: 'zurb-btn', data: {'skip-pjax' => ''}
         | &nbsp;
-        = link_to t('ui.links.logout'), destroy_admin_session_path, class: 'zurb-btn', method: :delete
+        = link_to t('ui.links.logout'), destroy_admin_session_path, class: 'zurb-btn', method: :delete, data: {'skip-pjax' => ''}
     
     = image_tag 'appletunity.png', alt: 'Appletunity.ru'
     
@@ -33,14 +33,14 @@
           h3 = t('ui.text.stay_connected')
           p = t('ui.text.stay_connected_description')
 
-          = link_to image_tag('rss-128.png'), feed_vacancies_path, target: '_blank'
-          = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', target: '_blank'
-          = link_to image_tag('facebook-128.png'), 'https://www.facebook.com/pages/Appletunity/425636904190790', target: '_blank'
+          = link_to image_tag('rss-128.png'), feed_vacancies_path, data: {'skip-pjax' => ''}, target: '_blank'
+          = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', data: {'skip-pjax' => ''}, target: '_blank'
+          = link_to image_tag('facebook-128.png'), 'https://www.facebook.com/pages/Appletunity/425636904190790', data: {'skip-pjax' => ''}, target: '_blank'
   
   footer
     .about
-      = link_to t('ui.links.wtf?'), static_path('about')
-      = link_to t('ui.links.terms'), static_path('terms')
+      = link_to t('ui.links.wtf?'), about_page_path
+      = link_to t('ui.links.terms'), terms_page_path
     
       - unless current_admin
         = link_to t('ui.links.sign_in'), new_admin_session_path

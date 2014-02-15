@@ -23,7 +23,8 @@ Appletunity::Application.routes.draw do
     resources :occupations
   end
 
-  get '/pages/:id' => 'high_voltage/pages#show', as: :static
+  get '/about' => 'pages#about', as: :about_page
+  get '/terms' => 'pages#terms', as: :terms_page
   
   root to: 'vacancies#index'
 end
