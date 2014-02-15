@@ -7,14 +7,15 @@ html
     = javascript_include_tag :application
     = javascript_include_rconsole_tag
     = stylesheet_link_tag :application
-    = csrf_meta_tags
 
     link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'
 
     - if Rails.env.production?
       javascript:
-        var root = (typeof exports !== 'undefined' && exports !== null) ? exports : this;
-        root._gaq = [['_setAccount', 'UA-24462942-2'], ['_trackPageview']];
+        var _gaq = _gaq || [];
+        
+        _gaq.push(['_setAccount', 'UA-24462942-2']);
+        _gaq.push(['_trackPageview']);
 
         (function() {
           var ga = document.createElement('script'),
@@ -25,24 +26,13 @@ html
           ga.async = true;
           proto = (proto === 'https:') ? 'https://ssl' : 'http://www';
           ga.src = proto + '.google-analytics.com/ga.js';
-          s[0].parentNode.insertBefore(ga, s);s
+          s[0].parentNode.insertBefore(ga, s);
         })();
 
     = yield :head
 
 body data-spy='scroll' data-target='.subnav'
-  = render 'shared/flash', flash: flash.discard
-  
   noscript
     .system-warnings = t('ui.no_javascript')
   
-  .container
-    = render partial: 'shared/header'
-    
-    .row class='page-#{controller_name}'
-      .span8
-        .contentable = yield
-      .span4
-        = render 'shared/sidebar'
-    
-    = render 'shared/footer'
+  #page data-page-container=true = render 'shared/page'

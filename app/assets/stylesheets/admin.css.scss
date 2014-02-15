@@ -16,6 +16,36 @@
   margin-left: 10px;
 }
 
+#flash {
+  position: fixed;
+  font-size: 0.9em;
+  right: -100%;
+  bottom: 60px;
+  z-index: 9999;
+  &.noscript {
+    right: 30px;
+  }
+  > .body {
+    @include box_shadow(3px 3px 5px $defaultShadowColor);
+    opacity: 0.9;
+    border-radius: 6px;
+    color: #fff;
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px 12px;
+    text-align: center;
+    text-shadow: none;
+    &.notice {
+      background-color: #468847;
+      border: 1px solid darken(#468847, 5%);
+    }
+    &.alert {
+      background-color: #b94a48;
+      border: 1px solid darken(#b94a48, 5%);
+    }
+  }
+}
+
 body { 
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-size: 1em;
@@ -23,35 +53,6 @@ body {
     margin: 0;
     > .navbar-inner {
       border-radius: 0;
-    }
-  }
-  .flash {
-    position: fixed;
-    font-size: 0.9em;
-    right: -1000px;
-    bottom: 60px;
-    z-index: 9999;
-    &.noscript {
-      right: 30px;
-    }
-    > .body {
-      @include box_shadow(3px 3px 5px #bbb);
-      opacity: 0.9;
-      border-radius: 6px;
-      color: #fff;
-      width: 300px;
-      margin: 0 auto;
-      padding: 10px 12px;
-      text-align: center;
-      text-shadow: none;
-      &.notice {
-        background-color: #468847;
-        border: 1px solid darken(#468847, 5%);
-      }
-      &.alert {
-        background-color: #b94a48;
-        border: 1px solid darken(#b94a48, 5%);
-      }
     }
   }
   > header {
@@ -70,9 +71,11 @@ body {
         > .table {
           > tbody {
             > tr {
-              > td:last-child {
-                text-align: right;
-                white-space: nowrap;
+              > td {
+                &:last-child {
+                  text-align: right;
+                  white-space: nowrap;
+                }
               }
             }
           }

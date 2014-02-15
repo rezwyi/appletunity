@@ -1,0 +1,52 @@
+= csrf_meta_tags
+
+.container class='ns-#{[controller_name, action_name].join('-')}'
+  header#overview.jumbotron.subhead
+    - if current_admin
+      .manage-buttons.pull-right
+        = link_to t('ui.links.resque'), resque_path, class: 'zurb-btn', data: {'skip-pjax' => ''}, target: '_blank'
+        | &nbsp;
+        = link_to t('ui.links.manage'), administration_vacancies_path(awaiting_approve: '1'), class: 'zurb-btn', data: {'skip-pjax' => ''}
+        | &nbsp;
+        = link_to t('ui.links.logout'), destroy_admin_session_path, class: 'zurb-btn', method: :delete, data: {'skip-pjax' => ''}
+    
+    = image_tag 'appletunity.png', alt: 'Appletunity.ru'
+    
+    h1.logo = link_to "#{content_tag(:strong, 'apple')}tunity".html_safe, root_path
+    p.lead = t('ui.text.best_vacancies')
+  
+  .row
+    .span8
+      .contentable = yield
+    
+    .span4
+      .sidebar
+        .post-vacancy
+          h3 = t('ui.text.a?')
+          p = t('ui.text.intro')
+          .post-vacancy-button
+            = link_to t('ui.vacancies.links.add'), new_vacancy_path, class: 'zurb-btn center-aligned-text'
+
+        .clearfix
+
+        .stay-connected
+          h3 = t('ui.text.stay_connected')
+          p = t('ui.text.stay_connected_description')
+
+          = link_to image_tag('rss-128.png'), feed_vacancies_path, data: {'skip-pjax' => ''}, target: '_blank'
+          = link_to image_tag('twitter-128.png'), 'http://twitter.com/appletunity', data: {'skip-pjax' => ''}, target: '_blank'
+          = link_to image_tag('facebook-128.png'), 'https://www.facebook.com/pages/Appletunity/425636904190790', data: {'skip-pjax' => ''}, target: '_blank'
+  
+  footer
+    .about
+      = link_to t('ui.links.wtf?'), about_page_path
+      = link_to t('ui.links.terms'), terms_page_path
+    
+      - unless current_admin
+        = link_to t('ui.links.sign_in'), new_admin_session_path
+    
+    .copyright
+      = link_to 'http://rezvanov.info', target: '_blank' do
+        | #{copyright_years}&nbsp;&copy;&nbsp;rezvanov.info
+
+= render 'shared/flash', flash: flash.discard

@@ -56,25 +56,25 @@ describe ApplicationHelper do
     end
 
     it 'should set default title and meta tags related to the object' do
-      @vacancy = FactoryGirl.build(:vacancy)
+      @resource = FactoryGirl.build(:vacancy)
 
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
-          [I18n.t('ui.text.appletunity'), @vacancy.company_name, @vacancy.title].join(' - ')
+          [I18n.t('ui.text.appletunity'), @resource.company_name, @resource.title].join(' - ')
         ),
-        tag(:meta, property: 'og:image', content: image_path(@vacancy.logo)),
+        tag(:meta, property: 'og:image', content: image_path(@resource.logo)),
         tag(:meta, name: 'description', content: 'Some body')
       ]
     end
 
     it 'should set default title and meta tags related to the object' do
-      @vacancy = FactoryGirl.build(:vacancy, logo: nil)
+      @resource = FactoryGirl.build(:vacancy, logo: nil)
 
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
-          [I18n.t('ui.text.appletunity'), @vacancy.company_name, @vacancy.title].join(' - ')
+          [I18n.t('ui.text.appletunity'), @resource.company_name, @resource.title].join(' - ')
         ),
         tag(:meta, property: 'og:image', content: '/assets/appletunity.png'),
         tag(:meta, name: 'description', content: 'Some body')

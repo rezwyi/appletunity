@@ -56,7 +56,7 @@ module ApplicationHelper
   # Returns html safe String
   def title_and_metas
     output = ''
-    ivar = instance_variable_get("@#{controller_name.singularize}")
+    ivar = @resource
     
     title = content_tag(:title, [t('ui.text.appletunity'), t('ui.text.best_vacancies')].join(' - '))
     image = tag(:meta, property: 'og:image', content: image_path('appletunity.png'))
