@@ -2,8 +2,7 @@
   = render partial: 'shared/honeypot_captcha'
   
   fieldset
-    h2 = t('ui.vacancies.text.what_you_want')
-    hr
+    legend = t('ui.vacancies.text.what_you_want')
     .control-group class=('error' if vacancy.errors[:title].present?)
       = f.label :title, class: 'control-label'
       span.required &nbsp;&#42;
@@ -29,10 +28,8 @@
             = ff.check_box :_destroy, {checked: ff.object.persisted?}, '0', '1'
             = ff.label :_destroy, ff.object.occupation.name
     
-    .clearfix
-
-    h2 = t('ui.vacancies.text.about_your_company')
-    hr
+  fieldset
+    legend = t('ui.vacancies.text.about_your_company')
     .control-group class=('error' if vacancy.errors[:company_name].present?)
       = f.label :company_name, class: 'control-label'
       span.required &nbsp;&#42;
@@ -51,10 +48,8 @@
       .controls
         = f.file_field :logo, class: 'span5'
 
-    .clearfix
-
-    h2 = t('ui.vacancies.text.contacts')
-    hr
+  fieldset
+    legend = t('ui.vacancies.text.contacts')
     .control-group class=('error' if vacancy.errors[:contact_email].present?)
       = f.label :contact_email, class: 'control-label'
       span.required &nbsp;&#42;
@@ -66,8 +61,7 @@
       .controls
         = f.text_field :contact_phone, class: 'span5'
 
-    .clearfix
-
+  fieldset
     .form-actions
       .control-group
         label.checkbox.inline.terms.fullwidth

@@ -97,6 +97,35 @@
 .container[class*="ns-vacancies-"] {
   form {
     > fieldset {
+      + fieldset {
+        margin-top: 60px;
+        &:last-child {
+          margin-top: 0;
+        }
+      }
+      > legend {
+        position: relative;
+        background-color: $blueColor;
+        color: $whiteColor;
+        border-radius: 4px;
+        font-size: 22px;
+        padding: 16px;
+        margin-bottom: 30px;
+        &:after {
+          $arrowSize: 20px;
+          content: '';
+          position: absolute;
+          border: solid transparent;
+          border-top-color: $blueColor;
+          border-width: $arrowSize $arrowSize 0 0;
+          top: 100%;
+          left: 0;
+          height: 0;
+          width: 0;
+          margin-left: 30px;
+          pointer-events: none;
+        }
+      }
       > .control-group {
         .help-inline {
           padding: 0;
