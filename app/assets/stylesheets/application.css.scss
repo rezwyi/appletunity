@@ -3,6 +3,7 @@
  *= require_self
  */
 
+@import "compass/css3";
 @import "global/env";
 @import "global/mixins";
 @import "bootstrap";
@@ -200,6 +201,29 @@ input[type="color"] {
   > .splitter {
     display: inline-block;
     margin: 0 10px;
+  }
+}
+
+#nprogress {
+  pointer-events: none;
+  > .bar {
+    position: fixed;
+    background-color: $defaultNprogressBackgroundColor;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $defaultNprogressHeight;
+    z-index: 100;
+    > .peg {
+      @include opacity(1);
+      @include transform(rotate(3deg) translate(0px, -4px));
+      @include box-shadow(0 0 10px $defaultNprogressBackgroundColor, 0 3px 5px $defaultNprogressBackgroundColor);
+      position: absolute;
+      display: block;
+      right: 0;
+      width: 100px;
+      height: 100%;
+    }
   }
 }
 

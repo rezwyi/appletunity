@@ -309,7 +309,7 @@ DEPENDENCIES
   capistrano_colors
   capybara
   coffee-rails
-  compass-rails (~> 1.1.2)
+  compass-rails
   devise (~> 3.0.0)
   exception_notification
   factory_girl_rails

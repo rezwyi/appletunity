@@ -3,9 +3,14 @@
 #= require jquery.pjax
 #= require plugins/redactor
 #= require plugins/redactor.locale
+#= require plugins/nprogress
 
 # Some general setup
-if $.support.pjax then $.pjax.defaults.timeout = 0 
+if $.support.pjax then $.pjax.defaults.timeout = 0
+if NProgress
+  NProgress.configure
+    showSpinner: false
+    template: '<div class="bar" role="bar"><div class="peg"></div></div>'
 
 # Boot up application
 $ -> window.Application = new Appletunity.Application()
@@ -69,6 +74,12 @@ Appletunity.Application = ->
     # Every time when pjax link clicked or forward/back button pressed we need
     # to reinit Application. This will correctly reinit plugins and do some stuff
     @on 'uiPageUpdated uiPageRestored', -> init.apply($document)
+
+    # Show progress bar while pjax request is executed
+    if $.support.pjax
+      @on 'pjax:timeout pjax:beforeSend uiPageRestored', stopProgresBar
+      @on 'pjax:beforeSend', NProgress.start
+      @on 'uiPageUpdated', showPjaxProgressUntilImagesIsLoaded
 
     @on 'click', selectors.pjaxifiedLink, (e) ->
       # Fallback to basic click if history API is not supported (e.g. IE9-)
@@ -147,6 +158,26 @@ Appletunity.Application = ->
     setTimeout ->
       bubbleNode.animate top: '-=35', opacity: '0', 150, -> @remove()
     , options.text.length * 72
+
+  stopProgresBar = ->
+    NProgress.remove()
+    NProgress.status = null
+
+  showPjaxProgressUntilImagesIsLoaded = (e, xhr) ->
+    return NProgress.done() unless xhr && xhr.responseText
+    
+    currentProgress = 0.5
+    loadedImages = 0
+    imageNodes = $(xhr.responseText).find('img')
+    
+    if imageNodes.length
+      # Set progress to 50% immediately once the pjax request completed
+      # then wait until all images is loaded and set progress to 100%
+      NProgress.set currentProgress
+      imageNodes.each ->
+        $(@).imageLoad -> NProgress.done() if ++loadedImages is imageNodes.length
+    else
+      NProgress.done()
 
   bind.apply $document
   init.apply $document

@@ -22,7 +22,7 @@ gem 'bootstrap-sass', '~> 2.3.0.0'
 gem 'slim-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
-gem 'compass-rails', '~> 1.1.2'
+gem 'compass-rails'
 
 gem 'whenever', require: false
 gem 'exception_notification'
