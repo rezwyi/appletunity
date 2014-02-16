@@ -1,29 +1,23 @@
 .vacancies
   - @vacancies.each do |v|
     .vacancy id='vacancy-#{v.id}' class=('expired' if v.expired?)
-      .company-logo.pull-left
-        - if v.company_website.present?
-          = link_to logo_for(v), format_website_url_for(v), target: '_blank'
-        - else
-          = logo_for v
-
-      h1.title
-        = link_to title_for(v), vacancy_path(v)
-
-      span.created
-        = Russian::strftime(v.created_at, '%d %B')
+      = logo_for v
       
-      - if v.location.present?
-        span.location
-          | &nbsp;&#47;&nbsp;
-          = v.location
+      .wrapper
+        .title = link_to title_for(v), vacancy_path(v)
 
-      - if v.occupations.any?
-        .occupations
-          - v.occupations.each do |o|
-            span.label = o.name
-            | &nbsp;
+        span.created
+          = Russian::strftime(v.created_at, '%d %B')
+        
+        - if v.location.present?
+          span.location
+            | &nbsp;&#47;&nbsp;
+            = v.location
 
-      .clearfix
+        - if v.occupations.any?
+          .occupations
+            - v.occupations.each do |o|
+              span.label = o.name
+              | &nbsp;
 
 = render 'vacancies/pagination', resources: @vacancies

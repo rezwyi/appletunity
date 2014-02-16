@@ -74,6 +74,9 @@ input[type="color"] {
   label {
     margin-bottom: 0;
   }
+  &:first-child {
+    padding-top: 0;
+  }
 }
 
 .checkbox.inline + .checkbox.inline,
@@ -202,7 +205,7 @@ input[type="color"] {
 
 body {
   background: image-url('bg.png') 0 0 repeat;
-  font-family: 'Open Sans', sans-serif;
+  font-family: Helvetica, FreeSans, 'Droid Sans', Arial, sans-serif;
   font-weight: 300;
   font-size: 14px;
   color: $grayColor;

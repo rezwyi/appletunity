@@ -43,8 +43,8 @@
     
     .control-group
       = f.label :logo, class: 'control-label'
-      .controls
-        = logo_for vacancy, :medium, class: 'well'
+      - if vacancy.logo?
+        .controls = logo_for vacancy, :medium
       .controls
         = f.file_field :logo, class: 'span5'
 

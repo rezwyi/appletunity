@@ -80,6 +80,11 @@ body {
             }
           }
         }
+        > form {
+          > fieldset {
+            @include company-logo(100px);
+          }
+        }
       }
     }
   }

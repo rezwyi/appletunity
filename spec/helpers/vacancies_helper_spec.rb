@@ -37,26 +37,58 @@ describe VacanciesHelper do
     end
 
     context 'when Vacancy instance given' do
-      before :each do
-        @vacancy = mock_model(Vacancy)
-        @vacancy.stub(:company_name).and_return('some_company_name')
-        @vacancy.stub_chain(:logo, :url).and_return('/assets/some_logo.png')
-      end
-      
-      it 'should return no logo image tag' do
-        @vacancy.stub(:logo?).and_return(false)
-        helper.logo_for(@vacancy).should eq %(<img alt="some_company_name" src="/assets/no_logo.png" />)
+      let (:vacancy) { FactoryGirl.build(:vacancy) }
+
+      it 'should return vacancy logo html' do
+        helper.logo_for(vacancy).should == [
+          %(<div class="company-logo"><div class="logo-container">),
+            %(<a data-skip-pjax="" href="http://example.com" target="_blank">),
+              %(<img alt="Some company name" src="#{vacancy.logo.url(:small)}" />),
+            %(</a>),
+          %(</div></div>)
+        ].join
       end
 
-      it 'should return vacancy logo image tag' do
-        @vacancy.stub(:logo?).and_return(true)
-        helper.logo_for(@vacancy).should eq %(<img alt="some_company_name" src="/assets/some_logo.png" />)
+      it 'should return vacancy logo html' do
+        helper.logo_for(vacancy, :medium).should == [
+          %(<div class="company-logo"><div class="logo-container">),
+            %(<a data-skip-pjax="" href="http://example.com" target="_blank">),
+              %(<img alt="Some company name" src="#{vacancy.logo.url(:medium)}" />),
+            %(</a>),
+          %(</div></div>)
+        ].join
       end
 
-      it 'should return vacancy logo image tag with class' do
-        @vacancy.stub(:logo?).and_return(true)
-        s = %(<img alt="some_company_name" class="well" src="/assets/some_logo.png" />)
-        helper.logo_for(@vacancy, :medium, class: 'well').should eq s
+      it 'should return vacancy logo html' do
+        vacancy.stub(:company_website).and_return(nil)
+        helper.logo_for(vacancy).should == [
+          %(<div class="company-logo"><div class="logo-container">),
+            %(<img alt="Some company name" src="#{vacancy.logo.url(:small)}" />),
+          %(</div></div>)
+        ].join
+      end
+
+      context 'and no logo file attached' do
+        before { vacancy.stub(:logo?).and_return(false) }
+        
+        it 'should return fallback logo html' do
+          helper.logo_for(vacancy).should == [
+            %(<div class="company-logo"><div class="logo-container">),
+              %(<a data-skip-pjax="" href="http://example.com" target="_blank">),
+                %(<img alt="Some company name" src="/assets/no_logo.png" />),
+              %(</a>),
+            %(</div></div>)
+          ].join
+        end
+
+        it 'should return fallback logo html' do
+          vacancy.stub(:company_website).and_return(nil)
+          helper.logo_for(vacancy).should == [
+            %(<div class="company-logo"><div class="logo-container">),
+              %(<img alt="Some company name" src="/assets/no_logo.png" />),
+            %(</div></div>)
+          ].join
+        end
       end
     end
   end

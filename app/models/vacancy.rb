@@ -29,7 +29,7 @@ class Vacancy < ActiveRecord::Base
     end
   end
 
-  paginates_per 12
+  paginates_per 25
   
   has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
   validates_attachment_content_type :logo, content_type: %w(image/jpeg image/jpg image/png)

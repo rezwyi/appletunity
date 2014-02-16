@@ -35,7 +35,6 @@ module VacanciesHelper
   #
   # vacancy - Instance of Vacancy (required)
   # size - The size of image attachment (default: :small)
-  # options - The Hash of html options (optional)
   #
   # Examples
   #
@@ -43,13 +42,18 @@ module VacanciesHelper
   #   # => 'img tag'
   #
   # Returns html safe String
-  def logo_for(vacancy, size = :small, options = {})
+  def logo_for(vacancy, size = :small)
     return unless vacancy
 
-    options = {alt: vacancy.company_name}.merge(options)
-    html = vacancy.logo? ? image_tag(vacancy.logo.url(size), options) : image_tag('no_logo.png', options)
+    html = vacancy.logo? ?
+      image_tag(vacancy.logo.url(size), alt: vacancy.company_name) :
+      image_tag('no_logo.png', alt: vacancy.company_name)
     
-    html.html_safe
+    if vacancy.company_website.present?
+      html = link_to(html, format_website_url_for(vacancy), data: {'skip-pjax' => ''}, target: '_blank')
+    end
+    
+    content_tag(:div, content_tag(:div, html, class: 'logo-container'), class: 'company-logo')
   end
 
   # Public: Build share link for the given network name and vacancy instance.

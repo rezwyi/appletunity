@@ -54,8 +54,8 @@
     
     .control-group
       = f.label :logo, class: 'control-label'
-      .controls
-        = logo_for resource, :medium, class: 'well'
+      - if f.object.logo?
+        .controls = logo_for resource, :medium
       .controls
         = f.file_field :logo, class: 'span8'
     

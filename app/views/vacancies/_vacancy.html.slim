@@ -1,13 +1,8 @@
 .vacancy id="vacancy-#{vacancy.id}"
   .header
-    - if vacancy.logo?
-      .company-logo.pull-right
-        - if vacancy.company_website.present?
-          = link_to logo_for(vacancy, :medium), format_website_url_for(vacancy), target: '_blank'
-        - else
-          = logo_for vacancy, :medium
+    = logo_for vacancy, :medium
     
-    h1.title = title_for vacancy
+    .title = title_for vacancy
     span.created = Russian::strftime(vacancy.created_at, '%d %B')
     
     - if vacancy.location.present?
@@ -21,7 +16,7 @@
           span.label = o.name
           | &nbsp;
   
-  hr.clear
+  hr
   
   .body == vacancy.rendered_body
   

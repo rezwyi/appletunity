@@ -95,6 +95,11 @@ describe ApplicationHelper do
         helper.breadcrumbs.should == content_tag(:div, html, id: 'breadcrumbs')
       end
 
+      it 'should return nil if resource is admin' do
+        @resource = FactoryGirl.build(:admin)
+        helper.breadcrumbs.should be_nil
+      end
+
       context 'and resource persisted' do
         before { @resource.stub(:persisted?).and_return(true) }
         

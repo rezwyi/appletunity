@@ -95,7 +95,7 @@ module ApplicationHelper
   #
   # Returns html safe string
   def breadcrumbs
-    return unless @resource
+    return unless @resource && @resource.class != Admin
 
     splitter = content_tag(:span, '&raquo;'.html_safe, class: 'splitter')
     current_crumb = @resource.persisted? ?
