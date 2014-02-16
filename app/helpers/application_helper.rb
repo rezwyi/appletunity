@@ -82,4 +82,29 @@ module ApplicationHelper
 
     output.html_safe
   end
+
+  # Public: Generates breadcrumbs for current page
+  #
+  # Examples
+  #
+  #   breadcrumbs
+  #   # => '<a href="/">Главная</a><span class="splitter">&raquo;</span><span>Новая вакансия</span>'
+  #
+  #   breadcrumbs
+  #   # => '<a href="/">Главная</a><span class="splitter">&raquo;</span><span>Some title</span>'
+  #
+  # Returns html safe string
+  def breadcrumbs
+    return unless @resource
+
+    splitter = content_tag(:span, '&raquo;'.html_safe, class: 'splitter')
+    current_crumb = @resource.persisted? ?
+      @resource.title :
+      t("ui.vacancies.breadcrumbs.new_#{@resource.class.name.downcase}")
+
+    content_tag(:div, [
+      link_to(t("ui.vacancies.breadcrumbs.root"), root_path),
+      content_tag(:span, current_crumb)
+    ].join(splitter).html_safe, id: 'breadcrumbs')
+  end
 end

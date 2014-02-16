@@ -81,4 +81,28 @@ describe ApplicationHelper do
       ]
     end
   end
+
+  describe '#breadcrumbs' do
+    it 'should return nil' do
+      helper.breadcrumbs.should be_nil
+    end
+
+    context 'when resource present' do
+      before { @resource = FactoryGirl.build(:vacancy) }
+      
+      it 'should return resource related breadcrumbs' do
+        html = %(<a href="/">Главная</a><span class="splitter">&raquo;</span><span>Новая вакансия</span>).html_safe
+        helper.breadcrumbs.should == content_tag(:div, html, id: 'breadcrumbs')
+      end
+
+      context 'and resource persisted' do
+        before { @resource.stub(:persisted?).and_return(true) }
+        
+        it 'should return resource related breadcrumbs' do
+          html = %(<a href="/">Главная</a><span class="splitter">&raquo;</span><span>Some title</span>).html_safe
+          helper.breadcrumbs.should == content_tag(:div, html, id: 'breadcrumbs')
+        end
+      end
+    end
+  end
 end

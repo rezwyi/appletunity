@@ -10,6 +10,11 @@ describe 'Vacancies page' do
     find("#vacancy-#{vacancy.id} .company-logo a")[:href].should =~ /http:\/\/example.com/
   end
 
+  it 'should not show breadcrumbs' do
+    visit vacancies_path
+    page.should_not have_css('#breadcrumbs')
+  end
+
   context 'when vacancy is expired' do
     before { expired_vacancy }
     

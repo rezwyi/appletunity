@@ -183,6 +183,23 @@ input[type="color"] {
   }
 }
 
+#breadcrumbs {
+  @include ellipsis-text-overflow;
+  @include verticaly-aligned-content;
+  font-size: 12px;
+  margin-bottom: 30px;
+  > a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  > .splitter {
+    display: inline-block;
+    margin: 0 10px;
+  }
+}
+
 body {
   background: image-url('bg.png') 0 0 repeat;
   font-family: 'Open Sans', sans-serif;

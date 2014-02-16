@@ -7,6 +7,11 @@ describe 'Vacancy page' do
     visit vacancy_path(vacancy)
     find('.company-logo a')[:href].should == 'http://example.com'
   end
+
+  it 'should show breadcrumbs' do
+    visit vacancy_path(vacancy)
+    page.should have_css('#breadcrumbs')
+  end
   
   context 'when view expired vacancy' do
     let(:expired_vacancy) { FactoryGirl.create(:vacancy, expired_at: 1.day.ago) }

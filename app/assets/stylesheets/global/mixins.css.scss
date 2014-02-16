@@ -1,5 +1,17 @@
-@mixin ellipsis_overflow {
+@mixin ellipsis-text-overflow {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@mixin verticaly-aligned-content($vposition: middle) {
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: $vposition;
+  }
+  > * {
+    vertical-align: $vposition;
+  }
 }
