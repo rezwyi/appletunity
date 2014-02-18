@@ -48,7 +48,7 @@
         = link_to t('ui.links.sign_in'), new_admin_session_path
     
     .copyright
-      = link_to 'http://rezvanov.info', target: '_blank' do
+      = link_to 'http://rezvanov.info', data: {'skip-pjax' => ''}, target: '_blank' do
         | #{copyright_years}&nbsp;&copy;&nbsp;rezvanov.info
 
 = render 'shared/flash', flash: flash.discard
