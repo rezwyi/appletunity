@@ -4,6 +4,7 @@ gem 'rails', '~> 4.0.0'
 
 gem 'rails_config'
 gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-ui-rails'
 gem 'therubyracer'
 gem 'pjax_rails'
 
