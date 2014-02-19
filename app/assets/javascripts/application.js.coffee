@@ -80,7 +80,7 @@ Appletunity.Application = ->
     if $.support.pjax
       @on 'pjax:timeout pjax:beforeSend uiPageRestored', stopProgresBar
       @on 'pjax:beforeSend', NProgress.start
-      @on 'uiPageUpdated', showPjaxProgressUntilImagesIsLoaded
+      @on 'uiPageUpdated', showPageProgressUntilImagesIsLoaded
 
     @on 'click', selectors.pjaxifiedLink, (e) ->
       # Fallback to basic click if history API is not supported (e.g. IE9-)
@@ -164,7 +164,7 @@ Appletunity.Application = ->
     NProgress.remove()
     NProgress.status = null
 
-  showPjaxProgressUntilImagesIsLoaded = (e, xhr) ->
+  showPageProgressUntilImagesIsLoaded = (e, xhr) ->
     return NProgress.done() unless xhr && xhr.responseText
     
     currentProgress = 0.5
