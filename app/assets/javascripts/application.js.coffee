@@ -6,13 +6,6 @@
 #= require plugins/redactor.locale
 #= require plugins/nprogress
 
-# Some general setup
-if $.support.pjax then $.pjax.defaults.timeout = 0
-if NProgress
-  NProgress.configure
-    showSpinner: false
-    template: '<div class="bar" role="bar"><div class="peg"></div></div>'
-
 # Boot up application
 $ -> window.Application = new Appletunity.Application()
 
@@ -28,30 +21,17 @@ Appletunity.Application = ->
     redactorInput: ':input[data-redactor]'
     
     flash: '#flash'
-
-  init = ->
-    if (flashNode = @find(selectors.flash)).length
-      flashNode.animate right: '30px'
-      setTimeout (-> flashNode.animate(right: '-100%', -> @remove())), 5000
-
-    # Need to properly reinitialize redactor if present
-    if (redactorInputNode = @find(selectors.redactorInput))
-      htmlBackup = ''
-      
-      redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
-
-      if (redactorBox = @find('.redactor_box'))
-        htmlBackup = redactorBox.find('[contenteditable]').html()
-        
-        redactorInputNode.insertBefore redactorBox
-        redactorBox.remove()
-      
-      redactorInputNode.val(htmlBackup).redactor
-        lang: 'ru'
-        autoresize: false
-        buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']
-
-  bind = ->
+  
+  support =
+    pjax: $.support.pjax
+  configure = ->
+    if support.pjax then $.pjax.defaults.timeout = 0
+    
+    if NProgress
+      NProgress.configure
+        showSpinner: false
+        template: '<div class="bar" role="bar"><div class="peg"></div></div>'
+    
     @on 'ajax:beforeSend pjax:beforeSend', (e) -> $(e.target).on('click.railsDisable', $.rails.stopEverything)
     @on 'ajax:beforeSend', removeErrorsAndBubbles
     @on 'pjax:beforeSend', (e) -> $(e.target).on('click.railsDisable', $.rails.stopEverything)
@@ -135,6 +115,27 @@ Appletunity.Application = ->
         # Show only one error
         break
 
+  init = ->
+    if (flashNode = @find(selectors.flash)).length
+      flashNode.animate right: '30px'
+      setTimeout (-> flashNode.animate(right: '-100%', -> @remove())), 5000
+
+    # Need to properly reinitialize redactor if present
+    if (redactorInputNode = @find(selectors.redactorInput))
+      htmlBackup = ''
+      
+      redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
+
+      if (redactorBox = @find('.redactor_box'))
+        htmlBackup = redactorBox.find('[contenteditable]').html()
+        
+        redactorInputNode.insertBefore redactorBox
+        redactorBox.remove()
+      
+      redactorInputNode.val(htmlBackup).redactor
+        lang: 'ru'
+        autoresize: false
+        buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']
   removeErrorsAndBubbles = ->
     baseNode
       .find('.control-group.error').removeClass('error').end()
@@ -180,7 +181,7 @@ Appletunity.Application = ->
     else
       NProgress.done()
 
-  bind.apply $document
+  configure.apply $document
   init.apply $document
 
   {}
