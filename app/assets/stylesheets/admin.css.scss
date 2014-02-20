@@ -3,9 +3,7 @@
  *= require_self
  */
 
-@import "global/env";
-@import "global/mixins";
-@import "bootstrap";
+@import "global/config/admin";
 
 .fullwidth {
   width: 100%;
