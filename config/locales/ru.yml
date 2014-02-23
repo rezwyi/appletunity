@@ -59,6 +59,7 @@ ru:
       buttons:
         add: Разместить
         save: Сохранить
+        choose_file: Выберите файл
 
   messages:
     sure?: Уверен?

@@ -71,7 +71,6 @@
           = link_to t('ui.vacancies.text.terms'), terms_page_path, target: '_blank'
           span.required &nbsp;&#42;
       
-      div
-        = f.submit t("ui.vacancies.buttons.#{vacancy.persisted? ? 'save' : 'add'}"), class: 'zurb-btn'
-        | &nbsp;
-        = link_to t('ui.links.cancel'), root_path
+      = f.spinner_button t("ui.vacancies.buttons.#{vacancy.persisted? ? 'save' : 'add'}"), class: 'zurb-btn'
+      | &nbsp;
+      = link_to t('ui.links.cancel'), root_path

@@ -88,13 +88,15 @@ input[type="color"] {
   background-color: $defaultButtonNormalColor;
   display: inline-block;
   color: $whiteColor;
-  border-bottom: 1px solid rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
   border-radius: 5px;
   font-size: 14px;
-  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  padding: 5px 10px 6px;
+  text-align: center;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, .25);
   text-decoration: none;
   cursor: pointer;
-  padding: 5px 10px 6px;
+  outline: none;
   &:hover {
     background-color: $defaultButtonHoverColor;
     text-decoration: none;
@@ -147,6 +149,48 @@ input[type="color"] {
     display: block;
     &:first-letter {
       text-transform: uppercase;
+    }
+  }
+}
+
+.spinner-button {
+  @include verticaly-aligned-content;
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+  ~ * {
+    height: 0;
+  }
+  > .bounce {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: $whiteColor;
+    border-radius: 100%;
+    margin-right: 3px;
+    -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.one {
+      -webkit-animation-delay: -0.48s;
+      animation-delay: -0.48s;
+    }
+    &.two {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    &.three {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
     }
   }
 }

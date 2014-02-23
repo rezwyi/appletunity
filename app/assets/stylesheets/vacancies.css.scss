@@ -17,19 +17,19 @@
         }
       }
       > legend {
+        $arrowSize: 20px;
         position: relative;
-        background-color: $blueColor;
-        color: $whiteColor;
+        background-color: $lightBlueColor;
+        color: $grayColor;
         border-radius: 4px;
         font-size: 22px;
         padding: 16px;
         margin-bottom: 30px;
         &:after {
-          $arrowSize: 20px;
           content: '';
           position: absolute;
           border: solid transparent;
-          border-top-color: $blueColor;
+          border-top-color: $lightBlueColor;
           border-width: $arrowSize $arrowSize 0 0;
           top: 100%;
           left: 0;
@@ -60,6 +60,10 @@
           > .error {
             color: #b94a48;
           }
+        }
+        > button {
+          width: 100px;
+          height: 32px;
         }
       }
     }

@@ -1,6 +1,7 @@
 $whiteColor: #fff;
 $blackColor: #333;
 $blueColor: #3f9dcc;
+$lightBlueColor: #d0dfe7;
 $grayColor: #666;
 $lightGrayColor: lighten($grayColor, 55%);
 $lightRedColor: #b94a48;
@@ -27,5 +28,6 @@ $gridColumnWidth: 75px;
 $gridGutterWidth: 0px;
 
 @import "compass/css3";
+@import "global/animations";
 @import "global/mixins";
 @import "bootstrap";
