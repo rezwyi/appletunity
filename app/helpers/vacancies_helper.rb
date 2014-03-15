@@ -102,15 +102,15 @@ module VacanciesHelper
   #
   # Examples
   #
-  #   setup_occupations_for(vacancy)
+  #   setup_vacancies_occupations_for(vacancy)
   #   # => nil
   #
-  # Returns sorted array of vacancy.vacancies_occupations
+  # Returns sorted array of vacancy.occupationables
   def setup_vacancies_occupations_for(vacancy)
     (Occupation.all - vacancy.occupations).each do |occupation|
-      vacancy.vacancies_occupations.build occupation: occupation
+      vacancy.occupationables.build occupation: occupation
     end
-    vacancy.vacancies_occupations.sort { |a,b| b.occupation_id <=> a.occupation_id }
+    vacancy.occupationables.sort { |a,b| b.occupation_id <=> a.occupation_id }
   end
 
   # Public: Fix company website url

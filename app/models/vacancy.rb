@@ -3,10 +3,10 @@ class Vacancy < ActiveRecord::Base
 
   ALLOWED_TAGS = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
 
-  has_many :vacancies_occupations, dependent: :destroy
-  has_many :occupations, through: :vacancies_occupations
+  has_many :occupationables, dependent: :destroy
+  has_many :occupations, through: :occupationables
 
-  accepts_nested_attributes_for :vacancies_occupations, allow_destroy: true
+  accepts_nested_attributes_for :occupationables, allow_destroy: true
 
   validates :title, presence: true, length: {maximum: 70}
   validates :body, presence: true

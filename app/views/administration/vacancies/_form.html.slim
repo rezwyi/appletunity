@@ -36,7 +36,7 @@
     .control-group
       = f.label :occupations, class: 'control-label'
       .controls
-        = f.fields_for :vacancies_occupations, setup_vacancies_occupations_for(resource) do |ff|
+        = f.fields_for :occupationables, setup_vacancies_occupations_for(resource) do |ff|
           label.inline.checkbox
             = ff.hidden_field :occupation_id
             = ff.check_box :_destroy, {checked: ff.object.persisted?}, '0', '1'

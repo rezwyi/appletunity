@@ -43,15 +43,15 @@ class VacanciesController < ApplicationController
 
   def create_params(namespace)
     params.require(namespace).permit(
-      :company_name, :company_website, :title, :body, :location, :contact_email, :contact_phone, :agreed_to_offer, :logo,
-      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+      :company_name, :company_website, :title, :body, :location, :contact_email, :contact_phone, :agreed_to_offer,
+      occupationables_attributes: [:id, :occupation_id, :_destroy]
     )
   end
 
   def update_params(namespace)
     params.require(namespace).permit(
-      :company_name, :company_website, :body, :location, :contact_email,:contact_phone, :logo,
-      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+      :company_name, :company_website, :body, :location, :contact_email,:contact_phone,
+      occupationables_attributes: [:id, :occupation_id, :_destroy]
     )
   end
 end
