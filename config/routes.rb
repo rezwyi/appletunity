@@ -13,6 +13,7 @@ Appletunity::Application.routes.draw do
     post 'sessions/admin' => 'devise/sessions#create'
   end 
 
+  resource :logos, only: :create
   resources :vacancies, except: :delete do
     get 'feed', on: :collection, defaults: {format: 'rss'}
   end

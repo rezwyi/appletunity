@@ -3,10 +3,12 @@ class Vacancy < ActiveRecord::Base
 
   ALLOWED_TAGS = %w(h1 h2 h3 h4 p pre blockquote div ul ol li b i em strike strong)
 
-  has_many :vacancies_occupations, dependent: :destroy
-  has_many :occupations, through: :vacancies_occupations
+  has_many :occupationables, dependent: :destroy
+  has_many :occupations, through: :occupationables
+  has_one :logoable, as: :resource, dependent: :destroy
+  has_one :logo, through: :logoable
 
-  accepts_nested_attributes_for :vacancies_occupations, allow_destroy: true
+  accepts_nested_attributes_for :occupationables, allow_destroy: true
 
   validates :title, presence: true, length: {maximum: 70}
   validates :body, presence: true
@@ -30,9 +32,9 @@ class Vacancy < ActiveRecord::Base
   end
 
   paginates_per 25
-  
-  has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
-  validates_attachment_content_type :logo, content_type: %w(image/jpeg image/jpg image/png)
+
+  has_attached_file :inline_logo, styles: {small: '80x80', medium: '100x100'}
+  validates_attachment_content_type :inline_logo, content_type: %w(image/jpeg image/jpg image/png)
 
   scope :live, -> { where(approved: true) }
   scope :awaiting_approve, -> { where(approved: false) }

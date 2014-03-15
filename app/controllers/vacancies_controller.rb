@@ -1,4 +1,6 @@
 class VacanciesController < ApplicationController
+  include Controllers::Logoable
+  
   before_action only: :show do
     unless @resource.approved? || admin_signed_in?
       raise ActionController::RoutingError, 'Not found'
@@ -31,7 +33,7 @@ class VacanciesController < ApplicationController
     if @resource.save
       flash[:notice] = t('messages.vacancy_updated_successfull')
     end
-    respond_with @resource
+    respond_with @resource, location: vacancy_path(@resource)
   end
 
   def feed
@@ -43,15 +45,15 @@ class VacanciesController < ApplicationController
 
   def create_params(namespace)
     params.require(namespace).permit(
-      :company_name, :company_website, :title, :body, :location, :contact_email, :contact_phone, :agreed_to_offer, :logo,
-      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+      :company_name, :company_website, :title, :body, :location, :contact_email, :contact_phone, :agreed_to_offer,
+      occupationables_attributes: [:id, :occupation_id, :_destroy]
     )
   end
 
   def update_params(namespace)
     params.require(namespace).permit(
-      :company_name, :company_website, :body, :location, :contact_email,:contact_phone, :logo,
-      vacancies_occupations_attributes: [:id, :occupation_id, :_destroy]
+      :company_name, :company_website, :body, :location, :contact_email,:contact_phone,
+      occupationables_attributes: [:id, :occupation_id, :_destroy]
     )
   end
 end

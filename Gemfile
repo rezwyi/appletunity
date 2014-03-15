@@ -4,8 +4,10 @@ gem 'rails', '~> 4.0.0'
 
 gem 'rails_config'
 gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-ui-rails'
 gem 'therubyracer'
 gem 'pjax_rails'
+gem 'js-routes'
 
 gem 'unicorn-rails'
 gem 'mysql2', '0.3.12b5'
@@ -17,12 +19,11 @@ gem 'resque', '~> 1.24.1'
 gem 'devise', '~> 3.0.0'
 
 gem 'slim-rails'
-gem 'bootstrap-sass', '~> 2.3.0.0'
-
-gem 'slim-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'compass-rails'
+gem 'jbuilder'
+gem 'bootstrap-sass', '~> 2.3.0.0'
 
 gem 'whenever', require: false
 gem 'exception_notification'

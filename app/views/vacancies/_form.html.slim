@@ -1,9 +1,9 @@
 = form_for vacancy, remote: true, authenticity_token: true, multipart: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
-  = render partial: 'shared/honeypot_captcha'
+  = render 'shared/honeypot_captcha'
   
   fieldset
     legend = t('ui.vacancies.text.what_you_want')
-    .control-group class=('error' if vacancy.errors[:title].present?)
+    .control-group
       = f.label :title, class: 'control-label'
       span.required &nbsp;&#42;
       .controls
@@ -14,7 +14,7 @@
       .controls
         = f.text_field :location, class: 'span5', placeholder: t('ui.vacancies.placeholders.location')
 
-    .control-group class=('error' if vacancy.errors[:body].present?)
+    .control-group
       = f.label :body, class: 'control-label'
       span.required &nbsp;&#42;
       = f.text_area :body, rows: 15, class: 'span5', data: {redactor: ''}, placeholder: t('ui.vacancies.placeholders.body')
@@ -22,7 +22,7 @@
     .control-group
       = f.label :occupations, class: 'control-label'
       .controls
-        = f.fields_for :vacancies_occupations, setup_vacancies_occupations_for(vacancy) do |ff|
+        = f.fields_for :occupationables, setup_vacancies_occupations_for(vacancy) do |ff|
           label.inline.checkbox
             = ff.hidden_field :occupation_id
             = ff.check_box :_destroy, {checked: ff.object.persisted?}, '0', '1'
@@ -30,7 +30,7 @@
     
   fieldset
     legend = t('ui.vacancies.text.about_your_company')
-    .control-group class=('error' if vacancy.errors[:company_name].present?)
+    .control-group
       = f.label :company_name, class: 'control-label'
       span.required &nbsp;&#42;
       .controls
@@ -41,16 +41,17 @@
       .controls
         = f.text_field :company_website, class: 'span5', placeholder: 'http://'
     
-    .control-group
+    // Logo uploader
+    .control-group.logo-uploader
       = f.label :logo, class: 'control-label'
-      - if vacancy.logo?
-        .controls = logo_for vacancy, :medium
+      = render('logos/attached_logo', resource: vacancy.logo) if vacancy.logo
       .controls
-        = f.file_field :logo, class: 'span5'
+        = spinner_file_field_tag 'logo[image]', class: 'abtn', data: {logo_uploader: ''}
+        span.tip = t('ui.vacancies.text.logo_tip')
 
   fieldset
     legend = t('ui.vacancies.text.contacts')
-    .control-group class=('error' if vacancy.errors[:contact_email].present?)
+    .control-group
       = f.label :contact_email, class: 'control-label'
       span.required &nbsp;&#42;
       .controls
@@ -71,7 +72,6 @@
           = link_to t('ui.vacancies.text.terms'), terms_page_path, target: '_blank'
           span.required &nbsp;&#42;
       
-      div
-        = f.submit t("ui.vacancies.buttons.#{vacancy.persisted? ? 'save' : 'add'}"), class: 'zurb-btn'
-        | &nbsp;
-        = link_to t('ui.links.cancel'), root_path
+      = f.spinner_button t("ui.vacancies.buttons.#{vacancy.persisted? ? 'save' : 'add'}"), class: 'abtn'
+      | &nbsp;
+      = link_to t('ui.links.cancel'), root_path

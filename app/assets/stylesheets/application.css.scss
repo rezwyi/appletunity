@@ -3,10 +3,7 @@
  *= require_self
  */
 
-@import "compass/css3";
-@import "global/env";
-@import "global/mixins";
-@import "bootstrap";
+@import "global/config/application";
 
 *, *:before, *:after {
   @include box-sizing(border-box);
@@ -40,6 +37,19 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   height: 30px;
+}
+
+.input.file {
+  > input[type="file"] {
+    position: absolute;
+    font-size: 200px;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    direction: ltr;
+    cursor: pointer;
+  }
 }
 
 .center-aligned-text {
@@ -85,19 +95,22 @@ input[type="color"] {
   margin-left: 20px;
 }
 
-.zurb-btn {
+.abtn, .input.file {
   @include box_shadow(0 1px 3px $defaultShadowColor);
   position: relative;
-  background-color: $defaultButtonNormalColor;
   display: inline-block;
+  background-color: $defaultButtonNormalColor;
   color: $whiteColor;
-  border-bottom: 1px solid rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
   border-radius: 5px;
   font-size: 14px;
-  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  padding: 5px 10px 6px;
+  text-align: center;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, .25);
   text-decoration: none;
   cursor: pointer;
-  padding: 5px 10px 6px;
+  outline: none;
+  overflow: hidden;
   &:hover {
     background-color: $defaultButtonHoverColor;
     text-decoration: none;
@@ -109,12 +122,12 @@ input[type="color"] {
 }
 
 .bubble {
-  @include opacity(0);
   position: absolute;
   border-radius: 10px;
   font-size: 0.9em;
   padding: 10px;
   max-width: 360px;
+  opacity: 0;
   z-index: 1;
   &:before, &:after {
     top: 100%;
@@ -154,6 +167,49 @@ input[type="color"] {
   }
 }
 
+.spinner-button {
+  @include verticaly-aligned-content;
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+  ~ * {
+    height: 0;
+    visibility: hidden;
+  }
+  > .bounce {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: $whiteColor;
+    border-radius: 100%;
+    margin-right: 3px;
+    -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+    animation: bouncedelay 1.2s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    &:last-child {
+      margin-right: 0;
+    }
+    &.one {
+      -webkit-animation-delay: -0.48s;
+      animation-delay: -0.48s;
+    }
+    &.two {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+    &.three {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+  }
+}
+
 #captcha {
   display: none;
 }
@@ -168,12 +224,12 @@ input[type="color"] {
   }
   > .body {
     @include box_shadow(3px 3px 5px $defaultShadowColor);
-    opacity: 0.9;
     color: $whiteColor;
     border-radius: 6px;
     width: 300px;
     margin: 0 auto;
     padding: 10px 12px;
+    opacity: 0.9;
     text-align: center;
     text-shadow: none;
     &.notice {
@@ -215,7 +271,6 @@ input[type="color"] {
     height: $defaultNprogressHeight;
     z-index: 100;
     > .peg {
-      @include opacity(1);
       @include transform(rotate(3deg) translate(0px, -4px));
       @include box-shadow(0 0 10px $defaultNprogressBackgroundColor, 0 3px 5px $defaultNprogressBackgroundColor);
       position: absolute;
@@ -223,6 +278,7 @@ input[type="color"] {
       right: 0;
       width: 100px;
       height: 100%;
+      opacity: 1;
     }
   }
 }
@@ -252,6 +308,7 @@ body {
       text-shadow: 0px 1px 0px darken($whiteColor, 10%);
     }
     > header {
+      position: relative;
       > .logo {
         display: inline-block;
         font-size: 1.9em;
@@ -298,8 +355,7 @@ body {
             margin-bottom: 20px;
           }
           > .post-vacancy-button {
-            > .zurb-btn {
-              @include box-sizing(border-box);
+            > a {
               font-size: 1.5em;
               line-height: 32px;
               width: 100%;

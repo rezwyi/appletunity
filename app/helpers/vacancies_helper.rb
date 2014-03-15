@@ -45,12 +45,12 @@ module VacanciesHelper
   def logo_for(vacancy, size = :small)
     return unless vacancy
 
-    html = vacancy.logo? ?
-      image_tag(vacancy.logo.url(size), alt: vacancy.company_name) :
+    html = vacancy.logo ?
+      image_tag(vacancy.logo.image.url(size), alt: vacancy.company_name) :
       image_tag('no_logo.png', alt: vacancy.company_name)
     
     if vacancy.company_website.present?
-      html = link_to(html, format_website_url_for(vacancy), data: {'skip-pjax' => ''}, target: '_blank')
+      html = link_to(html, format_website_url_for(vacancy), data: {skip_pjax: ''}, target: '_blank')
     end
     
     content_tag(:div, content_tag(:div, html, class: 'logo-container'), class: 'company-logo')
@@ -102,15 +102,15 @@ module VacanciesHelper
   #
   # Examples
   #
-  #   setup_occupations_for(vacancy)
+  #   setup_vacancies_occupations_for(vacancy)
   #   # => nil
   #
-  # Returns sorted array of vacancy.vacancies_occupations
+  # Returns sorted array of vacancy.occupationables
   def setup_vacancies_occupations_for(vacancy)
     (Occupation.all - vacancy.occupations).each do |occupation|
-      vacancy.vacancies_occupations.build occupation: occupation
+      vacancy.occupationables.build occupation: occupation
     end
-    vacancy.vacancies_occupations.sort { |a,b| b.occupation_id <=> a.occupation_id }
+    vacancy.occupationables.sort { |a,b| b.occupation_id <=> a.occupation_id }
   end
 
   # Public: Fix company website url

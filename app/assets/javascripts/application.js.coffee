@@ -1,16 +1,14 @@
 #= require jquery
+#= require jquery.ui.widget
 #= require jquery_ujs
 #= require jquery.pjax
+#= require js-routes
+#= require plugins/jquery.iframe-transport
+#= require plugins/jquery.fileupload
+#= require plugins/jquery.fileupload-process
 #= require plugins/redactor
 #= require plugins/redactor.locale
 #= require plugins/nprogress
-
-# Some general setup
-if $.support.pjax then $.pjax.defaults.timeout = 0
-if NProgress
-  NProgress.configure
-    showSpinner: false
-    template: '<div class="bar" role="bar"><div class="peg"></div></div>'
 
 # Boot up application
 $ -> window.Application = new Appletunity.Application()
@@ -26,31 +24,22 @@ Appletunity.Application = ->
     ajaxifiedForm: 'form[data-remote]'
     redactorInput: ':input[data-redactor]'
     
+    logoUploader: '[data-logo-uploader]'
+    logoRemover: '[data-logo-remover]'
+    
     flash: '#flash'
+  
+  support =
+    pjax: $.support.pjax
 
-  init = ->
-    if (flashNode = @find(selectors.flash)).length
-      flashNode.animate right: '30px'
-      setTimeout (-> flashNode.animate(right: '-100%', -> @remove())), 5000
-
-    # Need to properly reinitialize redactor if present
-    if (redactorInputNode = @find(selectors.redactorInput))
-      htmlBackup = ''
-      
-      redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
-
-      if (redactorBox = @find('.redactor_box'))
-        htmlBackup = redactorBox.find('[contenteditable]').html()
-        
-        redactorInputNode.insertBefore redactorBox
-        redactorBox.remove()
-      
-      redactorInputNode.val(htmlBackup).redactor
-        lang: 'ru'
-        autoresize: false
-        buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']
-
-  bind = ->
+  configure = ->
+    if support.pjax then $.pjax.defaults.timeout = 0
+    
+    if NProgress
+      NProgress.configure
+        showSpinner: false
+        template: '<div class="bar" role="bar"><div class="peg"></div></div>'
+    
     @on 'ajax:beforeSend pjax:beforeSend', (e) -> $(e.target).on('click.railsDisable', $.rails.stopEverything)
     @on 'ajax:beforeSend', removeErrorsAndBubbles
     @on 'pjax:beforeSend', (e) -> $(e.target).on('click.railsDisable', $.rails.stopEverything)
@@ -79,7 +68,7 @@ Appletunity.Application = ->
     if $.support.pjax
       @on 'pjax:timeout pjax:beforeSend uiPageRestored', stopProgresBar
       @on 'pjax:beforeSend', NProgress.start
-      @on 'uiPageUpdated', showPjaxProgressUntilImagesIsLoaded
+      @on 'uiPageUpdated', showPageProgressUntilImagesIsLoaded
 
     @on 'click', selectors.pjaxifiedLink, (e) ->
       # Fallback to basic click if history API is not supported (e.g. IE9-)
@@ -109,7 +98,7 @@ Appletunity.Application = ->
       
       for fieldName, error of errors
         targetNode = formNode.find('*[name*="' + fieldName + '"]')
-        parentNode = targetNode.parents('.control-group').addClass('error')
+        parentNode = targetNode.closest('.control-group').addClass('error')
 
         targetNode = if targetNode.is('textarea:hidden')
           targetNode.closest('.redactor_box')
@@ -133,6 +122,64 @@ Appletunity.Application = ->
         
         # Show only one error
         break
+
+    @on 'click', selectors.logoRemover, (e) ->
+      e.preventDefault()
+      $(@).parent().remove()
+
+  init = ->
+    if (flashNode = @find(selectors.flash)).length
+      flashNode.animate right: '30px'
+      setTimeout (-> flashNode.animate(right: '-100%', -> @remove())), 5000
+
+    # Need to properly reinitialize redactor if present
+    if (redactorInputNode = @find(selectors.redactorInput))
+      htmlBackup = ''
+      
+      redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
+
+      if (redactorBox = @find('.redactor_box'))
+        htmlBackup = redactorBox.find('[contenteditable]').html()
+        
+        redactorInputNode.insertBefore redactorBox
+        redactorBox.remove()
+      
+      redactorInputNode.val(htmlBackup).redactor
+        lang: 'ru'
+        autoresize: false
+        buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']
+
+    # Autoupload choosen logo image
+    @find(selectors.logoUploader).fileupload
+      url: Routes.logos_path()
+      formData: null
+      autoUpload: true
+      dropZone: null
+      always: -> enableInputFileElement $(@)
+      start: ->
+        removeErrorsAndBubbles()
+        disableInputFileElement $(@)
+      done: (e, data) ->
+        return unless data && data.result
+        $(data.result.template).insertBefore $(@).closest('.controls')
+      fail: (e, data) ->
+        targetNode = $(@).closest('.input')
+        errors = JSON.parse(data.jqXHR.responseText).errors
+
+        for fieldName, error of errors
+          targetNode.closest('.control-group').addClass('error')
+          
+          showBubbledText
+            insertAfter: targetNode.parent()
+            target: targetNode
+            text: error[0]
+            cssClass: 'error'
+            beforeShow: (bubbleNode) ->
+              scrollTop = parseFloat(bubbleNode.css('top')) - 30
+              if targetNode.offset().top < $document.scrollTop()
+                $('body, html').animate scrollTop: scrollTop, 700
+
+          break
 
   removeErrorsAndBubbles = ->
     baseNode
@@ -163,7 +210,7 @@ Appletunity.Application = ->
     NProgress.remove()
     NProgress.status = null
 
-  showPjaxProgressUntilImagesIsLoaded = (e, xhr) ->
+  showPageProgressUntilImagesIsLoaded = (e, xhr) ->
     return NProgress.done() unless xhr && xhr.responseText
     
     currentProgress = 0.5
@@ -179,7 +226,17 @@ Appletunity.Application = ->
     else
       NProgress.done()
 
-  bind.apply $document
+  disableInputFileElement = (inputNode) ->
+    return unless inputNode && inputNode.is(':file')
+    wrapperNode = inputNode.parent()
+    wrapperNode.prepend $(wrapperNode.data('disable-with'))
+    inputNode.prop 'disabled', true
+  
+  enableInputFileElement = (inputNode) ->
+    return unless inputNode && inputNode.is(':file') && inputNode.is(':disabled')
+    inputNode.prop('disabled', false).parent().find(':first-child').remove()
+
+  configure.apply $document
   init.apply $document
 
   {}

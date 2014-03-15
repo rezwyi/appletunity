@@ -56,14 +56,14 @@ describe ApplicationHelper do
     end
 
     it 'should set default title and meta tags related to the object' do
-      @resource = FactoryGirl.build(:vacancy)
+      @resource = FactoryGirl.build(:vacancy, logo: FactoryGirl.build(:logo))
 
       helper.title_and_metas.split("\n").should == [
         content_tag(
           :title,
           [I18n.t('ui.text.appletunity'), @resource.company_name, @resource.title].join(' - ')
         ),
-        tag(:meta, property: 'og:image', content: image_path(@resource.logo)),
+        tag(:meta, property: 'og:image', content: image_path(@resource.logo.image)),
         tag(:meta, name: 'description', content: 'Some body')
       ]
     end

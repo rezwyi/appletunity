@@ -14,13 +14,9 @@ $defaultButtonHoverColor: darken($defaultButtonNormalColor, 3%);
 $defaultNoscriptBackgroundColor: $lightRedColor;
 $defaultNoscriptBorderColor: darken($lightRedColor, 15%);
 
-$bubbleErrorBgColor: #da7676;
-$bubbleErrorTextColor: $whiteColor;
-$bubbleErrorBorderColor: darken($bubbleErrorBgColor, 8%);
-
 $defaultHeight: 70px;
 $gridColumnWidth: 75px;
 $gridGutterWidth: 0px;
 
-$defaultNprogressBackgroundColor: $blueColor;
-$defaultNprogressHeight: 2px;
+@import "global/mixins";
+@import "bootstrap";

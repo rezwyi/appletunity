@@ -1,6 +1,6 @@
 .vacancy id="vacancy-#{vacancy.id}"
   .header
-    = logo_for vacancy, :medium
+    = logo_for vacancy, :normal
     
     .title = title_for vacancy
     span.created = Russian::strftime(vacancy.created_at, '%d %B')
@@ -27,4 +27,4 @@
       .expired-note = t('ui.vacancies.text.expired_note')
     - else
       = render 'vacancies/social_buttons', resource: vacancy
-      = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'zurb-btn', data: {'skip-pjax' => ''}
+      = link_to t('ui.vacancies.links.reply'), mailto_for(vacancy), class: 'abtn', data: {skip_pjax: ''}
