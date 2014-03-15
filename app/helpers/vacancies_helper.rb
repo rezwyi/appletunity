@@ -45,12 +45,12 @@ module VacanciesHelper
   def logo_for(vacancy, size = :small)
     return unless vacancy
 
-    html = vacancy.logo? ?
-      image_tag(vacancy.logo.url(size), alt: vacancy.company_name) :
+    html = vacancy.logo ?
+      image_tag(vacancy.logo.image.url(size), alt: vacancy.company_name) :
       image_tag('no_logo.png', alt: vacancy.company_name)
     
     if vacancy.company_website.present?
-      html = link_to(html, format_website_url_for(vacancy), data: {'skip-pjax' => ''}, target: '_blank')
+      html = link_to(html, format_website_url_for(vacancy), data: {skip_pjax: ''}, target: '_blank')
     end
     
     content_tag(:div, content_tag(:div, html, class: 'logo-container'), class: 'company-logo')

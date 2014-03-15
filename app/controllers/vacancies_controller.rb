@@ -1,4 +1,6 @@
 class VacanciesController < ApplicationController
+  include Controllers::Logoable
+  
   before_action only: :show do
     unless @resource.approved? || admin_signed_in?
       raise ActionController::RoutingError, 'Not found'
@@ -31,7 +33,7 @@ class VacanciesController < ApplicationController
     if @resource.save
       flash[:notice] = t('messages.vacancy_updated_successfull')
     end
-    respond_with @resource
+    respond_with @resource, location: vacancy_path(@resource)
   end
 
   def feed

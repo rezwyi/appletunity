@@ -1,5 +1,3 @@
-include ActionDispatch::TestProcess
-
 FactoryGirl.define do
   factory :vacancy do
     title 'Some title'
@@ -14,7 +12,5 @@ FactoryGirl.define do
     expired_at 5.days.since
     agreed_to_offer true
     approved true
-
-    logo { fixture_file_upload(Rails.root.join('spec', 'images', 'vacancy_logo.png'), 'image/png') }
   end
 end

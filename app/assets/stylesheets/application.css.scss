@@ -39,6 +39,19 @@ input[type="color"] {
   height: 30px;
 }
 
+.input.file {
+  > input[type="file"] {
+    position: absolute;
+    font-size: 200px;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    direction: ltr;
+    cursor: pointer;
+  }
+}
+
 .center-aligned-text {
   text-align: center;
 }
@@ -82,11 +95,11 @@ input[type="color"] {
   margin-left: 20px;
 }
 
-.zurb-btn {
+.abtn, .input.file {
   @include box_shadow(0 1px 3px $defaultShadowColor);
   position: relative;
-  background-color: $defaultButtonNormalColor;
   display: inline-block;
+  background-color: $defaultButtonNormalColor;
   color: $whiteColor;
   border-bottom: 1px solid rgba(0, 0, 0, .25);
   border-radius: 5px;
@@ -97,6 +110,7 @@ input[type="color"] {
   text-decoration: none;
   cursor: pointer;
   outline: none;
+  overflow: hidden;
   &:hover {
     background-color: $defaultButtonHoverColor;
     text-decoration: none;
@@ -165,6 +179,7 @@ input[type="color"] {
   z-index: 1;
   ~ * {
     height: 0;
+    visibility: hidden;
   }
   > .bounce {
     display: inline-block;
@@ -340,8 +355,7 @@ body {
             margin-bottom: 20px;
           }
           > .post-vacancy-button {
-            > .zurb-btn {
-              @include box-sizing(border-box);
+            > a {
               font-size: 1.5em;
               line-height: 32px;
               width: 100%;

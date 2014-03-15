@@ -5,6 +5,8 @@ class Vacancy < ActiveRecord::Base
 
   has_many :occupationables, dependent: :destroy
   has_many :occupations, through: :occupationables
+  has_one :logoable, as: :resource, dependent: :destroy
+  has_one :logo, through: :logoable
 
   accepts_nested_attributes_for :occupationables, allow_destroy: true
 
@@ -30,9 +32,9 @@ class Vacancy < ActiveRecord::Base
   end
 
   paginates_per 25
-  
-  has_attached_file :logo, styles: {small: '80x80', medium: '100x100'}
-  validates_attachment_content_type :logo, content_type: %w(image/jpeg image/jpg image/png)
+
+  has_attached_file :inline_logo, styles: {small: '80x80', medium: '100x100'}
+  validates_attachment_content_type :inline_logo, content_type: %w(image/jpeg image/jpg image/png)
 
   scope :live, -> { where(approved: true) }
   scope :awaiting_approve, -> { where(approved: false) }

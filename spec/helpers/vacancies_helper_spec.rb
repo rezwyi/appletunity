@@ -37,23 +37,24 @@ describe VacanciesHelper do
     end
 
     context 'when Vacancy instance given' do
-      let (:vacancy) { FactoryGirl.build(:vacancy) }
+      let(:logo) { FactoryGirl.build(:logo) }
+      let (:vacancy) { FactoryGirl.build(:vacancy, logo: logo) }
 
       it 'should return vacancy logo html' do
         helper.logo_for(vacancy).should == [
           %(<div class="company-logo"><div class="logo-container">),
             %(<a data-skip-pjax="" href="http://example.com" target="_blank">),
-              %(<img alt="Some company name" src="#{vacancy.logo.url(:small)}" />),
+              %(<img alt="Some company name" src="#{vacancy.logo.image.url(:small)}" />),
             %(</a>),
           %(</div></div>)
         ].join
       end
 
       it 'should return vacancy logo html' do
-        helper.logo_for(vacancy, :medium).should == [
+        helper.logo_for(vacancy, :normal).should == [
           %(<div class="company-logo"><div class="logo-container">),
             %(<a data-skip-pjax="" href="http://example.com" target="_blank">),
-              %(<img alt="Some company name" src="#{vacancy.logo.url(:medium)}" />),
+              %(<img alt="Some company name" src="#{vacancy.logo.image.url(:normal)}" />),
             %(</a>),
           %(</div></div>)
         ].join
@@ -63,13 +64,13 @@ describe VacanciesHelper do
         vacancy.stub(:company_website).and_return(nil)
         helper.logo_for(vacancy).should == [
           %(<div class="company-logo"><div class="logo-container">),
-            %(<img alt="Some company name" src="#{vacancy.logo.url(:small)}" />),
+            %(<img alt="Some company name" src="#{vacancy.logo.image.url(:small)}" />),
           %(</div></div>)
         ].join
       end
 
       context 'and no logo file attached' do
-        before { vacancy.stub(:logo?).and_return(false) }
+        before { vacancy.stub(:logo).and_return(nil) }
         
         it 'should return fallback logo html' do
           helper.logo_for(vacancy).should == [

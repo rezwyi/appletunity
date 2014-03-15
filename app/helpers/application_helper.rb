@@ -68,8 +68,8 @@ module ApplicationHelper
         title = content_tag(:title, [t('ui.text.appletunity'), ivar.company_name, ivar.title].join(' - '))
       end
 
-      if ivar.respond_to?(:logo) && ivar.respond_to?(:logo?)
-        image = tag(:meta, property: 'og:image', content: ivar.logo.to_s) if ivar.logo?
+      if ivar.respond_to?(:logo)
+        image = tag(:meta, property: 'og:image', content: ivar.logo.image.to_s) if ivar.logo
       end
 
       if ivar.respond_to?(:body) && ivar.body.present?
