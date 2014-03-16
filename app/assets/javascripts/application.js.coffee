@@ -134,7 +134,7 @@ Appletunity.Application = ->
 
     # Need to properly reinitialize redactor if present
     if (redactorInputNode = @find(selectors.redactorInput))
-      htmlBackup = ''
+      htmlBackup = null
       
       redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
 
@@ -144,7 +144,7 @@ Appletunity.Application = ->
         redactorInputNode.insertBefore redactorBox
         redactorBox.remove()
       
-      redactorInputNode.val(htmlBackup).redactor
+      redactorInputNode.val(htmlBackup || redactorInputNode.val()).redactor
         lang: 'ru'
         autoresize: false
         buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']

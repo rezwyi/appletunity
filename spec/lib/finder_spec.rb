@@ -2,11 +2,7 @@ require 'spec_helper'
 
 describe Finder do
   subject do
-    Finder.new({
-      first: 'first',
-      second: 'second',
-      filter: {'keywords' => 'Some body'}
-    })
+    Finder.new first: 'first', second: 'second', filter: {keywords: 'Some body'}
   end
 
   it 'should convert params to methods' do

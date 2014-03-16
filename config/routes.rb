@@ -7,18 +7,17 @@ Appletunity::Application.routes.draw do
     mount Resque::Server.new, at: '/resque', as: :resque
   end
   
-  devise_for :admins
-
+  devise_for :admins, path: '', path_names: {sign_in: 'login', sign_out: 'logout'}
   devise_scope :admin do
     post 'sessions/admin' => 'devise/sessions#create'
   end 
 
-  resource :logos, only: :create
   resources :vacancies, except: :delete do
     get 'feed', on: :collection, defaults: {format: 'rss'}
   end
+  resource :logos, only: :create
 
-  namespace :administration do
+  namespace :admin do
     resources :vacancies, except: :show
     resources :admins
     resources :occupations

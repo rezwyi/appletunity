@@ -1,4 +1,6 @@
 = form_for vacancy, remote: true, authenticity_token: true, multipart: true, html: {class: 'form-inline', novalidate: true, data: {type: :json}} do |f|
+  = hidden_field_tag(:token, params[:token]) if params[:token]
+
   = render 'shared/honeypot_captcha'
   
   fieldset

@@ -6,7 +6,7 @@
       .manage-buttons.pull-right
         = link_to t('ui.links.resque'), resque_path, class: 'abtn', data: {skip_pjax: ''}, target: '_blank'
         | &nbsp;
-        = link_to t('ui.links.manage'), administration_vacancies_path(awaiting_approve: '1'), class: 'abtn', data: {skip_pjax: ''}
+        = link_to t('ui.links.manage'), admin_vacancies_path(awaiting_approve: '1'), class: 'abtn', data: {skip_pjax: ''}
         | &nbsp;
         = link_to t('ui.links.logout'), destroy_admin_session_path, class: 'abtn', method: :delete, data: {skip_pjax: ''}
     

@@ -1,8 +1,8 @@
-class Administration::BaseController < ActionController::Base
+class Admin::ApplicationController < ActionController::Base
   include Controllers::Secure
   include Controllers::Resourceable
 
-  layout 'layouts/administration'
+  layout 'layouts/admin'
 
   before_action :authenticate_admin!
   before_action { I18n.locale = :en }
@@ -46,7 +46,7 @@ class Administration::BaseController < ActionController::Base
   protected
 
   def after_create_path
-    url_for [:administration, controller_name]
+    url_for [:admin, controller_name]
   end
 
   def after_update_path

@@ -22,11 +22,11 @@ body
           = link_to 'Home', root_path, class: 'navbar-link'
           | &nbsp;
           = link_to 'Logout', destroy_admin_session_path, method: :delete, class: 'navbar-link'
-        .brand Administration
+        .brand Appletunity
         .nav-collapse.collapse
           ul.nav
             - %w(Vacancies Occupations Admins).each do |i|
-              - href = url_for([:administration, i.downcase])
+              - href = url_for([:admin, i.downcase])
               li class=('active' if request.path.starts_with?(href)) = link_to i, href
 
   header#overview.jumbotron.subhead

@@ -1,8 +1,8 @@
 ul.nav.nav-tabs
-  li class=('active' if request.fullpath == administration_vacancies_path)
-    = link_to 'Live', administration_vacancies_path
-  li class=('active' if request.fullpath == administration_vacancies_path(awaiting_approve: '1'))
-    = link_to 'Awaiting approve', administration_vacancies_path(awaiting_approve: '1')
+  li class=('active' if request.fullpath == admin_vacancies_path)
+    = link_to 'Live', admin_vacancies_path
+  li class=('active' if request.fullpath == admin_vacancies_path(awaiting_approve: '1'))
+    = link_to 'Awaiting approve', admin_vacancies_path(awaiting_approve: '1')
 
 table.table
   thead
@@ -24,4 +24,4 @@ table.table
           | &nbsp;
           = link_to_delete_resource r, class: 'btn btn-danger'
 
-= paginate vacancies, theme: 'administration'
+= paginate vacancies, theme: 'admin'

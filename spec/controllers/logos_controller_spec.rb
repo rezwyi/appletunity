@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe LogosController do
   describe '#create' do
-    let(:params) do
-      {format: :json, logo: {image: fixture_file_upload(Rails.root.join('spec', 'images', 'logo.png'), 'image/png')}}
-    end
+    let(:params) { {format: :json, logo: {image: FactoryGirl.generate(:logo_image)}} }
 
     it 'should create logo' do
       expect { post(:create, params) }.to change(Logo, :count).by(1)
@@ -19,7 +17,7 @@ describe LogosController do
       before { FactoryGirl.create(:logo) }
 
       it 'should not create logo' do
-        expect { post(:create, params) }.not_to change(Logo, :count).by(1)
+        expect { post(:create, params) }.not_to change(Logo, :count)
       end
 
       it 'should response with 200' do
@@ -29,12 +27,10 @@ describe LogosController do
     end
 
     context 'when wrong file format' do
-      let(:params) do
-        {format: :json, logo: {image: fixture_file_upload(Rails.root.join('spec', 'images', 'logo.tiff'), 'image/tiff')}}
-      end
+      let(:params) { {format: :json, logo: {image: FactoryGirl.generate(:tiff_logo_image)}} }
 
       it 'should not create logo' do
-        expect { post(:create, params) }.not_to change(Logo, :count).by(1)
+        expect { post(:create, params) }.not_to change(Logo, :count)
       end
 
       it 'should response with 422' do
@@ -44,9 +40,7 @@ describe LogosController do
     end
 
     context 'when image too small' do
-      let(:params) do
-        {format: :json, logo: {image: fixture_file_upload(Rails.root.join('spec', 'images', 'logo_small.png'), 'image/png')}}
-      end
+      let(:params) { {format: :json, logo: {image: FactoryGirl.generate(:small_logo_image)}} }
 
       it 'should not create logo' do
         expect { post(:create, params) }.not_to change(Logo, :count).by(1)

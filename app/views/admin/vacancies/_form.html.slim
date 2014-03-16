@@ -1,20 +1,4 @@
-- content_for :head do
-  javascript:
-    $(document).ready(function(){
-      var redactor_buttons = ['formatting', '|',
-                              'bold', 'italic', 'deleted', '|', 
-                              'unorderedlist', 'orderedlist'];
-
-      // Transform body textarea to modern
-      // WYSIWYG editor
-      $('#vacancy_body').redactor({
-        lang: '#{I18n.locale}',
-        buttons: redactor_buttons,
-        autoresize: false
-      });
-    });
-
-= form_for [:administration, resource] do |f|
+= form_for [:admin, resource] do |f|
   = f.hidden_field :agreed_to_offer, value: 1
   
   fieldset
@@ -31,7 +15,7 @@
     .control-group class=('error' if resource.errors[:body].present?)
       = f.label :body, class: 'control-label'
       .controls
-        = f.text_area :body, class: 'input-xxlarge', rows: 15
+        = f.text_area :body, rows: 15, class: 'input-xxlarge', data: {redactor: ''}
     
     .control-group
       = f.label :occupations, class: 'control-label'
@@ -73,4 +57,4 @@
           = check_box_tag 'approved', 'yes', resource.approved?
           | Not spam!
   
-  = render 'administration/shared/form_actions', resource: resource
+  = render 'admin/shared/form_actions', resource: resource

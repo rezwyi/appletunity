@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Logo do
   it { should have_attached_file(:image) }
   it { should validate_attachment_content_type(:image).allowing('image/jpeg', 'image/jpg', 'image/png')}
-  it { should validate_attachment_content_type(:image).rejecting('text/plain', 'text/xml') }
+  it { should validate_attachment_content_type(:image).rejecting('text/plain', 'text/xml', 'image/tiff') }
   it { should validate_attachment_size(:image).in(0..10.megabytes) }
 
   describe 'fingerprint' do

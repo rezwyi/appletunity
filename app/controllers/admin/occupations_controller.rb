@@ -1,4 +1,4 @@
-class Administration::OccupationsController < Administration::BaseController
+class Admin::OccupationsController < Admin::ApplicationController
   private
 
   def create_params(namespace)

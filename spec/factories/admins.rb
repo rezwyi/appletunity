@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :admin do
-    email 'admin@example.com' 
+    email { FactoryGirl.generate(:email) }
     password '123456'
   end
 end

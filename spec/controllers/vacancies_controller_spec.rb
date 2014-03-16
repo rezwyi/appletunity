@@ -1,35 +1,17 @@
 require 'spec_helper'
 
 describe VacanciesController do
-  let(:admin) { FactoryGirl.create(:admin) }
-  let(:vacancy) { FactoryGirl.create(:vacancy) }
-
   describe '#index' do
-    it 'should be success' do
+    it 'should response with 200' do
       get :index
       response.should be_success
-    end
-
-    it 'should find some vacancies' do
-      get :index
-      assigns[:vacancies].should == [vacancy]
-    end
-
-    it 'should render index template' do
-      get :index
-      response.should render_template(:index)
     end
   end
 
   describe '#feed' do
-    it 'should be success' do
+    it 'should response with 200' do
       get :feed, format: :rss
       response.should be_success
-    end
-
-    it 'should find some vacancies' do
-      get :feed, format: :rss
-      assigns[:vacancies].should == [vacancy]
     end
 
     it 'should render feed template' do
@@ -39,141 +21,178 @@ describe VacanciesController do
   end
 
   describe '#show' do
-    it 'should be success' do
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
+    
+    it 'should response with 200' do
       get :show, id: vacancy.id
       response.should be_success
     end
 
-    it 'should find vacancy' do
-      get :show, id: vacancy.id
-      assigns[:resource].should == vacancy
-    end
-
-    it 'should render vacancy' do
-      get :show, id: vacancy.id
-      response.should render_template(:show)
-    end
-
     context 'if vacancy is expired' do
-      let(:expired_vacancy) { FactoryGirl.create(:vacancy, expired_at: 5.days.ago) }
+      let(:vacancy) { FactoryGirl.create(:vacancy, expired_at: 5.days.ago) }
       
-      it 'should be success' do
-        get :show, id: expired_vacancy.id
+      it 'should response with 200' do
+        get :show, id: vacancy.id
         response.should be_success
-      end
-
-      it 'should find expired vacancy' do
-        get :show, id: expired_vacancy.id
-        assigns[:resource].should == expired_vacancy
-      end
-
-      it 'should render' do
-        get :show, id: expired_vacancy.id
-        response.should render_template(:show)
       end
     end
 
     context 'if vacancy is not approved' do
-      let(:not_approved_vacancy) { FactoryGirl.create(:vacancy, approved: false) }      
+      before { vacancy }
+      
+      let(:vacancy) { FactoryGirl.create(:vacancy, approved: false) }
 
-      it 'should raise routing error if user is not logged in' do
-        expect { get(:show, id: not_approved_vacancy.id) }.to raise_error(ActionController::RoutingError)
+      it 'should raise routing error' do
+        expect { get(:show, id: vacancy.id) }.to raise_error(ActionController::RoutingError)
       end
 
-      it 'should find vacancy if user is logged in' do
-        sign_in admin
-        get :show, id: not_approved_vacancy.id
-        assigns[:resource].should == not_approved_vacancy
+      context 'and admin signed in' do
+        before { sign_in(FactoryGirl.create(:admin)) }
+
+        it 'should response with 200' do
+          get :show, id: vacancy.id
+          response.should be_success
+        end
       end
     end
   end
 
   context '#create' do
-    let(:params) do
-      FactoryGirl.build(:vacancy).attributes.slice(
-        'title', 'body', 'company_name', 'contact_email', 'agreed_to_offer'
-      )
-    end
+    let(:params) {{
+      format: 'json',
+      vacancy: {
+        title: 'Some title',
+        body: 'Some body',
+        company_name: 'Some company',
+        contact_email: 'contact@example.com',
+        agreed_to_offer: true
+      }
+    }}
 
-    it 'should save record to database' do
-      expect { post(:create, vacancy: params) }.to change(Vacancy, :count).by(1)
+    it 'should create vacancy' do
+      expect { post(:create, params) }.to change(Vacancy, :count).by(1)
     end
 
     it 'should show flash notice' do
-      post :create, vacancy: params
-      flash[:notice].should == I18n.t('messages.vacancy_created_successfull', email: params['contact_email'])
+      post :create, params
+      flash[:notice].should == I18n.t('messages.vacancy_created_successfull', email: 'contact@example.com')
     end
 
-    it 'should redirect to root' do
-      post :create, vacancy: params
-      response.should redirect_to(root_path)
+    it 'should response with 201' do
+      post :create, params
+      response.status.should == 201
     end
 
-    context 'if not successfull' do
-      before { Vacancy.any_instance.stub(:save).and_return(false) }
+    context 'when errors present' do
+      before { params.deep_merge!(vacancy: {body: ''}) }
 
-      it 'should redirect to vacancies' do
-        post :create, vacancy: params
-        response.should redirect_to(root_path)
+      it 'should not create vacancy' do
+        expect { post(:create, params) }.not_to change(Vacancy, :count)
+      end
+
+      it 'should response with 422' do
+        post :create, params
+        response.status.should == 422
+      end
+    end
+
+    context 'when user is not agreed with offer' do
+      before { params.deep_merge!(vacancy: {agreed_to_offer: false}) }
+
+      it 'should not create vacancy' do
+        expect { post(:create, params) }.not_to change(Vacancy, :count)
+      end
+
+      it 'should response with 422' do
+        post :create, params
+        response.status.should == 422
       end
     end
   end
 
   describe '#edit' do
-    it 'should render edit template' do
-      get :edit, id: vacancy.id, token: vacancy.edit_token
-      response.should render_template(:edit)
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
+    let(:params) { {id: vacancy.id, token: vacancy.edit_token} }
+
+    it 'should response with 200' do
+      get :edit, params
+      response.should be_success
     end
 
-    it 'should render edit template' do
-      sign_in admin
-      get :edit, id: vacancy.id, token: 'some-bad-token'
-      response.should render_template(:edit)
-    end
+    context 'when wrong token given' do
+      let(:params) { {id: vacancy.id, token: 'bad-token'} }
+      
+      it 'should raise routing error' do
+        expect { get(:edit, params) }.to raise_error(ActionController::RoutingError)
+      end
 
-    it 'should raise error' do
-      expect {
-        get :edit, id: vacancy.id, token: 'some-bad-token'
-      }.to raise_error(ActionController::RoutingError)
-    end
-
-    it 'should raise error' do
-      expect { get :edit, id: vacancy.id }.to raise_error(ActionController::RoutingError)
+      context 'and admin signed in' do
+        before { sign_in(FactoryGirl.create(:admin)) }
+        
+        it 'should response with 200' do
+          get :edit, params
+          response.should be_success
+        end
+      end
     end
   end
 
   describe '#update' do
-    let(:params) do
-      {title: 'New title', body: 'New body', contact_email: 'new_email@example.com'}
-    end
+    let(:vacancy) { FactoryGirl.create(:vacancy) }
+    
+    let(:params) {{
+      format: 'json',
+      token: vacancy.edit_token,
+      id: vacancy.id,
+      vacancy: {
+        title: 'New title',
+        body: 'New body',
+        contact_email: 'new_email@example.com',
+        agreed_to_offer: false
+      }
+    }}
 
     it 'should not update vacancy title' do
-      put :update, id: vacancy.id, vacancy: params
-      vacancy.reload
-      vacancy.title.should == 'Some title'
+      expect { put(:update, params) && vacancy.reload }.not_to change(vacancy, :title)
+    end
+
+    it 'should not update agreed to offer' do
+      expect { put(:update, params) && vacancy.reload }.not_to change(vacancy, :agreed_to_offer)
     end
 
     it 'should show flash notice' do
-      put :update, id: vacancy.id, vacancy: params
+      put :update, params
       flash[:notice].should == I18n.t('messages.vacancy_updated_successfull')
     end
 
-    it 'should redirect to vacancy' do
-      put :update, id: vacancy.id, vacancy: params
-      response.should redirect_to(vacancy)
+    it 'should response with 200' do
+      put :update, params
+      response.should be_success
     end
 
-    context 'when not successfull' do
-      before { Vacancy.any_instance.stub(:save).and_return(false) }
+    context 'when errors peresent' do
+      before { params.deep_merge!(vacancy: {body: ''}) }
 
-      it 'should not show flash notice' do
-        put :update, id: vacancy.id, vacancy: params
-        flash[:notice].should be_nil
+      it 'should response with 422' do
+        put :update, params
+        response.status.should == 422
+      end
+    end
+
+    context 'when wrong token given' do
+      before { params.merge!(token: 'bad-token') }
+      
+      it 'should raise routing error' do
+        expect { put(:update, params) }.to raise_error(ActionController::RoutingError)
       end
 
-      it 'should redirect to vacancy' do
-        put :update, id: vacancy.id, vacancy: params
-        response.should redirect_to(vacancy)
+      context 'and admin signed in' do
+        before { sign_in(FactoryGirl.create(:admin)) }
+
+        it 'should response with 200' do
+          put :update, params
+          response.should be_success
+        end
       end
     end
   end

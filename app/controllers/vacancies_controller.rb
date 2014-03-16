@@ -7,7 +7,7 @@ class VacanciesController < ApplicationController
     end
   end
   
-  before_action only: :edit do
+  before_action only: %i(edit update) do
     unless @resource.edit_token == params[:token] || admin_signed_in?
       raise ActionController::RoutingError, 'Not found'
     end
@@ -33,7 +33,7 @@ class VacanciesController < ApplicationController
     if @resource.save
       flash[:notice] = t('messages.vacancy_updated_successfull')
     end
-    respond_with @resource, location: vacancy_path(@resource)
+    respond_with @resource, location: @resource.approved? ? vacancy_path(@resource) : root_path
   end
 
   def feed

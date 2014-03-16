@@ -21,19 +21,8 @@ Appletunity.Admin = ->
       flashNode.animate right: '30px'
       setTimeout (-> flashNode.animate(right: '-100%', -> @remove())), 5000
 
-    # Need to properly reinitialize redactor if present
     if (redactorInputNode = @find(selectors.redactorInput))
-      htmlBackup = ''
-      
-      redactorInputNode.destroyEditor() if redactorInputNode.data('redactor')
-
-      if (redactorBox = @find('.redactor_box'))
-        htmlBackup = redactorBox.find('[contenteditable]').html()
-        
-        redactorInputNode.insertBefore redactorBox
-        redactorBox.remove()
-      
-      redactorInputNode.val(htmlBackup).redactor
+      redactorInputNode.redactor
         lang: 'ru'
         autoresize: false
         buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|', 'unorderedlist', 'orderedlist']
