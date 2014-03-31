@@ -19,10 +19,10 @@ gem 'resque', '~> 1.24.1'
 gem 'devise', '~> 3.0.0'
 
 gem 'slim-rails'
-gem 'sass-rails'
 gem 'coffee-rails'
 gem 'compass-rails'
 gem 'jbuilder'
+gem 'sass-rails', '~> 4.0.2'
 gem 'bootstrap-sass', '~> 2.3.0.0'
 
 gem 'whenever', require: false
