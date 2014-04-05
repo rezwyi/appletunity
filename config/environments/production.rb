@@ -1,9 +1,13 @@
 Appletunity::Application.configure do
   # Setting up the exception notification middleware
-  config.middleware.use ExceptionNotification::Rack, email: {
-    sender_address: 'no-reply@appletunity.ru',
-    exception_recipients: 'support@appletunity.ru'
-  }
+  config.middleware.use(
+    ExceptionNotification::Rack,
+    ignore_exceptions: %w(ActionController::UnknownFormat),
+    email: {
+      sender_address: 'no-reply@appletunity.ru',
+      exception_recipients: 'support@appletunity.ru'
+    }
+  )
 
   # Code is not reloaded between requests
   config.cache_classes = true
