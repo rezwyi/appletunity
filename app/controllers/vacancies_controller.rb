@@ -18,7 +18,7 @@ class VacanciesController < ApplicationController
   respond_to :rss, only: :feed
 
   def index
-    @vacancies = Finder.new(params).retrieve
+    @vacancies = Finder.new(params).retrieve.includes(:logo, :occupations)
     respond_with @vacancies
   end
 
