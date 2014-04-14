@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 
 gem 'rails_config'
 gem 'jquery-rails', '~> 2.1.4'
@@ -10,7 +10,7 @@ gem 'pjax_rails'
 gem 'js-routes'
 
 gem 'unicorn-rails'
-gem 'mysql2', '0.3.12b5'
+gem 'mysql2'
 
 gem 'kaminari'
 gem 'russian'
