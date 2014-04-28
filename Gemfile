@@ -2,34 +2,31 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.1.0'
 
-gem 'rails_config'
-gem 'jquery-rails', '~> 2.1.4'
-gem 'jquery-ui-rails'
-gem 'therubyracer'
-gem 'pjax_rails'
-gem 'js-routes'
-
 gem 'unicorn-rails'
 gem 'mysql2'
 
-gem 'kaminari'
-gem 'russian'
-gem 'paperclip'
-gem 'resque', '~> 1.24.1'
-gem 'devise', '~> 3.0.0'
+gem 'therubyracer'
+gem 'jquery-rails', '~> 2.1.4'
+gem 'jquery-ui-rails'
+gem 'pjax_rails'
+gem 'js-routes'
 
 gem 'slim-rails'
 gem 'coffee-rails'
 gem 'compass-rails'
 gem 'jbuilder'
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails'
 gem 'bootstrap-sass', '~> 2.3.0.0'
 
-gem 'whenever', require: false
+gem 'rails_config'
+gem 'kaminari'
+gem 'russian'
+gem 'paperclip'
 gem 'exception_notification'
-
 gem 'twitter'
-gem 'rconsole'
+gem 'whenever', require: false
+gem 'resque', '~> 1.24.1'
+gem 'devise', '~> 3.0.0'
 
 group :assets do
   gem 'uglifier'
@@ -41,7 +38,7 @@ group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'capistrano_colors'
-  gem 'ruby-prof'
+  gem 'rconsole'
 end
 
 group :test do
