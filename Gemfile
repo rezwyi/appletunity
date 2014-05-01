@@ -35,9 +35,8 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'mailcatcher'
-  gem 'capistrano', '~> 2.15.5'
-  gem 'capistrano-ext'
-  gem 'capistrano_colors'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   gem 'rconsole'
 end
 
