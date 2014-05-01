@@ -37,6 +37,7 @@ group :development do
   gem 'mailcatcher'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-resque', github: 'sshingler/capistrano-resque', require: false
   gem 'rconsole'
 end
 
