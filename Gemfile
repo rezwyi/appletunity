@@ -35,6 +35,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'mailcatcher'
+  gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
   gem 'capistrano-resque', github: 'sshingler/capistrano-resque', require: false
