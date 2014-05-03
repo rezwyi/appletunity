@@ -4,6 +4,7 @@ Capfile
 *.sublime-project
 *.sublime-workspace
 config/deploy.rb
+config/deploy.*.rb
 config/database.yml
 db/data.yml
 
@@ -14,3 +15,4 @@ log/*.log
 tmp/
 public/system
 coverage/
+config/deploy
