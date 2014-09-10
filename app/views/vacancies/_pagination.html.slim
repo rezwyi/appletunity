@@ -1,8 +1,0 @@
-.clear
-  .pull-left
-    - if resources.try(:num_pages) > 1 && !resources.first_page?
-      = link_to "&larr; #{t('ui.vacancies.links.newer')}".html_safe, url_for(params.merge(page: resources.current_page - 1))
-  
-  .pull-right
-    - if resources.try(:num_pages) > 1 && !resources.last_page?
-      = link_to "#{t('ui.vacancies.links.older')} &rarr;".html_safe, url_for(params.merge(page: resources.current_page + 1))

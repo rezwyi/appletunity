@@ -1,8 +1,0 @@
-= form_for [:admin, resource] do |f|
-  fieldset
-    .control-group class=('error' if @resource.errors[:name].present?)
-      = f.label :name, class: 'control-label'
-      .controls
-        = f.text_field :name, class: 'span8'
-  
-  = render 'admin/shared/form_actions', resource: resource

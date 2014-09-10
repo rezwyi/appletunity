@@ -1,8 +1,4 @@
 Appletunity
 ===========
 
-The project is closed. Thank you all!
-
-## Copyright
-
-See LICENSE file.
+The project is no longer supported. If you need to see the code of the project, see the early commits. Thank you all!

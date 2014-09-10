@@ -1,1 +1,0 @@
-json.template render(partial: 'logos/attached_logo', formats: [:html], locals: {resource: @resource})
